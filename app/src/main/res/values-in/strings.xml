@@ -1,0 +1,189 @@
+<resources>
+    <!-- App Info -->
+    <string name="app_name">531 Training</string>
+    <string name="app_description">Teman Latihan Kekuatan Profesional</string>
+    
+    <!-- Welcome Screen -->
+    <string name="welcome_title">531 Training</string>
+    <string name="welcome_subtitle">Teman Latihan Kekuatan Profesional</string>
+    <string name="welcome_feature_1">Pembuatan Rencana Latihan Cerdas</string>
+    <string name="welcome_feature_2">Kalkulasi Beban Barbell Otomatis</string>
+    <string name="welcome_feature_3">Pelacakan Kemajuan Latihan Akurat</string>
+    <string name="welcome_get_started">Mulai</string>
+    <string name="welcome_setup_notice">Pengaturan sederhana diperlukan untuk penggunaan pertama</string>
+    <string name="welcome_scientific">Buat Latihan Lebih Ilmiah</string>
+    
+    <!-- Setup Screens -->
+    <string name="setup_1rm">Atur 1RM</string>
+    <string name="setup_plates">Konfigurasi Plate</string>
+    <string name="setup_template">Pilih Template</string>
+    <string name="setup_step_counter">%1$d/3</string>
+    
+    <!-- 1RM Setup -->
+    <string name="setup_1rm_title">Atur 1RM Empat Besar</string>
+    <string name="setup_1rm_description">Masukkan beban maksimal satu repetisi Anda</string>
+    <string name="lift_bench">Bench Press</string>
+    <string name="lift_squat">Squat</string>
+    <string name="lift_deadlift">Deadlift</string>
+    <string name="lift_press">Overhead Press</string>
+    <string name="weight_kg">Berat (kg)</string>
+    <string name="setup_tip_title">Tips:</string>
+    <string name="setup_tip_1rm">531 merekomendasikan \"mulai ringan\" - sistem akan otomatis mengatur TM menjadi 90% dari 1RM</string>
+    
+    <!-- Plate Configuration -->
+    <string name="plates_title">Atur Plate Gym</string>
+    <string name="plates_description">Pilih berat plate yang tersedia di gym Anda</string>
+    <string name="barbell_weight">Berat Barbell</string>
+    <string name="available_plates">Plate Tersedia</string>
+    <string name="plate_count">Jumlah: %1$d</string>
+    <string name="plate_unavailable">Tidak Tersedia</string>
+    <string name="add_custom_plate">Tambah Berat Kustom</string>
+    
+    <!-- Template Selection -->
+    <string name="template_title">Pilih Template 531</string>
+    <string name="template_description">Pilih template latihan sesuai level Anda saat ini</string>
+    <string name="template_5s_name">Siklus 5/5/5+</string>
+    <string name="template_5s_description">Untuk pemula dan yang memulai kembali</string>
+    <string name="template_3s_name">Siklus 3/3/3+</string>
+    <string name="template_3s_description">Intensitas sedang untuk kemajuan stabil</string>
+    <string name="template_531_name">Siklus 5/3/1+</string>
+    <string name="template_531_description">Intensitas tinggi untuk atlet berpengalaman</string>
+    <string name="template_recommendation">Rekomendasi:</string>
+    <string name="template_advice">Pemula sebaiknya mulai dengan 5/5/5+ dan bertahap ke intensitas lebih tinggi</string>
+    <string name="complete_setup">Selesaikan Pengaturan</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">531 Training</string>
+    <string name="current_week_day">Minggu %1$d • Hari %2$d</string>
+    <string name="today_workout">Latihan Hari Ini</string>
+    <string name="workout_day_template">Hari %1$s - %2$s</string>
+    <string name="main_sets">Set Utama</string>
+    <string name="sets_count">%1$s %2$d set</string>
+    <string name="start_workout">Mulai Latihan</string>
+    <string name="week_progress">Kemajuan Minggu</string>
+    <string name="quick_actions">Aksi Cepat</string>
+    <string name="plate_calculator">Kalkulator Plate</string>
+    <string name="training_timer">Timer Latihan</string>
+    <string name="progress_view">Lihat Kemajuan</string>
+    <string name="adjust_plan">Sesuaikan Rencana</string>
+    <string name="current_tm">Training Max Saat Ini (TM)</string>
+    <string name="completed">Selesai</string>
+    <string name="in_progress">Sedang Berlangsung</string>
+    <string name="not_started">Belum Dimulai</string>
+    
+    <!-- Workout Details -->
+    <string name="workout_details">Detail Latihan</string>
+    <string name="week_mode">Minggu %1$d • Mode %2$s</string>
+    <string name="today_goal">Target Hari Ini: Selesaikan 3 set utama</string>
+    <string name="main_training">Latihan Utama</string>
+    <string name="set_number">Set %1$d</string>
+    <string name="amrap_label">AMRAP</string>
+    <string name="tm_percentage">%1$d%% TM</string>
+    <string name="amrap_instruction">• Dorong untuk repetisi maksimal</string>
+    <string name="actual_reps">Repetisi aktual:</string>
+    <string name="reps_unit">reps</string>
+    <string name="start_timer">Mulai Timer</string>
+    <string name="complete_workout">Selesaikan Latihan</string>
+    
+    <!-- Plate Calculator -->
+    <string name="plate_calculator_title">Kalkulator Plate</string>
+    <string name="target_weight">Berat Target</string>
+    <string name="recommended_solution">Solusi Rekomendasi</string>
+    <string name="exact_match">Cocok Persis</string>
+    <string name="close_match">Cocok Dekat</string>
+    <string name="total_weight">Total: %1$.1fkg</string>
+    <string name="weight_difference_over">%1$.1fkg lebih dari target</string>
+    <string name="weight_difference_under">%1$.1fkg kurang dari target</string>
+    <string name="barbell_breakdown">Barbell: %1$dkg</string>
+    <string name="per_side_weight">Per Sisi: %1$.1fkg</string>
+    <string name="each_side_needs">Setiap sisi perlu</string>
+    <string name="plate_diagram">Diagram Plate</string>
+    <string name="detailed_breakdown">Rincian Detail (Per Sisi)</string>
+    <string name="per_side_total">Total Per Sisi:</string>
+    <string name="unable_to_load">Tidak Dapat Memuat</string>
+    <string name="weight_too_low">Berat target terlalu rendah atau plate tidak cukup</string>
+    
+    <!-- Timer -->
+    <string name="training_timer_title">Timer Latihan</string>
+    <string name="rest_between_sets">Istirahat Antar Set</string>
+    <string name="time_remaining">Waktu Tersisa</string>
+    <string name="start">Mulai</string>
+    <string name="pause">Jeda</string>
+    <string name="stop">Berhenti</string>
+    <string name="timer_90s">90d</string>
+    <string name="timer_2min">2mnt</string>
+    <string name="timer_3min">3mnt</string>
+    <string name="timer_complete_title">Waktu Habis!</string>
+    <string name="timer_complete_message">Waktu istirahat selesai, siap untuk set berikutnya</string>
+    
+    <!-- Statistics -->
+    <string name="training_stats">Statistik Latihan</string>
+    <string name="training_overview">Ikhtisar Latihan</string>
+    <string name="completed_workouts">Latihan Selesai</string>
+    <string name="completed_cycles">Siklus Selesai</string>
+    <string name="average_amrap">Rata-rata AMRAP</string>
+    <string name="completion_rate">Tingkat Penyelesaian</string>
+    <string name="big_four_progress">Kemajuan Empat Besar</string>
+    <string name="recent_workouts">Latihan Terbaru</string>
+    <string name="progress_percentage">+%1$.1f%%</string>
+    <string name="amrap_count">AMRAP: %1$d reps</string>
+    <string name="workout_date">%1$s • Minggu %2$d Hari %3$d</string>
+    <string name="no_workout_history">Belum ada riwayat latihan</string>
+    
+    <!-- Settings -->
+    <string name="settings">Pengaturan</string>
+    <string name="user_info">Info Pengguna</string>
+    <string name="trainer">Pelatih</string>
+    <string name="cycle_info">531 Training • Siklus %1$d</string>
+    <string name="training_settings">Pengaturan Latihan</string>
+    <string name="rm_settings">Pengaturan 1RM</string>
+    <string name="template_settings">Template Latihan</string>
+    <string name="plate_settings">Konfigurasi Plate</string>
+    <string name="language_settings">Bahasa</string>
+    <string name="data_management">Manajemen Data</string>
+    <string name="export_data">Ekspor Data</string>
+    <string name="reset_data">Reset Semua Data</string>
+    <string name="about">Tentang</string>
+    <string name="version">Versi</string>
+    <string name="developer">Pengembang</string>
+    <string name="team_name">Tim 531 Training</string>
+    
+    <!-- Languages -->
+    <string name="language_english">English</string>
+    <string name="language_chinese_simplified">简体中文</string>
+    <string name="language_chinese_traditional">繁體中文</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    
+    <!-- Common -->
+    <string name="next">Selanjutnya</string>
+    <string name="back">Kembali</string>
+    <string name="save">Simpan</string>
+    <string name="cancel">Batal</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="home">Beranda</string>
+    <string name="workout">Latihan</string>
+    <string name="statistics">Statistik</string>
+    <string name="profile">Profil</string>
+    <string name="kg_unit">kg</string>
+    <string name="reps_format">%1$d reps</string>
+    <string name="weight_reps_format">%1$.1fkg × %2$d</string>
+    
+    <!-- Notifications -->
+    <string name="notification_workout_complete">Latihan Selesai!</string>
+    <string name="notification_workout_message">Latihan yang bagus, terus pertahankan!</string>
+    <string name="notification_cycle_complete">Siklus Selesai!</string>
+    <string name="notification_cycle_message">TM otomatis ditingkatkan, memulai siklus baru!</string>
+    <string name="notification_export_success">Ekspor Berhasil</string>
+    <string name="notification_export_message">Data latihan diekspor ke folder unduhan</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_reset_data_title">Reset Semua Data?</string>
+    <string name="dialog_reset_data_message">Tindakan ini tidak dapat dibatalkan!</string>
+    <string name="dialog_confirm_reset">Konfirmasi Reset</string>
+    
+    <!-- Days of Week -->
+    <string name="day_monday">Senin</string>
+    <string name="day_wednesday">Rabu</string>
+    <string name="day_friday">Jumat</string>
+    <string name="day_sunday">Minggu</string>
+</resources>

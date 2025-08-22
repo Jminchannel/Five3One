@@ -1,0 +1,189 @@
+<resources>
+    <!-- App Info -->
+    <string name="app_name">531訓練法</string>
+    <string name="app_description">專業力量訓練夥伴</string>
+    
+    <!-- Welcome Screen -->
+    <string name="welcome_title">531訓練法助手</string>
+    <string name="welcome_subtitle">專業力量訓練夥伴</string>
+    <string name="welcome_feature_1">智能訓練計劃生成</string>
+    <string name="welcome_feature_2">槓鈴配重自動計算</string>
+    <string name="welcome_feature_3">訓練進度精準追蹤</string>
+    <string name="welcome_get_started">開始設定</string>
+    <string name="welcome_setup_notice">首次使用需要簡單設定</string>
+    <string name="welcome_scientific">讓訓練更科學</string>
+    
+    <!-- Setup Screens -->
+    <string name="setup_1rm">設定1RM</string>
+    <string name="setup_plates">槓鈴片配置</string>
+    <string name="setup_template">選擇訓練模板</string>
+    <string name="setup_step_counter">%1$d/3</string>
+    
+    <!-- 1RM Setup -->
+    <string name="setup_1rm_title">設定四大項1RM</string>
+    <string name="setup_1rm_description">輸入你的最大單次重量</string>
+    <string name="lift_bench">臥推</string>
+    <string name="lift_squat">深蹲</string>
+    <string name="lift_deadlift">硬舉</string>
+    <string name="lift_press">站姿推舉</string>
+    <string name="weight_kg">重量 (kg)</string>
+    <string name="setup_tip_title">小貼士：</string>
+    <string name="setup_tip_1rm">531訓練法建議「從輕開始」，系統會自動設定TM為90% 1RM</string>
+    
+    <!-- Plate Configuration -->
+    <string name="plates_title">設定健身房槓鈴片</string>
+    <string name="plates_description">選擇你健身房擁有的槓鈴片規格</string>
+    <string name="barbell_weight">槓鈴桿重量</string>
+    <string name="available_plates">可用槓鈴片</string>
+    <string name="plate_count">數量: %1$d</string>
+    <string name="plate_unavailable">不可用</string>
+    <string name="add_custom_plate">添加自定義規格</string>
+    
+    <!-- Template Selection -->
+    <string name="template_title">選擇531訓練模板</string>
+    <string name="template_description">選擇適合你當前水平的訓練模板</string>
+    <string name="template_5s_name">5/5/5+ 週期</string>
+    <string name="template_5s_description">適合初學者和重新開始的訓練者</string>
+    <string name="template_3s_name">3/3/3+ 週期</string>
+    <string name="template_3s_description">中等強度，適合穩定進步</string>
+    <string name="template_531_name">5/3/1+ 週期</string>
+    <string name="template_531_description">高強度，適合有經驗的訓練者</string>
+    <string name="template_recommendation">建議：</string>
+    <string name="template_advice">新手建議從5/5/5+開始，逐步提升到更高強度</string>
+    <string name="complete_setup">完成設定</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">531訓練助手</string>
+    <string name="current_week_day">第%1$d週 • 第%2$d天</string>
+    <string name="today_workout">今日訓練</string>
+    <string name="workout_day_template">%1$s日 - %2$s</string>
+    <string name="main_sets">主項訓練</string>
+    <string name="sets_count">%1$s %2$d組</string>
+    <string name="start_workout">開始訓練</string>
+    <string name="week_progress">本週進度</string>
+    <string name="quick_actions">快速操作</string>
+    <string name="plate_calculator">配重計算</string>
+    <string name="training_timer">訓練計時</string>
+    <string name="progress_view">進度查看</string>
+    <string name="adjust_plan">調整計劃</string>
+    <string name="current_tm">當前訓練最大重量 (TM)</string>
+    <string name="completed">已完成</string>
+    <string name="in_progress">進行中</string>
+    <string name="not_started">未開始</string>
+    
+    <!-- Workout Details -->
+    <string name="workout_details">訓練詳情</string>
+    <string name="week_mode">第%1$d週 • %2$s 模式</string>
+    <string name="today_goal">今日目標：完成3組主項訓練</string>
+    <string name="main_training">主項訓練</string>
+    <string name="set_number">第%1$d組</string>
+    <string name="amrap_label">AMRAP</string>
+    <string name="tm_percentage">%1$d%% TM</string>
+    <string name="amrap_instruction">• 盡力完成更多次數</string>
+    <string name="actual_reps">實際完成:</string>
+    <string name="reps_unit">次</string>
+    <string name="start_timer">開始計時器</string>
+    <string name="complete_workout">完成訓練</string>
+    
+    <!-- Plate Calculator -->
+    <string name="plate_calculator_title">配重計算器</string>
+    <string name="target_weight">目標重量</string>
+    <string name="recommended_solution">推薦配重方案</string>
+    <string name="exact_match">精確匹配</string>
+    <string name="close_match">近似匹配</string>
+    <string name="total_weight">總重: %1$.1fkg</string>
+    <string name="weight_difference_over">比目標重%1$.1fkg</string>
+    <string name="weight_difference_under">比目標輕%1$.1fkg</string>
+    <string name="barbell_breakdown">槓鈴桿: %1$dkg</string>
+    <string name="per_side_weight">每側: %1$.1fkg</string>
+    <string name="each_side_needs">左右兩側各需要</string>
+    <string name="plate_diagram">槓鈴配重示意圖</string>
+    <string name="detailed_breakdown">詳細配重 (每側)</string>
+    <string name="per_side_total">每側總重:</string>
+    <string name="unable_to_load">無法配重</string>
+    <string name="weight_too_low">目標重量過小或槓鈴片不足</string>
+    
+    <!-- Timer -->
+    <string name="training_timer_title">訓練計時器</string>
+    <string name="rest_between_sets">組間休息</string>
+    <string name="time_remaining">剩餘時間</string>
+    <string name="start">開始</string>
+    <string name="pause">暫停</string>
+    <string name="stop">停止</string>
+    <string name="timer_90s">90秒</string>
+    <string name="timer_2min">2分鐘</string>
+    <string name="timer_3min">3分鐘</string>
+    <string name="timer_complete_title">時間到！</string>
+    <string name="timer_complete_message">休息時間結束，可以開始下一組了</string>
+    
+    <!-- Statistics -->
+    <string name="training_stats">訓練統計</string>
+    <string name="training_overview">訓練概覽</string>
+    <string name="completed_workouts">完成訓練</string>
+    <string name="completed_cycles">完成週期</string>
+    <string name="average_amrap">平均AMRAP</string>
+    <string name="completion_rate">計劃完成率</string>
+    <string name="big_four_progress">四大項進步趨勢</string>
+    <string name="recent_workouts">近期訓練記錄</string>
+    <string name="progress_percentage">+%1$.1f%%</string>
+    <string name="amrap_count">AMRAP: %1$d次</string>
+    <string name="workout_date">%1$s • 第%2$d週第%3$d天</string>
+    <string name="no_workout_history">暫無訓練記錄</string>
+    
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="user_info">用戶資訊</string>
+    <string name="trainer">訓練者</string>
+    <string name="cycle_info">531訓練法 • 第%1$d週期</string>
+    <string name="training_settings">訓練設定</string>
+    <string name="rm_settings">1RM設定</string>
+    <string name="template_settings">訓練模板</string>
+    <string name="plate_settings">槓鈴片配置</string>
+    <string name="language_settings">語言設定</string>
+    <string name="data_management">資料管理</string>
+    <string name="export_data">匯出資料</string>
+    <string name="reset_data">重置所有資料</string>
+    <string name="about">關於</string>
+    <string name="version">版本</string>
+    <string name="developer">開發者</string>
+    <string name="team_name">531訓練助手團隊</string>
+    
+    <!-- Languages -->
+    <string name="language_english">English</string>
+    <string name="language_chinese_simplified">简体中文</string>
+    <string name="language_chinese_traditional">繁體中文</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    
+    <!-- Common -->
+    <string name="next">下一步</string>
+    <string name="back">返回</string>
+    <string name="save">儲存</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">確認</string>
+    <string name="home">主頁</string>
+    <string name="workout">訓練</string>
+    <string name="statistics">統計</string>
+    <string name="profile">我的</string>
+    <string name="kg_unit">kg</string>
+    <string name="reps_format">%1$d次</string>
+    <string name="weight_reps_format">%1$.1fkg × %2$d次</string>
+    
+    <!-- Notifications -->
+    <string name="notification_workout_complete">訓練完成！</string>
+    <string name="notification_workout_message">很好的訓練，繼續保持！</string>
+    <string name="notification_cycle_complete">週期完成！</string>
+    <string name="notification_cycle_message">TM已自動增加，開始新的週期！</string>
+    <string name="notification_export_success">匯出成功</string>
+    <string name="notification_export_message">訓練資料已匯出到下載資料夾</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_reset_data_title">確定要重置所有資料嗎？</string>
+    <string name="dialog_reset_data_message">此操作不可恢復！</string>
+    <string name="dialog_confirm_reset">確認重置</string>
+    
+    <!-- Days of Week -->
+    <string name="day_monday">週一</string>
+    <string name="day_wednesday">週三</string>
+    <string name="day_friday">週五</string>
+    <string name="day_sunday">週日</string>
+</resources>

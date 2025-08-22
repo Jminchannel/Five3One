@@ -1,0 +1,250 @@
+<resources>
+    <!-- App Info -->
+    <string name="app_name">531 Training</string>
+    <string name="app_description">Professional Strength Training Companion</string>
+    <string name="app_subtitle">Professional Strength Training Companion</string>
+    <string name="version_info">Version 1.0.0</string>
+    
+    <!-- Welcome Screen -->
+    <string name="welcome_title">531 Training</string>
+    <string name="welcome_subtitle">Professional Strength Training Companion</string>
+    <string name="welcome_feature_1">Smart Training Plan Generation</string>
+    <string name="welcome_feature_2">Auto Barbell Plate Calculation</string>
+    <string name="welcome_feature_3">Precise Training Progress Tracking</string>
+    <string name="welcome_get_started">Get Started</string>
+    <string name="welcome_setup_notice">Simple setup required for first use</string>
+    <string name="welcome_scientific">Make Training Scientific</string>
+    
+    <!-- Setup Screens -->
+    <string name="setup_1rm">Set 1RM</string>
+    <string name="setup_plates">Plate Configuration</string>
+    <string name="setup_template">Choose Template</string>
+    <string name="setup_step_counter">%1$d/3</string>
+    
+    <!-- 1RM Setup -->
+    <string name="setup_1rm_title">Set Big Four 1RM</string>
+    <string name="setup_1rm_description">Enter your one-rep max weights</string>
+    <string name="lift_bench">Bench Press</string>
+    <string name="lift_squat">Squat</string>
+    <string name="lift_deadlift">Deadlift</string>
+    <string name="lift_press">Overhead Press</string>
+    <string name="weight_kg">Weight (kg)</string>
+    <string name="setup_tip_title">Tip:</string>
+    <string name="setup_tip_1rm">531 recommends \"starting light\" - the system will automatically set TM to 90% of 1RM</string>
+    
+    <!-- Plate Configuration -->
+    <string name="plates_title">Set Gym Plates</string>
+    <string name="plates_description">Select available plate weights at your gym</string>
+    <string name="barbell_weight">Barbell Weight</string>
+    <string name="available_plates">Available Plates</string>
+    <string name="select_plates_hint">Select the plates available in your gym</string>
+    <string name="plate_count">Count: %1$d</string>
+    <string name="plate_unavailable">Unavailable</string>
+    <string name="add_custom_plate">Add Custom Weight</string>
+    
+    <!-- Template Selection -->
+    <string name="template_title">Choose 531 Template</string>
+    <string name="template_description">Select training template for your current level</string>
+    <string name="template_5s_name">5/5/5+ Cycle</string>
+    <string name="template_5s_description">For beginners and those restarting</string>
+    <string name="template_3s_name">3/3/3+ Cycle</string>
+    <string name="template_3s_description">Medium intensity for steady progress</string>
+    <string name="template_531_name">5/3/1+ Cycle</string>
+    <string name="template_531_description">High intensity for experienced lifters</string>
+    <string name="template_recommendation">Recommendation:</string>
+    <string name="template_advice">Beginners should start with 5/5/5+ and gradually progress to higher intensity</string>
+    <string name="complete_setup">Complete Setup</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">531 Training</string>
+    <string name="current_week_day">Week %1$d • Day %2$d</string>
+    <string name="today_workout">Today\'s Workout</string>
+    <string name="workout_day_template">%1$s Day - %2$s</string>
+    <string name="main_sets">Main Sets</string>
+    <string name="training_sets">Training Sets</string>
+    <string name="sets_count">%1$s %2$d sets</string>
+    <string name="start_workout">Start Workout</string>
+    <string name="week_progress">Week Progress</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="plate_calculator">Plate Calculator</string>
+    <string name="training_timer">Training Timer</string>
+    <string name="progress_view">Progress View</string>
+    <string name="adjust_plan">Adjust Plan</string>
+    <string name="current_tm">Current Training Max (TM)</string>
+    <string name="completed">Completed</string>
+    <string name="in_progress">In Progress</string>
+    <string name="not_started">Not Started</string>
+    
+    <!-- Workout Details -->
+    <string name="workout_details">Workout Details</string>
+    <string name="week_mode">Week %1$d • %2$s Mode</string>
+    <string name="today_goal">Complete 3 main sets</string>
+    <string name="main_training">Main Training</string>
+    <string name="set_number">Set %1$d</string>
+    <string name="amrap_label">AMRAP</string>
+    <string name="tm_percentage">%1$d%% TM</string>
+    <string name="amrap_instruction">• Push for maximum reps</string>
+    <string name="actual_reps">Actual reps:</string>
+    <string name="reps_unit">reps</string>
+    <string name="start_timer">Start Timer</string>
+    <string name="complete_workout">Complete Workout</string>
+    <string name="sets_progress">Progress: %1$d/%2$d sets</string>
+    <string name="plate_loading_solution">Plate Loading Solution</string>
+    <string name="workout_notes">Workout Notes</string>
+    <string name="add_notes_optional">Add notes (optional)</string>
+    <string name="workout_feeling">How did it feel?</string>
+    
+    <!-- Plate Calculator -->
+    <string name="plate_calculator_title">Plate Calculator</string>
+    <string name="target_weight">Target Weight</string>
+    <string name="quick_weights">Quick Weights</string>
+    <string name="recommended_solution">Recommended Solution</string>
+    <string name="exact_match">Exact Match</string>
+    <string name="close_match">Close Match</string>
+    <string name="total_weight">Total Weight</string>
+    <string name="weight_difference_over">%1$.1fkg over target</string>
+    <string name="weight_difference_under">%1$.1fkg under target</string>
+    <string name="barbell_breakdown">Barbell Breakdown</string>
+    <string name="per_side_weight">Per Side: %1$.1fkg</string>
+    <string name="current_plate_config">Current Plate Configuration</string>
+    <string name="each_side_needs">Each side needs</string>
+    <string name="plate_diagram">Plate Diagram</string>
+    <string name="detailed_breakdown">Detailed Breakdown (Per Side)</string>
+    <string name="per_side_total">Per Side Total:</string>
+    <string name="unable_to_load">Unable to Load</string>
+    <string name="weight_too_low">Target weight too low or insufficient plates</string>
+    
+    <!-- Timer -->
+    <string name="training_timer_title">Training Timer</string>
+    <string name="rest_between_sets">Rest Between Sets</string>
+    <string name="time_remaining">Time Remaining</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="timer_90s">90s</string>
+    <string name="timer_2min">2min</string>
+    <string name="timer_3min">3min</string>
+    <string name="timer_4min">4min</string>
+    <string name="timer_5min">5min</string>
+    <string name="timer_running">Timer Running</string>
+    <string name="timer_ready">Timer Ready</string>
+    <string name="timer_completed">Timer Completed</string>
+    <string name="quick_timer_presets">Quick Timer Presets</string>
+    <string name="manual_time_adjust">Manual Time Adjustment</string>
+    <string name="default_timer_settings">Default Timer Settings</string>
+    <string name="default_rest_time">Default Rest Time</string>
+    <string name="timer_completed_title">Rest Time Complete!</string>
+    <string name="timer_completed_message">Your rest period is over. Ready for the next set?</string>
+    <string name="timer_complete_title">Time\'s Up!</string>
+    <string name="timer_complete_message">Rest time over, ready for next set</string>
+    <string name="ok">OK</string>
+    
+    <!-- Statistics -->
+    <string name="training_stats">Training Statistics</string>
+    <string name="training_overview">Training Overview</string>
+    <string name="completed_workouts">Completed Workouts</string>
+    <string name="completed_cycles">Completed Cycles</string>
+    <string name="average_amrap">Average AMRAP</string>
+    <string name="completion_rate">Completion Rate</string>
+    <string name="big_four_progress">Big Four Progress</string>
+    <string name="recent_workouts">Recent Workouts</string>
+    <string name="progress_percentage">+%1$.1f%%</string>
+    <string name="amrap_count">AMRAP: %1$d reps</string>
+    <string name="workout_date">%1$s • Week %2$d Day %3$d</string>
+    <string name="no_workout_history">No workout history yet</string>
+    <string name="no_workout_history_description">Start your first workout to see progress tracking</string>
+    <string name="start_first_workout">Start First Workout</string>
+    <string name="no_statistics">No statistics available</string>
+    <string name="no_statistics_description">Complete some workouts to see your progress</string>
+    <string name="no_data">No data available</string>
+    <string name="no_data_description">Data will appear here once available</string>
+    <string name="loading_error">Loading failed</string>
+    <string name="loading_error_description">Something went wrong while loading data</string>
+    <string name="retry">Retry</string>
+    <string name="network_error">Network error</string>
+    <string name="network_error_description">Please check your internet connection</string>
+    <string name="maintenance_mode">Under maintenance</string>
+    <string name="maintenance_mode_description">This feature is temporarily unavailable</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="coming_soon_description">%1$s feature will be available in future updates</string>
+    <string name="loading">Loading...</string>
+    <string name="dismiss">Dismiss</string>
+    
+    <!-- Snackbar Messages -->
+    <string name="workout_completed_message">Workout completed successfully!</string>
+    <string name="workout_saved_message">Workout progress saved</string>
+    <string name="settings_updated_message">Settings updated successfully</string>
+    <string name="data_exported_message">Data exported successfully</string>
+    <string name="network_error_message">Network connection failed</string>
+    <string name="save_error_message">Failed to save data</string>
+    <string name="invalid_input_message">Please check your input</string>
+    <string name="feature_coming_soon_message">This feature is coming soon!</string>
+    
+    <!-- Workout Feelings -->
+    <string name="feeling_excellent">Excellent</string>
+    <string name="feeling_good">Good</string>
+    <string name="feeling_fair">Fair</string>
+    <string name="feeling_poor">Poor</string>
+    
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="user_info">User Info</string>
+    <string name="trainer">Trainer</string>
+    <string name="cycle_info">531 Training • Cycle %1$d</string>
+    <string name="current_1rm">Current 1RM</string>
+    <string name="training_settings">Training Settings</string>
+    <string name="rm_settings">1RM Settings</string>
+    <string name="template_settings">Training Template</string>
+    <string name="plate_settings">Plate Configuration</string>
+    <string name="language_settings">Language</string>
+    <string name="data_management">Data Management</string>
+    <string name="export_data">Export Data</string>
+    <string name="export_success">Data exported successfully</string>
+    <string name="reset_data">Reset All Data</string>
+    <string name="reset_data_confirm_title">Reset All Data?</string>
+    <string name="reset_data_confirm_message">This will permanently delete all your training data. This action cannot be undone.</string>
+    <string name="reset">Reset</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="developer">Developer</string>
+    <string name="team_name">531 Training Team</string>
+    
+    <!-- Languages -->
+    <string name="language_english">English</string>
+    <string name="language_chinese_simplified">简体中文</string>
+    <string name="language_chinese_traditional">繁體中文</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+    
+    <!-- Common -->
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="home">Home</string>
+    <string name="workout">Workout</string>
+    <string name="statistics">Statistics</string>
+    <string name="profile">Profile</string>
+    <string name="kg_unit">kg</string>
+    <string name="reps_format">%1$d reps</string>
+    <string name="weight_reps_format">%1$.1fkg × %2$d</string>
+    
+    <!-- Notifications -->
+    <string name="notification_workout_complete">Workout Complete!</string>
+    <string name="notification_workout_message">Great workout, keep it up!</string>
+    <string name="notification_cycle_complete">Cycle Complete!</string>
+    <string name="notification_cycle_message">TM automatically increased, starting new cycle!</string>
+    <string name="notification_export_success">Export Successful</string>
+    <string name="notification_export_message">Training data exported to downloads folder</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_reset_data_title">Reset All Data?</string>
+    <string name="dialog_reset_data_message">This action cannot be undone!</string>
+    <string name="dialog_confirm_reset">Confirm Reset</string>
+    
+    <!-- Days of Week -->
+    <string name="day_monday">Monday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_sunday">Sunday</string>
+</resources>

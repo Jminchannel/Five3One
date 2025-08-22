@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>531训练法助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .app-container {
+            max-width: 400px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: #f8fafc;
+            position: relative;
+        }
+        .screen-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        .screen {
+            min-height: 100vh;
+            display: none;
+        }
+        .screen.active {
+            display: block;
+        }
+        .progress-ring {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .timer-display {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="app-container">
+        <!-- 1. 欢迎页面 -->
+        <div id="welcome-screen" class="screen active bg-gradient-to-br from-blue-600 to-purple-700">
+            <div class="flex flex-col h-full text-white p-6">
+                <div class="flex-1 flex flex-col justify-center items-center">
+                    <div class="text-center mb-8">
+                        <i class="fas fa-dumbbell text-6xl mb-4"></i>
+                        <h1 class="text-3xl font-bold mb-2">531训练法助手</h1>
+                        <p class="text-lg opacity-90">专业力量训练伙伴</p>
+                    </div>
+                    
+                    <div class="w-full mb-8">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&h=200&fit=crop" 
+                             alt="健身" class="w-full h-48 object-cover rounded-lg opacity-80">
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <h2 class="text-xl font-semibold mb-4">让训练更科学</h2>
+                        <ul class="space-y-2 text-left">
+                            <li class="flex items-center"><i class="fas fa-check mr-3"></i>智能训练计划生成</li>
+                            <li class="flex items-center"><i class="fas fa-check mr-3"></i>杠铃配重自动计算</li>
+                            <li class="flex items-center"><i class="fas fa-check mr-3"></i>训练进度精准追踪</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="pb-8">
+                    <button onclick="goToScreen('setup-screen')" class="w-full bg-white text-blue-600 py-4 rounded-xl font-bold text-lg">
+                        开始设置
+                    </button>
+                    <p class="text-center text-sm opacity-75 mt-4">首次使用需要简单设置</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 1RM设置页面 -->
+        <div id="setup-screen" class="screen">
+            <!-- 顶部导航 -->
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('welcome-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 class="font-semibold">设置1RM</h2>
+                <span class="text-sm text-gray-500">1/3</span>
+            </div>
+            
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <i class="fas fa-weight-hanging text-4xl text-blue-600 mb-3"></i>
+                    <h3 class="text-xl font-bold mb-2">设置四大项1RM</h3>
+                    <p class="text-gray-600">输入你的最大单次重量</p>
+                </div>
+                
+                <!-- 四大项输入 -->
+                <div class="space-y-4">
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-bed text-red-500 mr-3"></i>
+                            <h4 class="font-semibold">卧推</h4>
+                        </div>
+                        <input type="number" id="bench-1rm" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                               placeholder="80" value="80">
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-arrow-down text-green-500 mr-3"></i>
+                            <h4 class="font-semibold">深蹲</h4>
+                        </div>
+                        <input type="number" id="squat-1rm" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                               placeholder="100" value="100">
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-arrow-up text-purple-500 mr-3"></i>
+                            <h4 class="font-semibold">硬拉</h4>
+                        </div>
+                        <input type="number" id="deadlift-1rm" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                               placeholder="120" value="120">
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-hands-pray text-orange-500 mr-3"></i>
+                            <h4 class="font-semibold">站姿推举</h4>
+                        </div>
+                        <input type="number" id="press-1rm" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                               placeholder="55" value="55">
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-xl mb-6 mt-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                        <div>
+                            <p class="text-sm text-blue-700"><strong>小贴士：</strong></p>
+                            <p class="text-sm text-blue-600">531训练法建议"从轻开始"，系统会自动设置TM为90% 1RM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="save1RM()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">
+                    下一步
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. 杠铃片配置页面 -->
+        <div id="plates-screen" class="screen">
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('setup-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 class="font-semibold">杠铃片配置</h2>
+                <span class="text-sm text-gray-500">2/3</span>
+            </div>
+            
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <i class="fas fa-circle text-4xl text-gray-600 mb-3"></i>
+                    <h3 class="text-xl font-bold mb-2">设置健身房杠铃片</h3>
+                    <p class="text-gray-600">选择你健身房拥有的杠铃片规格</p>
+                </div>
+                
+                <!-- 杠铃杆设置 -->
+                <div class="bg-white rounded-xl p-4 mb-6 shadow-sm border">
+                    <h4 class="font-semibold mb-3">杠铃杆重量</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="setBarbellWeight(20)" class="barbell-btn bg-blue-100 text-blue-600 py-2 rounded-lg font-semibold">20kg</button>
+                        <button onclick="setBarbellWeight(18)" class="barbell-btn bg-gray-100 text-gray-600 py-2 rounded-lg">18kg</button>
+                        <button onclick="setBarbellWeight(15)" class="barbell-btn bg-gray-100 text-gray-600 py-2 rounded-lg">15kg</button>
+                    </div>
+                </div>
+                
+                <!-- 杠铃片选择 -->
+                <div class="bg-white rounded-xl p-4 mb-6 shadow-sm border">
+                    <h4 class="font-semibold mb-4">可用杠铃片</h4>
+                    <div id="plates-list" class="space-y-3">
+                        <!-- 动态生成杠铃片选择 -->
+                    </div>
+                </div>
+                
+                <button onclick="goToScreen('template-screen')" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">
+                    下一步
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. 训练模板选择页面 -->
+        <div id="template-screen" class="screen">
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('plates-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 class="font-semibold">选择训练模板</h2>
+                <span class="text-sm text-gray-500">3/3</span>
+            </div>
+            
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <i class="fas fa-calendar-alt text-4xl text-blue-600 mb-3"></i>
+                    <h3 class="text-xl font-bold mb-2">选择531训练模板</h3>
+                    <p class="text-gray-600">选择适合你当前水平的训练模板</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div onclick="selectTemplate('5s')" class="template-card bg-white rounded-xl p-4 shadow-sm border cursor-pointer">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-lg">5/5/5+ 周期</h4>
+                            <i class="template-check fas fa-check-circle text-blue-500 text-xl hidden"></i>
+                        </div>
+                        <p class="text-gray-600 mb-3">适合初学者和重新开始的训练者</p>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm space-y-1">
+                                <div>第1组: 65% × 5次</div>
+                                <div>第2组: 75% × 5次</div>
+                                <div class="font-semibold text-blue-600">第3组: 85% × 5+次</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectTemplate('3s')" class="template-card bg-white rounded-xl p-4 shadow-sm border cursor-pointer">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-lg">3/3/3+ 周期</h4>
+                            <i class="template-check fas fa-check-circle text-blue-500 text-xl hidden"></i>
+                        </div>
+                        <p class="text-gray-600 mb-3">中等强度，适合稳定进步</p>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm space-y-1">
+                                <div>第1组: 70% × 3次</div>
+                                <div>第2组: 80% × 3次</div>
+                                <div class="font-semibold text-blue-600">第3组: 90% × 3+次</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectTemplate('531')" class="template-card bg-white rounded-xl p-4 shadow-sm border cursor-pointer">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-lg">5/3/1+ 周期</h4>
+                            <i class="template-check fas fa-check-circle text-blue-500 text-xl hidden"></i>
+                        </div>
+                        <p class="text-gray-600 mb-3">高强度，适合有经验的训练者</p>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm space-y-1">
+                                <div>第1组: 75% × 5次</div>
+                                <div>第2组: 85% × 3次</div>
+                                <div class="font-semibold text-blue-600">第3组: 95% × 1+次</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-yellow-50 p-4 rounded-xl mb-6 mt-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-lightbulb text-yellow-500 mr-2 mt-1"></i>
+                        <div>
+                            <p class="text-sm text-yellow-700"><strong>建议：</strong></p>
+                            <p class="text-sm text-yellow-600">新手建议从5/5/5+开始，逐步提升到更高强度</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="completeSetup()" id="complete-setup-btn" 
+                        class="w-full bg-gray-400 text-white py-4 rounded-xl font-bold text-lg cursor-not-allowed" 
+                        disabled>
+                    完成设置
+                </button>
+            </div>
+        </div>
+
+        <!-- 5. 主界面 -->
+        <div id="dashboard-screen" class="screen">
+            <!-- 顶部导航 -->
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <div>
+                    <h2 class="font-bold text-lg">531训练助手</h2>
+                    <p class="text-sm text-gray-600" id="current-week">第1周 • 第1天</p>
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="goToScreen('settings-screen')">
+                        <i class="fas fa-cog text-gray-600 text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-4 pb-20">
+                <!-- 今日训练卡片 -->
+                <div id="today-workout-card" class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-4 mb-4 text-white">
+                    <!-- 动态生成 -->
+                </div>
+                
+                <!-- 本周进度 -->
+                <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">本周进度</h4>
+                    <div id="week-progress" class="space-y-3">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 快速操作 -->
+                <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">快速操作</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="goToScreen('calculator-screen')" class="bg-gray-50 p-3 rounded-lg text-center">
+                            <i class="fas fa-calculator text-blue-600 text-xl mb-2"></i>
+                            <p class="text-sm font-semibold">配重计算</p>
+                        </button>
+                        <button onclick="goToScreen('timer-screen')" class="bg-gray-50 p-3 rounded-lg text-center">
+                            <i class="fas fa-stopwatch text-green-600 text-xl mb-2"></i>
+                            <p class="text-sm font-semibold">训练计时</p>
+                        </button>
+                        <button onclick="goToScreen('stats-screen')" class="bg-gray-50 p-3 rounded-lg text-center">
+                            <i class="fas fa-chart-line text-purple-600 text-xl mb-2"></i>
+                            <p class="text-sm font-semibold">进度查看</p>
+                        </button>
+                        <button onclick="goToScreen('setup-screen')" class="bg-gray-50 p-3 rounded-lg text-center">
+                            <i class="fas fa-edit text-orange-600 text-xl mb-2"></i>
+                            <p class="text-sm font-semibold">调整计划</p>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- TM概览 -->
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">当前训练最大重量 (TM)</h4>
+                    <div id="tm-overview" class="grid grid-cols-2 gap-3">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部导航 -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm bg-white border-t px-4 py-2">
+                <div class="flex justify-around">
+                    <div class="text-center py-1">
+                        <i class="fas fa-home text-blue-600 text-xl mb-1"></i>
+                        <p class="text-xs text-blue-600 font-semibold">主页</p>
+                    </div>
+                    <button onclick="startWorkout()" class="text-center py-1">
+                        <i class="fas fa-play text-gray-400 text-xl mb-1"></i>
+                        <p class="text-xs text-gray-400">训练</p>
+                    </button>
+                    <button onclick="goToScreen('stats-screen')" class="text-center py-1">
+                        <i class="fas fa-chart-bar text-gray-400 text-xl mb-1"></i>
+                        <p class="text-xs text-gray-400">统计</p>
+                    </button>
+                    <button onclick="goToScreen('settings-screen')" class="text-center py-1">
+                        <i class="fas fa-user text-gray-400 text-xl mb-1"></i>
+                        <p class="text-xs text-gray-400">我的</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 训练详情页面 -->
+        <div id="workout-screen" class="screen">
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('dashboard-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 id="workout-title" class="font-semibold">训练详情</h2>
+                <span></span>
+            </div>
+            
+            <div class="p-4" id="workout-content">
+                <!-- 动态生成训练内容 -->
+            </div>
+        </div>
+
+        <!-- 7. 配重计算器 -->
+        <div id="calculator-screen" class="screen">
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('dashboard-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 class="font-semibold">配重计算器</h2>
+                <span></span>
+            </div>
+            
+            <div class="p-4">
+                <!-- 目标重量输入 -->
+                <div class="bg-white rounded-xl p-4 mb-4 shadow-sm border">
+                    <h4 class="font-semibold mb-3">目标重量</h4>
+                    <div class="flex items-center space-x-3">
+                        <input type="number" id="target-weight" 
+                               class="flex-1 text-3xl font-bold text-center border-2 border-blue-200 rounded-lg py-3"
+                               value="77" onchange="calculatePlates()">
+                        <span class="text-xl font-semibold text-gray-600">kg</span>
+                    </div>
+                </div>
+                
+                <!-- 配重方案显示 -->
+                <div id="plate-solution" class="bg-white rounded-xl p-4 shadow-sm border">
+                    <!-- 动态生成配重方案 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. 训练计时器 -->
+        <div id="timer-screen" class="screen">
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('dashboard-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 class="font-semibold">训练计时器</h2>
+                <span></span>
+            </div>
+            
+            <div class="p-4">
+                <!-- 计时器界面 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm text-center">
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-gray-600">组间休息</h4>
+                    </div>
+                    
+                    <!-- 倒计时显示 -->
+                    <div class="mb-6">
+                        <div id="timer-display" class="text-6xl font-bold text-blue-600 mb-2 timer-display">3:00</div>
+                        <div class="text-sm text-gray-600">剩余时间</div>
+                    </div>
+                    
+                    <!-- 进度圆环 -->
+                    <div class="relative w-32 h-32 mx-auto mb-6">
+                        <svg class="w-32 h-32">
+                            <circle cx="64" cy="64" r="56" stroke="#e5e7eb" stroke-width="8" fill="none"></circle>
+                            <circle id="progress-circle" cx="64" cy="64" r="56" stroke="#3b82f6" stroke-width="8" fill="none" 
+                                    class="progress-ring" stroke-dasharray="351.86" stroke-dashoffset="0" stroke-linecap="round"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span id="progress-percent" class="text-2xl font-bold text-blue-600">100%</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 控制按钮 -->
+                    <div class="flex space-x-4 mb-4">
+                        <button onclick="stopTimer()" class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold">
+                            <i class="fas fa-stop mr-2"></i>停止
+                        </button>
+                        <button onclick="toggleTimer()" id="timer-toggle" class="flex-1 bg-blue-600 text-white py-3 rounded-xl font-semibold">
+                            <i class="fas fa-play mr-2"></i>开始
+                        </button>
+                    </div>
+                    
+                    <!-- 预设时间 -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="setTimer(90)" class="bg-green-100 text-green-700 py-2 rounded-lg text-sm">90秒</button>
+                        <button onclick="setTimer(120)" class="bg-blue-100 text-blue-700 py-2 rounded-lg text-sm">2分钟</button>
+                        <button onclick="setTimer(180)" class="bg-purple-100 text-purple-700 py-2 rounded-lg text-sm">3分钟</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. 统计页面 -->
+        <div id="stats-screen" class="screen">
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('dashboard-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 class="font-semibold">训练统计</h2>
+                <span></span>
+            </div>
+            
+            <div class="p-4">
+                <!-- 总体统计 -->
+                <div class="bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl p-4 mb-4 text-white">
+                    <h3 class="font-bold text-lg mb-3">训练概览</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div id="completed-workouts" class="text-2xl font-bold">0</div>
+                            <div class="text-sm opacity-90">完成训练</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="completed-cycles" class="text-2xl font-bold">0</div>
+                            <div class="text-sm opacity-90">完成周期</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="avg-amrap" class="text-2xl font-bold">0</div>
+                            <div class="text-sm opacity-90">平均AMRAP</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="completion-rate" class="text-2xl font-bold">100%</div>
+                            <div class="text-sm opacity-90">计划完成率</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 四大项进步 -->
+                <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">四大项进步趋势</h4>
+                    <div id="progress-stats" class="space-y-3">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 近期记录 -->
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">近期训练记录</h4>
+                    <div id="recent-workouts" class="space-y-3">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. 设置页面 -->
+        <div id="settings-screen" class="screen">
+            <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                <button onclick="goToScreen('dashboard-screen')">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <h2 class="font-semibold">设置</h2>
+                <span></span>
+            </div>
+            
+            <div class="p-4">
+                <!-- 用户信息 -->
+                <div class="bg-white rounded-xl p-4 mb-4 shadow-sm text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-user text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">训练者</h3>
+                    <p id="user-info" class="text-sm text-gray-600">531训练法 • 第1周期</p>
+                </div>
+                
+                <!-- 训练设置 -->
+                <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">训练设置</h4>
+                    <div class="space-y-3">
+                        <button onclick="goToScreen('setup-screen')" class="w-full flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-dumbbell text-blue-600 mr-3"></i>
+                                <span>1RM设置</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </button>
+                        <button onclick="goToScreen('template-screen')" class="w-full flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt text-green-600 mr-3"></i>
+                                <span>训练模板</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span id="current-template" class="text-sm text-gray-600 mr-2">5/5/5+</span>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </button>
+                        <button onclick="goToScreen('plates-screen')" class="w-full flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-circle text-purple-600 mr-3"></i>
+                                <span>杠铃片配置</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 数据管理 -->
+                <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">数据管理</h4>
+                    <div class="space-y-3">
+                        <button onclick="exportData()" class="w-full flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-download text-green-600 mr-3"></i>
+                                <span>导出数据</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </button>
+                        <button onclick="resetData()" class="w-full flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-trash text-red-600 mr-3"></i>
+                                <span>重置所有数据</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 应用信息 -->
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <h4 class="font-semibold mb-3">关于</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">版本</span>
+                            <span class="text-sm text-gray-600">1.0.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">开发者</span>
+                            <span class="text-sm text-gray-600">531训练助手团队</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

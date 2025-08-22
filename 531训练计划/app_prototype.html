@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>531训练法助手 - APP原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 375px;
+            margin: 20px auto;
+            border: 8px solid #1f2937;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .screen {
+            height: 812px;
+            background: #f8fafc;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">531训练法助手 - APP原型设计</h1>
+        
+        <!-- 1. 欢迎引导页面 -->
+        <div class="phone-frame">
+            <div class="screen bg-gradient-to-br from-blue-600 to-purple-700 flex flex-col">
+                <div class="flex-1 flex flex-col justify-center items-center text-white px-8">
+                    <div class="mb-8">
+                        <i class="fas fa-dumbbell text-6xl mb-4"></i>
+                        <h1 class="text-3xl font-bold mb-2">531训练法助手</h1>
+                        <p class="text-lg opacity-90">专业力量训练伙伴</p>
+                    </div>
+                    
+                    <div class="w-full mb-8">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&h=200&fit=crop" 
+                             alt="健身" class="w-full h-48 object-cover rounded-lg opacity-80">
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <h2 class="text-xl font-semibold mb-4">让训练更科学</h2>
+                        <ul class="space-y-2 text-left">
+                            <li class="flex items-center"><i class="fas fa-check mr-3"></i>智能训练计划生成</li>
+                            <li class="flex items-center"><i class="fas fa-check mr-3"></i>杠铃配重自动计算</li>
+                            <li class="flex items-center"><i class="fas fa-check mr-3"></i>训练进度精准追踪</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="px-8 pb-8">
+                    <button class="w-full bg-white text-blue-600 py-4 rounded-xl font-bold text-lg">
+                        开始设置
+                    </button>
+                    <p class="text-center text-sm opacity-75 mt-4">首次使用需要简单设置</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 初始设置页面 - 1RM设置 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <!-- 状态栏 -->
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">设置1RM</h2>
+                    <span class="text-sm text-gray-500">1/3</span>
+                </div>
+                
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-weight-hanging text-4xl text-blue-600 mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">设置四大项1RM</h3>
+                        <p class="text-gray-600">输入你的最大单次重量，或通过次数估算</p>
+                    </div>
+                    
+                    <!-- 卧推设置 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-bed text-red-500 mr-3"></i>
+                            <h4 class="font-semibold">卧推</h4>
+                        </div>
+                        <div class="flex space-x-4">
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">1RM (kg)</label>
+                                <input type="number" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                                       placeholder="80" value="80">
+                            </div>
+                            <div class="text-center py-2">
+                                <span class="text-gray-400">或</span>
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">重量×次数</label>
+                                <div class="flex space-x-1">
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="70">
+                                    <span class="py-2 text-gray-400">×</span>
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 深蹲设置 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-arrow-down text-green-500 mr-3"></i>
+                            <h4 class="font-semibold">深蹲</h4>
+                        </div>
+                        <div class="flex space-x-4">
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">1RM (kg)</label>
+                                <input type="number" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                                       placeholder="100" value="100">
+                            </div>
+                            <div class="text-center py-2">
+                                <span class="text-gray-400">或</span>
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">重量×次数</label>
+                                <div class="flex space-x-1">
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="85">
+                                    <span class="py-2 text-gray-400">×</span>
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 硬拉设置 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-arrow-up text-purple-500 mr-3"></i>
+                            <h4 class="font-semibold">硬拉</h4>
+                        </div>
+                        <div class="flex space-x-4">
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">1RM (kg)</label>
+                                <input type="number" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                                       placeholder="120" value="120">
+                            </div>
+                            <div class="text-center py-2">
+                                <span class="text-gray-400">或</span>
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">重量×次数</label>
+                                <div class="flex space-x-1">
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="105">
+                                    <span class="py-2 text-gray-400">×</span>
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 站姿推举设置 -->
+                    <div class="bg-white rounded-xl p-4 mb-6 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-hands-pray text-orange-500 mr-3"></i>
+                            <h4 class="font-semibold">站姿推举</h4>
+                        </div>
+                        <div class="flex space-x-4">
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">1RM (kg)</label>
+                                <input type="number" class="w-full border rounded-lg p-3 text-lg font-bold" 
+                                       placeholder="55" value="55">
+                            </div>
+                            <div class="text-center py-2">
+                                <span class="text-gray-400">或</span>
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-sm text-gray-600">重量×次数</label>
+                                <div class="flex space-x-1">
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="45">
+                                    <span class="py-2 text-gray-400">×</span>
+                                    <input type="number" class="w-16 border rounded-lg p-2 text-center" placeholder="8">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-xl mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                            <div>
+                                <p class="text-sm text-blue-700"><strong>小贴士：</strong></p>
+                                <p class="text-sm text-blue-600">531训练法建议"从轻开始"，系统会自动设置TM为90% 1RM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">
+                        下一步
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 杠铃片配置页面 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">杠铃片配置</h2>
+                    <span class="text-sm text-gray-500">2/3</span>
+                </div>
+                
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-circle text-4xl text-gray-600 mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">设置健身房杠铃片</h3>
+                        <p class="text-gray-600">选择你健身房拥有的杠铃片规格</p>
+                    </div>
+                    
+                    <!-- 杠铃杆设置 -->
+                    <div class="bg-white rounded-xl p-4 mb-6 shadow-sm border">
+                        <h4 class="font-semibold mb-3 flex items-center">
+                            <i class="fas fa-minus text-gray-600 mr-2"></i>杠铃杆重量
+                        </h4>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button class="bg-blue-100 text-blue-600 py-2 rounded-lg font-semibold">20kg</button>
+                            <button class="bg-gray-100 text-gray-600 py-2 rounded-lg">18kg</button>
+                            <button class="bg-gray-100 text-gray-600 py-2 rounded-lg">15kg</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 杠铃片选择 -->
+                    <div class="bg-white rounded-xl p-4 mb-6 shadow-sm border">
+                        <h4 class="font-semibold mb-4 flex items-center">
+                            <i class="fas fa-circle text-gray-600 mr-2"></i>可用杠铃片
+                        </h4>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-red-500 rounded-full mr-3"></div>
+                                    <span class="font-semibold">25kg</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-600">数量: 4</span>
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="w-7 h-7 bg-blue-500 rounded-full mr-3"></div>
+                                    <span class="font-semibold">20kg</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-600">数量: 4</span>
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 bg-yellow-500 rounded-full mr-3"></div>
+                                    <span class="font-semibold text-gray-400">15kg</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-400">健身房没有</span>
+                                    <i class="fas fa-times-circle text-gray-400"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="w-5 h-5 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="font-semibold">10kg</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-600">数量: 4</span>
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-purple-500 rounded-full mr-3"></div>
+                                    <span class="font-semibold">5kg</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-600">数量: 4</span>
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gray-500 rounded-full mr-3"></div>
+                                    <span class="font-semibold">2.5kg</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-600">数量: 4</span>
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full mr-3"></div>
+                                    <span class="font-semibold">1.25kg</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-600">数量: 4</span>
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full mt-4 bg-gray-100 text-gray-600 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-plus mr-2"></i>添加自定义规格
+                        </button>
+                    </div>
+                    
+                    <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">
+                        下一步
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 训练模板选择页面 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">选择训练模板</h2>
+                    <span class="text-sm text-gray-500">3/3</span>
+                </div>
+                
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-calendar-alt text-4xl text-blue-600 mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">选择531训练模板</h3>
+                        <p class="text-gray-600">选择适合你当前水平的训练模板</p>
+                    </div>
+                    
+                    <!-- 5/5/5+ 模板 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm border-2 border-blue-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-lg">5/5/5+ 周期</h4>
+                            <i class="fas fa-check-circle text-blue-500 text-xl"></i>
+                        </div>
+                        <p class="text-gray-600 mb-3">适合初学者和重新开始的训练者</p>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm space-y-1">
+                                <div>第1组: 65% × 5次</div>
+                                <div>第2组: 75% × 5次</div>
+                                <div class="font-semibold text-blue-600">第3组: 85% × 5+次</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3/3/3+ 模板 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm border">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-lg">3/3/3+ 周期</h4>
+                            <i class="far fa-circle text-gray-400 text-xl"></i>
+                        </div>
+                        <p class="text-gray-600 mb-3">中等强度，适合稳定进步</p>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm space-y-1">
+                                <div>第1组: 70% × 3次</div>
+                                <div>第2组: 80% × 3次</div>
+                                <div class="font-semibold text-blue-600">第3组: 90% × 3+次</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 5/3/1+ 模板 -->
+                    <div class="bg-white rounded-xl p-4 mb-6 shadow-sm border">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-lg">5/3/1+ 周期</h4>
+                            <i class="far fa-circle text-gray-400 text-xl"></i>
+                        </div>
+                        <p class="text-gray-600 mb-3">高强度，适合有经验的训练者</p>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-sm space-y-1">
+                                <div>第1组: 75% × 5次</div>
+                                <div>第2组: 85% × 3次</div>
+                                <div class="font-semibold text-blue-600">第3组: 95% × 1+次</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-xl mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-lightbulb text-yellow-500 mr-2 mt-1"></i>
+                            <div>
+                                <p class="text-sm text-yellow-700"><strong>建议：</strong></p>
+                                <p class="text-sm text-yellow-600">新手建议从5/5/5+开始，逐步提升到更高强度</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">
+                        完成设置
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 主界面/仪表板 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <!-- 顶部导航 -->
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <div>
+                        <h2 class="font-bold text-lg">531训练助手</h2>
+                        <p class="text-sm text-gray-600">第1周 • 第2天</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <i class="fas fa-cog text-gray-600 text-xl"></i>
+                        <i class="fas fa-user-circle text-gray-600 text-xl"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4">
+                    <!-- 今日训练卡片 -->
+                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-4 mb-4 text-white">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">今日训练</h3>
+                                <p class="opacity-90">深蹲日 - 5/5/5+</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 px-3 py-1 rounded-full">
+                                <span class="text-sm font-semibold">第1周</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white bg-opacity-10 rounded-lg p-3 mb-3">
+                            <div class="flex items-center justify-between">
+                                <span>主项训练</span>
+                                <span class="font-bold">深蹲 3组</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-white text-blue-600 py-3 rounded-lg font-bold">
+                            开始训练
+                        </button>
+                    </div>
+                    
+                    <!-- 本周进度 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">本周进度</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-check text-green-600 text-sm"></i>
+                                    </div>
+                                    <span>周一 - 卧推</span>
+                                </div>
+                                <span class="text-green-600 text-sm font-semibold">已完成</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-blue-600 text-sm font-bold">2</span>
+                                    </div>
+                                    <span class="font-semibold">周三 - 深蹲</span>
+                                </div>
+                                <span class="text-blue-600 text-sm font-semibold">进行中</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-gray-400 text-sm font-bold">3</span>
+                                    </div>
+                                    <span class="text-gray-400">周五 - 站姿推举</span>
+                                </div>
+                                <span class="text-gray-400 text-sm">未开始</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-gray-400 text-sm font-bold">4</span>
+                                    </div>
+                                    <span class="text-gray-400">周日 - 硬拉</span>
+                                </div>
+                                <span class="text-gray-400 text-sm">未开始</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速操作 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">快速操作</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="bg-gray-50 p-3 rounded-lg text-center">
+                                <i class="fas fa-calculator text-blue-600 text-xl mb-2"></i>
+                                <p class="text-sm font-semibold">配重计算</p>
+                            </button>
+                            <button class="bg-gray-50 p-3 rounded-lg text-center">
+                                <i class="fas fa-stopwatch text-green-600 text-xl mb-2"></i>
+                                <p class="text-sm font-semibold">训练计时</p>
+                            </button>
+                            <button class="bg-gray-50 p-3 rounded-lg text-center">
+                                <i class="fas fa-chart-line text-purple-600 text-xl mb-2"></i>
+                                <p class="text-sm font-semibold">进度查看</p>
+                            </button>
+                            <button class="bg-gray-50 p-3 rounded-lg text-center">
+                                <i class="fas fa-edit text-orange-600 text-xl mb-2"></i>
+                                <p class="text-sm font-semibold">调整计划</p>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- TM概览 -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">当前训练最大重量 (TM)</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-red-500">72kg</div>
+                                <div class="text-sm text-gray-600">卧推</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-500">90kg</div>
+                                <div class="text-sm text-gray-600">深蹲</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-purple-500">108kg</div>
+                                <div class="text-sm text-gray-600">硬拉</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-orange-500">50kg</div>
+                                <div class="text-sm text-gray-600">站姿推举</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航 -->
+                <div class="bg-white border-t px-4 py-2 mt-auto">
+                    <div class="flex justify-around">
+                        <div class="text-center py-1">
+                            <i class="fas fa-home text-blue-600 text-xl mb-1"></i>
+                            <p class="text-xs text-blue-600 font-semibold">主页</p>
+                        </div>
+                        <div class="text-center py-1">
+                            <i class="fas fa-play text-gray-400 text-xl mb-1"></i>
+                            <p class="text-xs text-gray-400">训练</p>
+                        </div>
+                        <div class="text-center py-1">
+                            <i class="fas fa-chart-bar text-gray-400 text-xl mb-1"></i>
+                            <p class="text-xs text-gray-400">统计</p>
+                        </div>
+                        <div class="text-center py-1">
+                            <i class="fas fa-user text-gray-400 text-xl mb-1"></i>
+                            <p class="text-xs text-gray-400">我的</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 训练计划详情页 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">深蹲训练</h2>
+                    <i class="fas fa-edit text-gray-600"></i>
+                </div>
+                
+                <div class="p-4">
+                    <!-- 训练信息头部 -->
+                    <div class="bg-gradient-to-r from-green-500 to-teal-600 rounded-xl p-4 mb-4 text-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-bold text-xl">深蹲</h3>
+                                <p class="opacity-90">第1周 • 5/5/5+ 模式</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm opacity-90">TM</div>
+                                <div class="text-xl font-bold">90kg</div>
+                            </div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-2">
+                            <div class="text-sm">今日目标：完成3组主项 + 辅助动作</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 主项训练组 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3 flex items-center">
+                            <i class="fas fa-dumbbell text-green-600 mr-2"></i>主项训练
+                        </h4>
+                        
+                        <!-- 第1组 -->
+                        <div class="border rounded-lg p-3 mb-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold">第1组</span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-weight-hanging text-blue-600 text-sm"></i>
+                                    </button>
+                                    <div class="w-6 h-6 border-2 border-gray-300 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="text-lg font-bold">59kg × 5次</div>
+                            <div class="text-sm text-gray-600">65% TM</div>
+                        </div>
+                        
+                        <!-- 第2组 -->
+                        <div class="border rounded-lg p-3 mb-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold">第2组</span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-weight-hanging text-blue-600 text-sm"></i>
+                                    </button>
+                                    <div class="w-6 h-6 border-2 border-gray-300 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="text-lg font-bold">68kg × 5次</div>
+                            <div class="text-sm text-gray-600">75% TM</div>
+                        </div>
+                        
+                        <!-- 第3组 (AMRAP) -->
+                        <div class="border-2 border-blue-200 bg-blue-50 rounded-lg p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <span class="font-semibold">第3组</span>
+                                    <span class="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded-full ml-2">AMRAP</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-weight-hanging text-blue-600 text-sm"></i>
+                                    </button>
+                                    <div class="w-6 h-6 border-2 border-gray-300 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="text-lg font-bold">77kg × 5+次</div>
+                            <div class="text-sm text-gray-600 mb-2">85% TM • 尽力完成更多次数</div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm">实际完成:</span>
+                                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-minus text-gray-600"></i>
+                                </button>
+                                <span class="w-8 text-center font-bold">8</span>
+                                <button class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-plus text-blue-600"></i>
+                                </button>
+                                <span class="text-sm text-gray-600">次</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 辅助动作建议 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3 flex items-center">
+                            <i class="fas fa-plus-circle text-purple-600 mr-2"></i>推荐辅助动作
+                        </h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
+                                <span>前深蹲</span>
+                                <span class="text-sm text-gray-600">3×8-12</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
+                                <span>保加利亚分腿蹲</span>
+                                <span class="text-sm text-gray-600">3×10 (每腿)</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
+                                <span>腿举</span>
+                                <span class="text-sm text-gray-600">3×15-20</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div class="space-y-3">
+                        <button class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg">
+                            开始训练
+                        </button>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold">
+                                <i class="fas fa-history mr-2"></i>历史记录
+                            </button>
+                            <button class="bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold">
+                                <i class="fas fa-share mr-2"></i>分享训练
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 杠铃配重计算器 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">配重计算器</h2>
+                    <i class="fas fa-cog text-gray-600"></i>
+                </div>
+                
+                <div class="p-4">
+                    <!-- 目标重量输入 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm border">
+                        <h4 class="font-semibold mb-3">目标重量</h4>
+                        <div class="flex items-center space-x-3">
+                            <input type="number" value="77" 
+                                   class="flex-1 text-3xl font-bold text-center border-2 border-blue-200 rounded-lg py-3">
+                            <span class="text-xl font-semibold text-gray-600">kg</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 配重方案 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm border">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-semibold">推荐配重方案</h4>
+                            <span class="text-sm bg-green-100 text-green-700 px-2 py-1 rounded-full">精确匹配</span>
+                        </div>
+                        
+                        <!-- 总重量显示 -->
+                        <div class="text-center mb-4">
+                            <div class="text-2xl font-bold text-green-600">77.5kg</div>
+                            <div class="text-sm text-gray-600">比目标重0.5kg</div>
+                        </div>
+                        
+                        <!-- 杠铃分解 -->
+                        <div class="bg-gray-50 rounded-lg p-3 mb-4">
+                            <div class="text-center mb-3">
+                                <div class="text-lg font-semibold">杠铃杆: 20kg</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="font-semibold mb-2">每侧配重: 28.75kg</div>
+                                <div class="text-sm text-gray-600">左右两侧各需要</div>
+                            </div>
+                        </div>
+                        
+                        <!-- 可视化杠铃 -->
+                        <div class="mb-4">
+                            <h5 class="font-semibold mb-2 text-center">杠铃配重示意图</h5>
+                            <div class="flex items-center justify-center space-x-1">
+                                <!-- 左侧杠铃片 -->
+                                <div class="flex items-center space-x-1">
+                                    <div class="w-6 h-16 bg-red-500 rounded" title="25kg"></div>
+                                    <div class="w-3 h-8 bg-gray-500 rounded" title="2.5kg"></div>
+                                    <div class="w-2 h-6 bg-gray-400 rounded" title="1.25kg"></div>
+                                </div>
+                                
+                                <!-- 杠铃杆 -->
+                                <div class="w-24 h-3 bg-gray-700 rounded-full mx-2"></div>
+                                
+                                <!-- 右侧杠铃片 -->
+                                <div class="flex items-center space-x-1">
+                                    <div class="w-2 h-6 bg-gray-400 rounded" title="1.25kg"></div>
+                                    <div class="w-3 h-8 bg-gray-500 rounded" title="2.5kg"></div>
+                                    <div class="w-6 h-16 bg-red-500 rounded" title="25kg"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 详细配重列表 -->
+                        <div class="border-t pt-3">
+                            <h5 class="font-semibold mb-2">详细配重 (每侧)</h5>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                                        <span>25kg × 1</span>
+                                    </div>
+                                    <span class="font-semibold">25kg</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-gray-500 rounded-full mr-2"></div>
+                                        <span>2.5kg × 1</span>
+                                    </div>
+                                    <span class="font-semibold">2.5kg</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-gray-400 rounded-full mr-2"></div>
+                                        <span>1.25kg × 1</span>
+                                    </div>
+                                    <span class="font-semibold">1.25kg</span>
+                                </div>
+                                <div class="border-t pt-2 mt-2">
+                                    <div class="flex justify-between items-center font-bold">
+                                        <span>每侧总重:</span>
+                                        <span>28.75kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 其他配重方案 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">其他方案</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center p-2 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <span>75kg (差-2kg)</span>
+                                <span class="text-sm text-yellow-700">20+25+2.5 (每侧)</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-red-50 rounded-lg border border-red-200">
+                                <span>80kg (差+3kg)</span>
+                                <span class="text-sm text-red-700">20+25+5 (每侧)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div class="space-y-3">
+                        <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">
+                            确认使用此配重
+                        </button>
+                        <button class="w-full bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-save mr-2"></i>保存到收藏
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. 训练执行页面（计时器界面） -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-times text-red-500"></i>
+                    <h2 class="font-semibold">训练进行中</h2>
+                    <i class="fas fa-pause text-gray-600"></i>
+                </div>
+                
+                <div class="p-4">
+                    <!-- 当前组信息 -->
+                    <div class="bg-gradient-to-r from-green-500 to-blue-600 rounded-xl p-4 mb-4 text-white">
+                        <div class="text-center">
+                            <h3 class="font-bold text-xl mb-1">深蹲 - 第2组</h3>
+                            <div class="text-3xl font-bold mb-2">68kg × 5次</div>
+                            <div class="bg-white bg-opacity-20 rounded-lg py-1 px-3 inline-block">
+                                <span class="text-sm">75% TM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 训练进度 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">训练进度</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span>第1组 - 59kg × 5</span>
+                                <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600 text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold">第2组 - 68kg × 5</span>
+                                <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-400">第3组 - 77kg × 5+</span>
+                                <div class="w-6 h-6 border-2 border-gray-300 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 计时器 -->
+                    <div class="bg-white rounded-xl p-6 mb-4 shadow-sm text-center">
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-600">组间休息</h4>
+                        </div>
+                        
+                        <!-- 倒计时显示 -->
+                        <div class="mb-6">
+                            <div class="text-6xl font-bold text-blue-600 mb-2">2:15</div>
+                            <div class="text-sm text-gray-600">剩余时间</div>
+                        </div>
+                        
+                        <!-- 进度圆环（模拟） -->
+                        <div class="relative w-32 h-32 mx-auto mb-6">
+                            <svg class="w-32 h-32 transform -rotate-90">
+                                <circle cx="64" cy="64" r="56" stroke="#e5e7eb" stroke-width="8" fill="none"></circle>
+                                <circle cx="64" cy="64" r="56" stroke="#3b82f6" stroke-width="8" fill="none" 
+                                        stroke-dasharray="351" stroke-dashoffset="175" stroke-linecap="round"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-blue-600">75%</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 控制按钮 -->
+                        <div class="flex space-x-4">
+                            <button class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold">
+                                <i class="fas fa-stop mr-2"></i>停止
+                            </button>
+                            <button class="flex-1 bg-blue-600 text-white py-3 rounded-xl font-semibold">
+                                <i class="fas fa-pause mr-2"></i>暂停
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速操作 -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">快速操作</h4>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button class="bg-green-100 text-green-700 py-2 rounded-lg text-sm">
+                                +30秒
+                            </button>
+                            <button class="bg-yellow-100 text-yellow-700 py-2 rounded-lg text-sm">
+                                重置
+                            </button>
+                            <button class="bg-red-100 text-red-700 py-2 rounded-lg text-sm">
+                                跳过
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. 训练完成记录页面 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">记录训练</h2>
+                    <button class="text-blue-600 font-semibold">保存</button>
+                </div>
+                
+                <div class="p-4">
+                    <!-- 训练完成状态 -->
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-4 mb-4 text-white text-center">
+                        <i class="fas fa-check-circle text-4xl mb-3"></i>
+                        <h3 class="font-bold text-xl mb-2">训练完成！</h3>
+                        <p>深蹲训练 - 第1周第2天</p>
+                        <p class="text-sm opacity-90 mt-1">用时: 45分钟</p>
+                    </div>
+                    
+                    <!-- 训练记录摘要 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">训练记录</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-2 bg-green-50 rounded-lg">
+                                <span>第1组 - 59kg × 5次</span>
+                                <span class="text-green-600 font-semibold">完成</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-green-50 rounded-lg">
+                                <span>第2组 - 68kg × 5次</span>
+                                <span class="text-green-600 font-semibold">完成</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-blue-50 rounded-lg border border-blue-200">
+                                <span>第3组 - 77kg × 5+次</span>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-blue-600 font-semibold">完成8次</span>
+                                    <i class="fas fa-star text-yellow-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AMRAP成绩详情 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm border border-blue-200">
+                        <h4 class="font-semibold mb-3 text-blue-600">AMRAP组表现</h4>
+                        <div class="text-center mb-4">
+                            <div class="text-3xl font-bold text-blue-600">8次</div>
+                            <div class="text-sm text-gray-600">超过目标3次！</div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm">表现评价:</span>
+                                <span class="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-semibold">优秀</span>
+                            </div>
+                            <p class="text-sm text-blue-700">这次表现超出预期，下个周期可以考虑适当增加训练重量。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 辅助动作记录 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">辅助动作</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
+                                <span>前深蹲</span>
+                                <span class="text-gray-600">50kg × 3组 × 10次</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
+                                <span>保加利亚分腿蹲</span>
+                                <span class="text-gray-600">自重 × 3组 × 12次</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-3 bg-gray-100 text-gray-600 py-2 rounded-lg text-sm">
+                            <i class="fas fa-plus mr-2"></i>添加更多动作
+                        </button>
+                    </div>
+                    
+                    <!-- 训练感受 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">训练感受</h4>
+                        <div class="flex justify-around mb-3">
+                            <button class="text-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-1">
+                                    <i class="fas fa-smile text-green-600 text-xl"></i>
+                                </div>
+                                <span class="text-xs">很好</span>
+                            </button>
+                            <button class="text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-1">
+                                    <i class="fas fa-meh text-blue-600 text-xl"></i>
+                                </div>
+                                <span class="text-xs">一般</span>
+                            </button>
+                            <button class="text-center">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-1">
+                                    <i class="fas fa-frown text-gray-600 text-xl"></i>
+                                </div>
+                                <span class="text-xs">困难</span>
+                            </button>
+                        </div>
+                        <textarea class="w-full border rounded-lg p-3 text-sm" rows="3" 
+                                  placeholder="记录今天的训练感受..."></textarea>
+                    </div>
+                    
+                    <!-- 保存按钮 -->
+                    <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg">
+                        保存训练记录
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. 设置页面 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">设置</h2>
+                    <span></span>
+                </div>
+                
+                <div class="p-4">
+                    <!-- 用户信息 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-user text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg">训练者</h3>
+                        <p class="text-sm text-gray-600">531训练法 • 第1周期</p>
+                    </div>
+                    
+                    <!-- 训练设置 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">训练设置</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-dumbbell text-blue-600 mr-3"></i>
+                                    <span>1RM设置</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar-alt text-green-600 mr-3"></i>
+                                    <span>训练模板</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-600 mr-2">5/5/5+</span>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-circle text-purple-600 mr-3"></i>
+                                    <span>杠铃片配置</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-orange-600 mr-3"></i>
+                                    <span>休息时间</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 应用设置 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">应用设置</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-bell text-yellow-600 mr-3"></i>
+                                    <span>通知设置</span>
+                                </div>
+                                <div class="w-12 h-6 bg-blue-600 rounded-full relative">
+                                    <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-volume-up text-red-600 mr-3"></i>
+                                    <span>声音提醒</span>
+                                </div>
+                                <div class="w-12 h-6 bg-blue-600 rounded-full relative">
+                                    <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-mobile-alt text-purple-600 mr-3"></i>
+                                    <span>振动提醒</span>
+                                </div>
+                                <div class="w-12 h-6 bg-gray-300 rounded-full relative">
+                                    <div class="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-moon text-indigo-600 mr-3"></i>
+                                    <span>深色模式</span>
+                                </div>
+                                <div class="w-12 h-6 bg-gray-300 rounded-full relative">
+                                    <div class="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 数据管理 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">数据管理</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-download text-green-600 mr-3"></i>
+                                    <span>导出数据</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-cloud text-blue-600 mr-3"></i>
+                                    <span>备份到云端</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-trash text-red-600 mr-3"></i>
+                                    <span>清除所有数据</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 关于应用 -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">关于</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-info-circle text-blue-600 mr-3"></i>
+                                    <span>关于531训练法</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-600 mr-3"></i>
+                                    <span>给应用评分</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope text-purple-600 mr-3"></i>
+                                    <span>联系我们</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">版本</span>
+                                <span class="text-sm text-gray-600">1.0.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. 历史记录/统计页面 -->
+        <div class="phone-frame">
+            <div class="screen">
+                <div class="bg-white px-4 py-3 flex justify-between items-center border-b">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                    <h2 class="font-semibold">训练统计</h2>
+                    <i class="fas fa-filter text-gray-600"></i>
+                </div>
+                
+                <div class="p-4">
+                    <!-- 总体统计 -->
+                    <div class="bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl p-4 mb-4 text-white">
+                        <h3 class="font-bold text-lg mb-3">训练概览</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">15</div>
+                                <div class="text-sm opacity-90">完成训练</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">3</div>
+                                <div class="text-sm opacity-90">完成周期</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">12.5</div>
+                                <div class="text-sm opacity-90">平均小时/周</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">95%</div>
+                                <div class="text-sm opacity-90">计划完成率</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 四大项进步趋势 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">四大项进步趋势</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
+                                    <span>卧推</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold">80kg → 85kg</div>
+                                    <div class="text-sm text-green-600">+6.3%</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                    <span>深蹲</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold">100kg → 110kg</div>
+                                    <div class="text-sm text-green-600">+10.0%</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
+                                    <span>硬拉</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold">120kg → 130kg</div>
+                                    <div class="text-sm text-green-600">+8.3%</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-orange-500 rounded-full mr-3"></div>
+                                    <span>站姿推举</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold">55kg → 60kg</div>
+                                    <div class="text-sm text-green-600">+9.1%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 近期训练记录 -->
+                    <div class="bg-white rounded-xl p-4 mb-4 shadow-sm">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-semibold">近期训练</h4>
+                            <button class="text-blue-600 text-sm">查看全部</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-200">
+                                <div>
+                                    <div class="font-semibold">深蹲训练</div>
+                                    <div class="text-sm text-gray-600">2024-01-15 • 第1周第2天</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold text-green-600">完成</div>
+                                    <div class="text-sm text-gray-600">AMRAP: 8次</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                <div>
+                                    <div class="font-semibold">卧推训练</div>
+                                    <div class="text-sm text-gray-600">2024-01-13 • 第1周第1天</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold text-blue-600">完成</div>
+                                    <div class="text-sm text-gray-600">AMRAP: 7次</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border">
+                                <div>
+                                    <div class="font-semibold">硬拉训练</div>
+                                    <div class="text-sm text-gray-600">2024-01-11 • 第4周第4天</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold text-gray-600">完成</div>
+                                    <div class="text-sm text-gray-600">AMRAP: 6次</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AMRAP表现统计 -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <h4 class="font-semibold mb-3">AMRAP表现分析</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                <div class="text-lg font-bold text-blue-600">7.2</div>
+                                <div class="text-sm text-gray-600">平均超额次数</div>
+                            </div>
+                            <div class="text-center p-3 bg-green-50 rounded-lg">
+                                <div class="text-lg font-bold text-green-600">13</div>
+                                <div class="text-sm text-gray-600">最佳AMRAP</div>
+                            </div>
+                            <div class="text-center p-3 bg-purple-50 rounded-lg">
+                                <div class="text-lg font-bold text-purple-600">深蹲</div>
+                                <div class="text-sm text-gray-600">最强项目</div>
+                            </div>
+                            <div class="text-center p-3 bg-orange-50 rounded-lg">
+                                <div class="text-lg font-bold text-orange-600">88%</div>
+                                <div class="text-sm text-gray-600">达标率</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
