@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmin.five3one.data.model.TimerState
 import com.jmin.five3one.data.repository.UserDataRepository
+import com.jmin.five3one.service.NotificationService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -17,7 +18,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class TimerViewModel @Inject constructor(
-    private val userDataRepository: UserDataRepository
+    private val userDataRepository: UserDataRepository,
+    private val notificationService: NotificationService
 ) : ViewModel() {
     
     // 计时器状态
@@ -34,6 +36,14 @@ class TimerViewModel @Inject constructor(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = 180
+        )
+    
+    // 用户设置 - 声音和振动偏好
+    private val appSettings = userDataRepository.getAppSettings()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null
         )
     
     // UI状态
@@ -189,6 +199,67 @@ class TimerViewModel @Inject constructor(
     }
     
     /**
+     * 切换声音设置
+     */
+    fun toggleSound() {
+        viewModelScope.launch {
+            try {
+                val currentSettings = userDataRepository.getAppSettings().first()
+                if (currentSettings != null) {
+                    val updatedSettings = currentSettings.toggleSound()
+                    userDataRepository.saveAppSettings(updatedSettings)
+                }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(errorMessage = "更新声音设置失败: ${e.message}") }
+            }
+        }
+    }
+    
+    /**
+     * 切换振动设置
+     */
+    fun toggleVibration() {
+        viewModelScope.launch {
+            try {
+                val currentSettings = userDataRepository.getAppSettings().first()
+                if (currentSettings != null) {
+                    val updatedSettings = currentSettings.toggleVibration()
+                    userDataRepository.saveAppSettings(updatedSettings)
+                    
+                    // 如果刚启用振动，给用户一个反馈振动
+                    if (updatedSettings.vibrationEnabled && notificationService.hasVibrator()) {
+                        notificationService.playHapticFeedback()
+                    }
+                }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(errorMessage = "更新振动设置失败: ${e.message}") }
+            }
+        }
+    }
+    
+    /**
+     * 获取当前声音设置状态
+     */
+    val isSoundEnabled: StateFlow<Boolean> = appSettings
+        .map { it?.soundEnabled ?: true }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = true
+        )
+    
+    /**
+     * 获取当前振动设置状态
+     */
+    val isVibrationEnabled: StateFlow<Boolean> = appSettings
+        .map { it?.vibrationEnabled ?: true }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = true
+        )
+    
+    /**
      * 启动计时器任务
      */
     private fun startTimerJob() {
@@ -218,8 +289,20 @@ class TimerViewModel @Inject constructor(
         _timerState.update { it.copy(isRunning = false) }
         _uiState.update { it.copy(showCompletionDialog = true) }
         
-        // 这里可以添加声音/振动提醒
-        // TODO: 实现声音和振动提醒
+        // 播放声音和振动提醒
+        val currentSettings = appSettings.value
+        if (currentSettings != null) {
+            notificationService.playTimerCompleteNotification(
+                soundEnabled = currentSettings.soundEnabled,
+                vibrationEnabled = currentSettings.vibrationEnabled
+            )
+        } else {
+            // 如果设置未加载，使用默认值（都启用）
+            notificationService.playTimerCompleteNotification(
+                soundEnabled = true,
+                vibrationEnabled = true
+            )
+        }
     }
     
     override fun onCleared() {

@@ -84,6 +84,36 @@
     <string name="reps_unit">次</string>
     <string name="start_timer">开始计时器</string>
     <string name="complete_workout">完成训练</string>
+    <string name="sets_progress">进度: %1$d/%2$d 组</string>
+    <string name="plate_loading_solution">配重方案</string>
+    <string name="workout_notes">训练笔记</string>
+    <string name="add_notes_optional">添加笔记（可选）</string>
+    <string name="workout_feeling">训练感受</string>
+    
+    <!-- AMRAP Success Feedback -->
+    <string name="amrap_celebration_title">挑战成功！</string>
+    <string name="amrap_celebration_subtitle">太棒了！超额完成目标，你的力量正在增长！</string>
+    <string name="amrap_exceeded_target">惊人的表现！你比计划要求多完成了 %1$d 次！</string>
+    <string name="amrap_perfect_performance">✅ AMRAP组挑战成功！强！</string>
+    <string name="amrap_data_confirmation">记录你的卓越表现</string>
+    <string name="amrap_target_display">目标：至少 %1$d 次</string>
+    <string name="amrap_actual_display">你完成了：%1$d 次</string>
+    <string name="amrap_form_reminder">请确保所有重复动作都保持了良好的形式。</string>
+    <string name="amrap_explanation_title">这说明什么？</string>
+    <string name="amrap_explanation_tm">这说明你当前的训练最大重量（TM）对你来说已经偏轻了。</string>
+    <string name="amrap_explanation_progress">你的真实力量水平正在有效提升，这是周期化训练起作用的证明！</string>
+    <string name="amrap_next_action_title">下一步怎么做？</string>
+    <string name="amrap_next_action_continue">继续保持！按照计划完成本周的辅助训练。</string>
+    <string name="amrap_next_action_automatic">无需任何额外操作。在本周期结束后，系统将自动为您增加训练重量，以匹配你增长后的力量水平。</string>
+    <string name="amrap_next_action_pr">继续坚持，你的下一个个人纪录（PR）就在不远处！</string>
+    <string name="amrap_save_continue">保存并继续</string>
+    <string name="amrap_view_progress">查看进度</string>
+    
+    <!-- Workout Feelings -->
+    <string name="feeling_excellent">非常好</string>
+    <string name="feeling_good">好</string>
+    <string name="feeling_fair">一般</string>
+    <string name="feeling_poor">不好</string>
     
     <!-- Plate Calculator -->
     <string name="plate_calculator_title">配重计算器</string>
@@ -104,7 +134,7 @@
     <string name="weight_too_low">目标重量过小或杠铃片不足</string>
     
     <!-- Timer -->
-    <string name="training_timer_title">训练计时器</string>
+    <string name="training_timer_title">休息倒计时</string>
     <string name="rest_between_sets">组间休息</string>
     <string name="time_remaining">剩余时间</string>
     <string name="start">开始</string>
@@ -167,6 +197,20 @@
     <string name="kg_unit">kg</string>
     <string name="reps_format">%1$d次</string>
     <string name="weight_reps_format">%1$.1fkg × %2$d次</string>
+    <string name="set_number_format">第%1$d组：</string>
+    <string name="adjust_one_rm">调整你的最大单次重量</string>
+    <string name="appearance_language">外观和语言</string>
+    <string name="appearance_theme_subtitle">主题、语言等界面设置</string>
+    <string name="interface_language">界面语言</string>
+    <string name="language_description">选择应用界面语言</string>
+    <string name="theme_settings">主题设置</string>
+    <string name="theme_description">自定义应用外观主题</string>
+    <string name="dark_mode">深色模式</string>
+    <string name="enabled">已启用</string>
+    <string name="disabled">已关闭</string>
+    <string name="theme_color">主题色彩</string>
+    <string name="coming_soon_theme">即将推出</string>
+    <string name="exit_app_prompt">再按一次返回键退出应用</string>
     
     <!-- Notifications -->
     <string name="notification_workout_complete">训练完成！</string>

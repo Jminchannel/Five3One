@@ -223,6 +223,14 @@ class SetupViewModel @Inject constructor(
     }
     
     /**
+     * 设置当前步骤
+     */
+    fun setCurrentStep(step: Int) {
+        val validStep = step.coerceIn(1, 3)
+        _setupState.update { it.copy(currentStep = validStep) }
+    }
+    
+    /**
      * 清除错误消息
      */
     fun clearError() {

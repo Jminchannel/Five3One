@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
+import com.jmin.five3one.ui.screen.AppearanceScreen
 import com.jmin.five3one.ui.screen.DashboardScreen
 import com.jmin.five3one.ui.screen.PlateCalculatorScreen
 import com.jmin.five3one.ui.screen.SettingsScreen
@@ -35,8 +36,13 @@ fun AppNavigation(
         // 启动画面
         composable(Screen.Splash.route) {
             SplashScreen(
-                onSplashComplete = {
+                onNavigateToWelcome = {
                     navController.navigate(Screen.Welcome.route) {
+                        popUpTo(Screen.Splash.route) { inclusive = true }
+                    }
+                },
+                onNavigateToDashboard = {
+                    navController.navigate(Screen.Dashboard.route) {
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
                 }
@@ -60,6 +66,31 @@ fun AppNavigation(
         }
         
         // 设置流程
+        composable(
+            route = "${Screen.Setup.route}?step={step}",
+            arguments = listOf(
+                navArgument("step") { 
+                    type = NavType.IntType
+                    defaultValue = 1
+                }
+            )
+        ) { backStackEntry ->
+            val initialStep = backStackEntry.arguments?.getInt("step") ?: 1
+            
+            SetupScreen(
+                onSetupComplete = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Setup.route) { inclusive = true }
+                    }
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                initialStep = initialStep
+            )
+        }
+        
+        // 设置流程（无参数版本，保持兼容性）
         composable(Screen.Setup.route) {
             SetupScreen(
                 onSetupComplete = {
@@ -168,8 +199,20 @@ fun AppNavigation(
                 onNavigateBack = {
                     navController.popBackStack()
                 },
-                onNavigateToSetup = {
-                    navController.navigate(Screen.Setup.route)
+                onNavigateToSetup = { step ->
+                    navController.navigate("${Screen.Setup.route}?step=$step")
+                },
+                onNavigateToAppearance = {
+                    navController.navigate(Screen.Appearance.route)
+                }
+            )
+        }
+        
+        // 外观设置页面
+        composable(Screen.Appearance.route) {
+            AppearanceScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -189,4 +232,5 @@ sealed class Screen(val route: String) {
     object Timer : Screen("timer")
     object Statistics : Screen("statistics")
     object Settings : Screen("settings")
+    object Appearance : Screen("appearance")
 }

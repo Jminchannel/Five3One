@@ -18,12 +18,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.jmin.five3one.R
+import com.jmin.five3one.ui.viewmodel.MainViewModel
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    onSplashComplete: () -> Unit
+    onNavigateToWelcome: () -> Unit,
+    onNavigateToDashboard: () -> Unit,
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     var isVisible by remember { mutableStateOf(false) }
     
@@ -43,10 +47,19 @@ fun SplashScreen(
         ), label = ""
     )
     
+    val uiState by viewModel.uiState.collectAsState()
+    
     LaunchedEffect(Unit) {
         isVisible = true
+        viewModel.checkSetupStatus()
         delay(2500)
-        onSplashComplete()
+        
+        // 根据设置状态决定跳转页面
+        if (uiState.isSetupCompleted) {
+            onNavigateToDashboard()
+        } else {
+            onNavigateToWelcome()
+        }
     }
     
     Box(

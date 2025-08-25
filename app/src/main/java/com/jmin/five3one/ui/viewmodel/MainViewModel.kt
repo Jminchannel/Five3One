@@ -154,6 +154,17 @@ class MainViewModel @Inject constructor(
     }
     
     /**
+     * 切换深色模式
+     */
+    fun toggleDarkMode() {
+        viewModelScope.launch {
+            val currentSettings = userData.value.appSettings
+            val updatedSettings = currentSettings.toggleDarkMode()
+            userDataRepository.saveAppSettings(updatedSettings)
+        }
+    }
+    
+    /**
      * 开始训练
      */
     fun startWorkout() {

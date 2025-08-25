@@ -104,7 +104,7 @@
     <string name="weight_too_low">Berat target terlalu rendah atau plate tidak cukup</string>
     
     <!-- Timer -->
-    <string name="training_timer_title">Timer Latihan</string>
+    <string name="training_timer_title">Beristirahat dihitung mundur</string>
     <string name="rest_between_sets">Istirahat Antar Set</string>
     <string name="time_remaining">Waktu Tersisa</string>
     <string name="start">Mulai</string>
@@ -181,6 +181,22 @@
     <string name="dialog_reset_data_message">Tindakan ini tidak dapat dibatalkan!</string>
     <string name="dialog_confirm_reset">Konfirmasi Reset</string>
     
+    <!-- Common -->
+    <string name="set_number_format">Set %1$d:</string>
+    <string name="adjust_one_rm">Sesuaikan beban maksimal sekali</string>
+    <string name="appearance_language">Tampilan &amp; Bahasa</string>
+    <string name="appearance_theme_subtitle">Tema, bahasa dan pengaturan antarmuka</string>
+    <string name="interface_language">Bahasa Antarmuka</string>
+    <string name="language_description">Pilih bahasa antarmuka aplikasi</string>
+    <string name="theme_settings">Pengaturan Tema</string>
+    <string name="theme_description">Sesuaikan tema tampilan aplikasi</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="enabled">Diaktifkan</string>
+    <string name="disabled">Dimatikan</string>
+    <string name="theme_color">Warna Tema</string>
+    <string name="coming_soon_theme">Segera Hadir</string>
+    <string name="exit_app_prompt">Tekan kembali lagi untuk keluar</string>
+
     <!-- Days of Week -->
     <string name="day_monday">Senin</string>
     <string name="day_wednesday">Rabu</string>

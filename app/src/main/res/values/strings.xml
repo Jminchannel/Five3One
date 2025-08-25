@@ -115,7 +115,7 @@
     <string name="weight_too_low">Target weight too low or insufficient plates</string>
     
     <!-- Timer -->
-    <string name="training_timer_title">Training Timer</string>
+    <string name="training_timer_title">Countdown to rest</string>
     <string name="rest_between_sets">Rest Between Sets</string>
     <string name="time_remaining">Time Remaining</string>
     <string name="start">Start</string>
@@ -180,6 +180,25 @@
     <string name="invalid_input_message">Please check your input</string>
     <string name="feature_coming_soon_message">This feature is coming soon!</string>
     
+    <!-- AMRAP Success Feedback -->
+    <string name="amrap_celebration_title">Challenge Complete!</string>
+    <string name="amrap_celebration_subtitle">Amazing! You exceeded the target - your strength is growing!</string>
+    <string name="amrap_exceeded_target">Outstanding performance! You completed %1$d more reps than required!</string>
+    <string name="amrap_perfect_performance">✅ AMRAP Set Challenge Success! Strong!</string>
+    <string name="amrap_data_confirmation">Record Your Excellent Performance</string>
+    <string name="amrap_target_display">Target: At least %1$d reps</string>
+    <string name="amrap_actual_display">You completed: %1$d reps</string>
+    <string name="amrap_form_reminder">Please ensure all repetitions maintained good form.</string>
+    <string name="amrap_explanation_title">What does this mean?</string>
+    <string name="amrap_explanation_tm">This indicates your current Training Max (TM) is getting too light for your strength level.</string>
+    <string name="amrap_explanation_progress">Your true strength is effectively improving - proof that periodization is working!</string>
+    <string name="amrap_next_action_title">What\'s next?</string>
+    <string name="amrap_next_action_continue">Keep it up! Complete this week\'s accessory work as planned.</string>
+    <string name="amrap_next_action_automatic">No additional action needed. At the end of this cycle, the system will automatically increase your training weights to match your improved strength.</string>
+    <string name="amrap_next_action_pr">Keep going - your next personal record (PR) is just around the corner!</string>
+    <string name="amrap_save_continue">Save and Continue</string>
+    <string name="amrap_view_progress">View Progress</string>
+
     <!-- Workout Feelings -->
     <string name="feeling_excellent">Excellent</string>
     <string name="feeling_good">Good</string>
@@ -228,6 +247,20 @@
     <string name="kg_unit">kg</string>
     <string name="reps_format">%1$d reps</string>
     <string name="weight_reps_format">%1$.1fkg × %2$d</string>
+    <string name="set_number_format">Set %1$d:</string>
+    <string name="adjust_one_rm">Adjust your one rep max</string>
+    <string name="appearance_language">Appearance &amp; Language</string>
+    <string name="appearance_theme_subtitle">Theme, language and interface settings</string>
+    <string name="interface_language">Interface Language</string>
+    <string name="language_description">Choose app interface language</string>
+    <string name="theme_settings">Theme Settings</string>
+    <string name="theme_description">Customize app appearance theme</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="theme_color">Theme Color</string>
+    <string name="coming_soon_theme">Coming Soon</string>
+    <string name="exit_app_prompt">Press back again to exit</string>
     
     <!-- Notifications -->
     <string name="notification_workout_complete">Workout Complete!</string>

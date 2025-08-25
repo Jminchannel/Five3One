@@ -26,9 +26,15 @@ import com.jmin.five3one.ui.viewmodel.SetupViewModel
 fun SetupScreen(
     onSetupComplete: () -> Unit,
     onNavigateBack: () -> Unit,
+    initialStep: Int = 1,
     viewModel: SetupViewModel = hiltViewModel()
 ) {
     val setupState by viewModel.setupState.collectAsState()
+    
+    // 设置初始步骤
+    LaunchedEffect(initialStep) {
+        viewModel.setCurrentStep(initialStep)
+    }
     
     // 监听设置完成
     LaunchedEffect(setupState.isCompleted) {

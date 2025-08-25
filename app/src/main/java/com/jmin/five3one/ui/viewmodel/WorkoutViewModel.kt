@@ -83,11 +83,17 @@ class WorkoutViewModel @Inject constructor(
      * 开始训练
      */
     fun startWorkout() {
+        // 获取当前训练的第三组（AMRAP组）的最小次数
+        val currentWorkoutInfo = currentWorkout.value
+        val amrapSet = currentWorkoutInfo.sets.find { it.setNumber == 3 && it.isAmrap }
+        val minAmrapReps = amrapSet?.targetReps ?: 0
+        
         _workoutState.update { 
             it.copy(
                 isWorkoutActive = true,
                 startTime = System.currentTimeMillis(),
-                selectedLift = null // 重置为当前日期对应的动作
+                selectedLift = null, // 重置为当前日期对应的动作
+                amrapReps = minAmrapReps // 初始化AMRAP组为最小次数
             ) 
         }
     }
@@ -99,7 +105,30 @@ class WorkoutViewModel @Inject constructor(
         _workoutState.update { state ->
             val updatedSets = state.completedSets.toMutableMap()
             updatedSets[setNumber] = actualReps
-            state.copy(completedSets = updatedSets)
+            
+            // 检查是否是AMRAP组（第3组）且完成目标次数
+            val currentWorkoutInfo = currentWorkout.value
+            val amrapSet = currentWorkoutInfo.sets.find { it.setNumber == 3 && it.isAmrap }
+            
+            var newState = state.copy(completedSets = updatedSets)
+            
+            if (amrapSet != null && setNumber == 3 && actualReps >= amrapSet.targetReps) {
+                // AMRAP组完成，显示庆祝弹窗
+                val celebrationData = AmrapCelebrationData(
+                    targetReps = amrapSet.targetReps,
+                    actualReps = actualReps,
+                    weight = amrapSet.weight,
+                    exceededBy = actualReps - amrapSet.targetReps,
+                    liftType = currentWorkoutInfo.lift
+                )
+                
+                newState = newState.copy(
+                    showAmrapCelebration = true,
+                    amrapCelebrationData = celebrationData
+                )
+            }
+            
+            newState
         }
     }
     
@@ -107,7 +136,11 @@ class WorkoutViewModel @Inject constructor(
      * 更新AMRAP组次数
      */
     fun updateAmrapReps(reps: Int) {
-        _workoutState.update { it.copy(amrapReps = reps) }
+        // 获取当前训练的第三组（AMRAP组）的最小次数
+        val currentTemplate = currentWorkout.value.template
+        val minReps = currentTemplate.getTargetReps(3) // 第三组的目标次数就是最小次数
+        val validReps = reps.coerceAtLeast(minReps)
+        _workoutState.update { it.copy(amrapReps = validReps) }
     }
     
     /**
@@ -207,6 +240,27 @@ class WorkoutViewModel @Inject constructor(
     }
     
     /**
+     * 放弃当前训练但保持训练状态活跃（归零记录重新开始）
+     */
+    fun abandonWorkout() {
+        // 获取当前训练的第三组（AMRAP组）的最小次数
+        val currentWorkoutInfo = currentWorkout.value
+        val amrapSet = currentWorkoutInfo.sets.find { it.setNumber == 3 && it.isAmrap }
+        val minAmrapReps = amrapSet?.targetReps ?: 0
+        
+        _workoutState.update { state ->
+            state.copy(
+                completedSets = emptyMap(),
+                amrapReps = minAmrapReps, // 重置为最小次数而不是0
+                notes = "",
+                feeling = WorkoutFeeling.GOOD,
+                currentPlateSolution = null
+                // 保持 isWorkoutActive = true 和 startTime
+            )
+        }
+    }
+    
+    /**
      * 计算杠铃配重
      */
     fun calculatePlateLoading(weight: Double) {
@@ -229,6 +283,30 @@ class WorkoutViewModel @Inject constructor(
      */
     fun clearError() {
         _workoutState.update { it.copy(errorMessage = null) }
+    }
+    
+    /**
+     * 显示AMRAP庆祝弹窗
+     */
+    fun showAmrapCelebration(celebrationData: AmrapCelebrationData) {
+        _workoutState.update { 
+            it.copy(
+                showAmrapCelebration = true,
+                amrapCelebrationData = celebrationData
+            ) 
+        }
+    }
+    
+    /**
+     * 关闭AMRAP庆祝弹窗
+     */
+    fun dismissAmrapCelebration() {
+        _workoutState.update { 
+            it.copy(
+                showAmrapCelebration = false,
+                amrapCelebrationData = null
+            ) 
+        }
     }
     
     /**
@@ -272,7 +350,9 @@ data class WorkoutUiState(
     val notes: String = "",
     val feeling: WorkoutFeeling = WorkoutFeeling.GOOD,
     val currentPlateSolution: PlateSolution? = null,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val showAmrapCelebration: Boolean = false, // 是否显示AMRAP庆祝弹窗
+    val amrapCelebrationData: AmrapCelebrationData? = null // AMRAP庆祝数据
 ) {
     val workoutDuration: Long
         get() = if (startTime > 0) System.currentTimeMillis() - startTime else 0L
@@ -280,6 +360,17 @@ data class WorkoutUiState(
     val isAllSetsCompleted: Boolean
         get() = completedSets.size >= 2 && amrapReps > 0 // 至少完成前两组和AMRAP组
 }
+
+/**
+ * AMRAP庆祝数据
+ */
+data class AmrapCelebrationData(
+    val targetReps: Int, // 目标次数
+    val actualReps: Int, // 实际完成次数
+    val weight: Double, // 重量
+    val exceededBy: Int, // 超出的次数
+    val liftType: LiftType // 训练动作
+)
 
 /**
  * 当前训练信息

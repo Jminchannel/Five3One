@@ -20,7 +20,8 @@ import com.jmin.five3one.ui.viewmodel.MainViewModel
 @Composable
 fun SettingsScreen(
     onNavigateBack: () -> Unit,
-    onNavigateToSetup: () -> Unit,
+    onNavigateToSetup: (step: Int) -> Unit,
+    onNavigateToAppearance: () -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val userData by viewModel.userData.collectAsState()
@@ -53,18 +54,23 @@ fun SettingsScreen(
             }
             
             item {
+                // 外观设置
+                AppearanceSettingsCard(
+                    onNavigateToAppearance = onNavigateToAppearance
+                )
+            }
+            
+            item {
                 // 训练设置
                 TrainingSettingsCard(
                     userData = userData,
-                    onNavigateToSetup = onNavigateToSetup,
-                    onUpdateLanguage = viewModel::updateLanguage
+                    onNavigateToSetup = onNavigateToSetup
                 )
             }
             
             item {
                 // 数据管理
                 DataManagementCard(
-                    onExportData = viewModel::exportData,
                     onResetData = viewModel::resetAllData
                 )
             }
@@ -72,25 +78,6 @@ fun SettingsScreen(
             item {
                 // 关于应用
                 AboutCard()
-            }
-            
-            // 成功消息
-            if (uiState.showExportSuccess) {
-                item {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
-                        )
-                    ) {
-                        Text(
-                            text = stringResource(R.string.export_success),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
-                }
             }
             
             // 错误消息
@@ -237,10 +224,38 @@ private fun UserInfoCard(
 }
 
 @Composable
+private fun AppearanceSettingsCard(
+    onNavigateToAppearance: () -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "外观设置",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // 外观设置
+            SettingsItem(
+                icon = Icons.Default.Palette,
+                title = stringResource(R.string.appearance_language),
+                subtitle = stringResource(R.string.appearance_theme_subtitle),
+                onClick = onNavigateToAppearance
+            )
+        }
+    }
+}
+
+@Composable
 private fun TrainingSettingsCard(
     userData: com.jmin.five3one.data.repository.UserData,
-    onNavigateToSetup: () -> Unit,
-    onUpdateLanguage: (com.jmin.five3one.data.model.Language) -> Unit
+    onNavigateToSetup: (step: Int) -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -260,18 +275,8 @@ private fun TrainingSettingsCard(
             SettingsItem(
                 icon = Icons.Default.FitnessCenter,
                 title = stringResource(R.string.rm_settings),
-                subtitle = "调整你的最大单次重量",
-                onClick = onNavigateToSetup
-            )
-            
-            Spacer(modifier = Modifier.height(8.dp))
-            
-            // 训练模板
-            SettingsItem(
-                icon = Icons.Default.Assignment,
-                title = stringResource(R.string.template_settings),
-                subtitle = "当前: ${userData.appSettings.currentTemplate.id.uppercase()}",
-                onClick = onNavigateToSetup
+                subtitle = stringResource(R.string.adjust_one_rm),
+                onClick = { onNavigateToSetup(1) } // 跳转到第1步：1RM设置
             )
             
             Spacer(modifier = Modifier.height(8.dp))
@@ -281,15 +286,17 @@ private fun TrainingSettingsCard(
                 icon = Icons.Default.Build,
                 title = stringResource(R.string.plate_settings),
                 subtitle = "杠铃杆: ${userData.plateConfig.barbellWeight}kg",
-                onClick = onNavigateToSetup
+                onClick = { onNavigateToSetup(2) } // 跳转到第2步：杠铃片配置
             )
             
             Spacer(modifier = Modifier.height(8.dp))
             
-            // 语言设置
-            LanguageSettingsItem(
-                currentLanguage = userData.appSettings.language,
-                onUpdateLanguage = onUpdateLanguage
+            // 训练模板
+            SettingsItem(
+                icon = Icons.Default.Assignment,
+                title = stringResource(R.string.template_settings),
+                subtitle = "当前: ${userData.appSettings.currentTemplate.id.uppercase()}",
+                onClick = { onNavigateToSetup(3) } // 跳转到第3步：训练模板
             )
         }
     }
@@ -297,7 +304,6 @@ private fun TrainingSettingsCard(
 
 @Composable
 private fun DataManagementCard(
-    onExportData: () -> Unit,
     onResetData: () -> Unit
 ) {
     var showResetDialog by remember { mutableStateOf(false) }
@@ -315,16 +321,6 @@ private fun DataManagementCard(
             )
             
             Spacer(modifier = Modifier.height(16.dp))
-            
-            // 导出数据
-            SettingsItem(
-                icon = Icons.Default.GetApp,
-                title = stringResource(R.string.export_data),
-                subtitle = "备份你的训练数据",
-                onClick = onExportData
-            )
-            
-            Spacer(modifier = Modifier.height(8.dp))
             
             // 重置数据
             SettingsItem(
@@ -412,59 +408,6 @@ private fun AboutCard() {
 }
 
 @Composable
-private fun LanguageSettingsItem(
-    currentLanguage: com.jmin.five3one.data.model.Language,
-    onUpdateLanguage: (com.jmin.five3one.data.model.Language) -> Unit
-) {
-    var showLanguageDialog by remember { mutableStateOf(false) }
-    
-    SettingsItem(
-        icon = Icons.Default.Language,
-        title = stringResource(R.string.language_settings),
-        subtitle = getLanguageDisplayName(currentLanguage),
-        onClick = { showLanguageDialog = true }
-    )
-    
-    if (showLanguageDialog) {
-        AlertDialog(
-            onDismissRequest = { showLanguageDialog = false },
-            title = { Text(stringResource(R.string.language_settings)) },
-            text = {
-                Column {
-                    com.jmin.five3one.data.model.Language.values().forEach { language ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    onUpdateLanguage(language)
-                                    showLanguageDialog = false
-                                }
-                                .padding(vertical = 8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = language == currentLanguage,
-                                onClick = {
-                                    onUpdateLanguage(language)
-                                    showLanguageDialog = false
-                                }
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(getLanguageDisplayName(language))
-                        }
-                    }
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = { showLanguageDialog = false }) {
-                    Text(stringResource(R.string.cancel))
-                }
-            }
-        )
-    }
-}
-
-@Composable
 private fun SettingsItem(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     title: String,
@@ -537,12 +480,4 @@ private fun SettingsItem(
     }
 }
 
-@Composable
-private fun getLanguageDisplayName(language: com.jmin.five3one.data.model.Language): String {
-    return when (language) {
-        com.jmin.five3one.data.model.Language.ENGLISH -> stringResource(R.string.language_english)
-        com.jmin.five3one.data.model.Language.CHINESE_SIMPLIFIED -> stringResource(R.string.language_chinese_simplified)
-        com.jmin.five3one.data.model.Language.CHINESE_TRADITIONAL -> stringResource(R.string.language_chinese_traditional)
-        com.jmin.five3one.data.model.Language.INDONESIAN -> stringResource(R.string.language_indonesian)
-    }
-}
+

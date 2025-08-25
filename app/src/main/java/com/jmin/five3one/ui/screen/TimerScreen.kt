@@ -1,14 +1,22 @@
 package com.jmin.five3one.ui.screen
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -62,53 +70,59 @@ fun TimerScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            // 计时器显示
-            TimerDisplayCard(
-                timerState = timerState,
-                onToggleTimer = viewModel::toggleTimer,
-                onStopTimer = viewModel::stopTimer
-            )
-            
-            // 快速时间选择
-            QuickTimerCard(
-                onTimeSelect = viewModel::setPresetTime,
-                isRunning = timerState.isRunning
-            )
-            
-            // 手动时间调整
-            ManualTimeAdjustCard(
-                currentTime = timerState.timeLeftSeconds,
-                onAddTime = viewModel::addTime,
-                isRunning = timerState.isRunning
-            )
-            
-            // 默认设置
-            DefaultTimerSettingsCard(
-                defaultTime = defaultRestTime,
-                onUpdateDefault = viewModel::updateDefaultRestTime
-            )
-            
-            // 错误消息
-            uiState.errorMessage?.let { error ->
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer
-                    )
-                ) {
-                    Text(
-                        text = error,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onErrorContainer,
-                        modifier = Modifier.padding(16.dp)
-                    )
+                .verticalScroll(rememberScrollState())
+        ){
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(24.dp)
+            ) {
+                // 计时器显示
+                TimerDisplayCard(
+                    timerState = timerState,
+                    onToggleTimer = viewModel::toggleTimer,
+                    onStopTimer = viewModel::stopTimer
+                )
+                // 快速时间选择
+                QuickTimerCard(
+                    onTimeSelect = viewModel::setPresetTime,
+                    isRunning = timerState.isRunning
+                )
+
+                // 手动时间调整
+                ManualTimeAdjustCard(
+                    currentTime = timerState.timeLeftSeconds,
+                    onAddTime = viewModel::addTime,
+                    isRunning = timerState.isRunning
+                )
+
+                // 默认设置
+                DefaultTimerSettingsCard(
+                    defaultTime = defaultRestTime,
+                    onUpdateDefault = viewModel::updateDefaultRestTime
+                )
+
+                // 错误消息
+                uiState.errorMessage?.let { error ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer
+                        )
+                    ) {
+                        Text(
+                            text = error,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
                 }
             }
         }
+
     }
 }
 
@@ -119,7 +133,6 @@ private fun TimerDisplayCard(
     onStopTimer: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = if (timerState.isRunning) {
                 MaterialTheme.colorScheme.primaryContainer
@@ -136,17 +149,29 @@ private fun TimerDisplayCard(
             Box(
                 contentAlignment = Alignment.Center
             ) {
+                val animatedProgress by animateFloatAsState(
+                    targetValue = timerState.progressPercentage,
+                    animationSpec = tween(
+                        durationMillis = 800,
+                        easing = LinearOutSlowInEasing
+                    ),
+                    label = "Timer Progress"
+                )
                 CircularProgressIndicator(
-                    progress = { timerState.progressPercentage },
-                    modifier = Modifier.size(200.dp),
+                    progress = { animatedProgress },
+                    modifier = Modifier.size(200.dp)
+                        .graphicsLayer {
+                            compositingStrategy = CompositingStrategy.Offscreen
+                        },
                     strokeWidth = 8.dp,
+                    strokeCap = StrokeCap.Round,
                     color = if (timerState.isRunning) {
                         MaterialTheme.colorScheme.primary
                     } else {
                         MaterialTheme.colorScheme.outline
                     }
                 )
-                
+
                 Text(
                     text = timerState.formattedTime,
                     style = MaterialTheme.typography.displayLarge,
@@ -158,9 +183,9 @@ private fun TimerDisplayCard(
                     }
                 )
             }
-            
+
             Spacer(modifier = Modifier.height(24.dp))
-            
+
             // 控制按钮
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -180,7 +205,7 @@ private fun TimerDisplayCard(
                         modifier = Modifier.size(32.dp)
                     )
                 }
-                
+
                 OutlinedButton(
                     onClick = onStopTimer,
                     modifier = Modifier.size(64.dp),
@@ -193,9 +218,9 @@ private fun TimerDisplayCard(
                     )
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             // 状态文字
             Text(
                 text = when {

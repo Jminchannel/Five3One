@@ -63,34 +63,6 @@ fun DashboardScreen(
                     }
                 }
             )
-        },
-        bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = null) },
-                    label = { Text(stringResource(R.string.home)) },
-                    selected = true,
-                    onClick = { }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.PlayArrow, contentDescription = null) },
-                    label = { Text(stringResource(R.string.workout)) },
-                    selected = false,
-                    onClick = onNavigateToWorkout
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.BarChart, contentDescription = null) },
-                    label = { Text(stringResource(R.string.statistics)) },
-                    selected = false,
-                    onClick = onNavigateToStatistics
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = null) },
-                    label = { Text(stringResource(R.string.profile)) },
-                    selected = false,
-                    onClick = onNavigateToSettings
-                )
-            }
         }
     ) { paddingValues ->
         LazyColumn(
@@ -107,7 +79,10 @@ fun DashboardScreen(
                     onStartWorkout = onNavigateToWorkout
                 )
             }
-            
+            item {
+                // TM概览
+                TMOverviewCard(userData = userData)
+            }
             item {
                 // 快速操作
                 QuickActionsCard(
@@ -116,11 +91,6 @@ fun DashboardScreen(
                     onNavigateToStatistics = onNavigateToStatistics,
                     onNavigateToSettings = onNavigateToSettings
                 )
-            }
-            
-            item {
-                // TM概览
-                TMOverviewCard(userData = userData)
             }
         }
     }
@@ -205,7 +175,7 @@ private fun TodayWorkoutCard(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "第${set.setNumber}组:",
+                                text = stringResource(R.string.set_number_format, set.setNumber),
                                 style = MaterialTheme.typography.bodySmall
                             )
                             Text(

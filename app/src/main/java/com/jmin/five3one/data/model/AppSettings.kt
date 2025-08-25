@@ -18,6 +18,7 @@ data class AppSettings(
     val soundEnabled: Boolean = true,
     val vibrationEnabled: Boolean = true,
     val isSetupCompleted: Boolean = false,
+    val isDarkMode: Boolean = false, // 深色模式
     val updatedAt: Long = System.currentTimeMillis()
 ) {
     /**
@@ -60,6 +61,13 @@ data class AppSettings(
      */
     fun toggleVibration(): AppSettings {
         return copy(vibrationEnabled = !vibrationEnabled, updatedAt = System.currentTimeMillis())
+    }
+    
+    /**
+     * 切换深色模式
+     */
+    fun toggleDarkMode(): AppSettings {
+        return copy(isDarkMode = !isDarkMode, updatedAt = System.currentTimeMillis())
     }
 }
 

@@ -104,7 +104,7 @@
     <string name="weight_too_low">目標重量過小或槓鈴片不足</string>
     
     <!-- Timer -->
-    <string name="training_timer_title">訓練計時器</string>
+    <string name="training_timer_title">休息倒計時</string>
     <string name="rest_between_sets">組間休息</string>
     <string name="time_remaining">剩餘時間</string>
     <string name="start">開始</string>
@@ -181,6 +181,22 @@
     <string name="dialog_reset_data_message">此操作不可恢復！</string>
     <string name="dialog_confirm_reset">確認重置</string>
     
+    <!-- Common -->
+    <string name="set_number_format">第%1$d組：</string>
+    <string name="adjust_one_rm">調整你的最大單次重量</string>
+    <string name="appearance_language">外觀和語言</string>
+    <string name="appearance_theme_subtitle">主題、語言等介面設定</string>
+    <string name="interface_language">介面語言</string>
+    <string name="language_description">選擇應用介面語言</string>
+    <string name="theme_settings">主題設定</string>
+    <string name="theme_description">自訂應用外觀主題</string>
+    <string name="dark_mode">深色模式</string>
+    <string name="enabled">已啟用</string>
+    <string name="disabled">已關閉</string>
+    <string name="theme_color">主題色彩</string>
+    <string name="coming_soon_theme">即將推出</string>
+    <string name="exit_app_prompt">再按一次返回鍵退出應用</string>
+
     <!-- Days of Week -->
     <string name="day_monday">週一</string>
     <string name="day_wednesday">週三</string>
