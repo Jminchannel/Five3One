@@ -38,6 +38,12 @@ class WorkoutRepository @Inject constructor(
         workoutHistoryDao.getWorkoutsByLift(lift)
     
     /**
+     * 根据ID获取单个训练记录
+     */
+    suspend fun getWorkoutById(id: Long): WorkoutHistory? = 
+        workoutHistoryDao.getWorkoutById(id)
+    
+    /**
      * 获取训练统计信息
      */
     fun getWorkoutStats(): Flow<WorkoutStats> = 

@@ -71,10 +71,11 @@
     <string name="progress_view">Progress View</string>
     <string name="adjust_plan">Adjust Plan</string>
     <string name="current_tm">Current Training Max (TM)</string>
+    <string name="clear_data_and_restart">Clear all data and start over</string>
     <string name="completed">Completed</string>
     <string name="in_progress">In Progress</string>
     <string name="not_started">Not Started</string>
-    
+    <string name="barbell_bar">barbell bar</string>
     <!-- Workout Details -->
     <string name="workout_details">Workout Details</string>
     <string name="week_mode">Week %1$d • %2$s Mode</string>
@@ -280,4 +281,125 @@
     <string name="day_wednesday">Wednesday</string>
     <string name="day_friday">Friday</string>
     <string name="day_sunday">Sunday</string>
+    
+    <!-- Exercise Tutorials -->
+    <string name="exercise_tutorial">Exercise Tutorial</string>
+    <string name="learning_center">Learning Center</string>
+    <string name="movement_library">Movement Library</string>
+    <string name="tutorial_completed">Tutorial Completed</string>
+    <string name="mark_completed">Mark Completed</string>
+    <string name="mark_incomplete">Mark Incomplete</string>
+    <string name="tutorial_not_found">Tutorial not found</string>
+    
+    <!-- Tutorial Content -->
+    <string name="overview">Overview</string>
+    <string name="demonstration_video">Demonstration Video</string>
+    <string name="video_coming_soon">Video Coming Soon</string>
+    <string name="common_mistakes_video">Common Mistakes Video</string>
+    <string name="key_points">Key Points</string>
+    <string name="mental_cues">Mental Cues</string>
+    <string name="target_muscles">Target Muscles</string>
+    <string name="common_mistakes">Common Mistakes</string>
+    <string name="safety_tips">Safety Tips</string>
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
+    
+    <!-- Learning Center -->
+    <string name="learning_progress">Learning Progress</string>
+    <string name="tutorials_completed_format" formatted="false">%d of %d tutorials completed</string>
+    <string name="all_tutorials_completed">All tutorials completed! 🎉</string>
+    <string name="keep_going">Keep going! 💪</string>
+    <string name="recommended_next">Recommended Next</string>
+    <string name="all_tutorials">All Tutorials</string>
+    <string name="duration_minutes">%d min</string>
+
+    <!-- Tutorial Setup Integration -->
+    <string name="tutorial_setup_prompt">Want to master these movements? Check out our exercise guides to ensure safety and efficiency.</string>
+    <string name="view_exercise_guides">View Exercise Guides</string>
+    <string name="skip_guides">Skip for Now</string>
+    
+    <!-- Workout Screen Tutorial -->
+    <string name="view_tutorial">View Tutorial</string>
+    <string name="exercise_guide">Exercise Guide</string>
+    <string name="quick_tips">Quick Tips</string>
+    <string name="close">Close</string>
+    <string name="full_guide">Full Guide</string>
+    <string name="tutorial_not_available">Tutorial not available</string>
+    <string name="learn_proper_form">Learn Proper Form</string>
+    <string name="master_the_movements">Master the movements</string>
+    
+        <!-- Exercise Names -->
+    <string name="squat">Squat</string>
+    <string name="bench_press">Bench Press</string>
+    <string name="deadlift">Deadlift</string>
+    <string name="overhead_press">Overhead Press</string>
+    
+    <!-- Additional strings -->
+    <string name="exercise_tutorials">Tutorials</string>
+    <string name="appearance_settings">appearance settings</string>
+    
+    <!-- Tutorial Prompt -->
+    <string name="tutorial_prompt_title">Learn Proper Form</string>
+    <string name="tutorial_prompt_description">Want to perform these exercises better? Check out our standard movement guides to ensure safety and efficiency.</string>
+    <string name="skip_for_now">Skip for Now</string>
+    <string name="view_tutorials">View Tutorials</string>
+    
+    <!-- Video Platforms -->
+    <string name="video_platforms_description">Search for demonstration videos on popular platforms:</string>
+    
+    <!-- Workout Detail -->
+    <string name="workout_detail">Workout Detail</string>
+    <string name="workout_sets">Workout Sets</string>
+    <string name="workout_performance">Workout Performance</string>
+    <string name="performance_rating">Performance Rating</string>
+    <string name="training_feeling">Training Feeling</string>
+    <string name="week_day_template">Week %1$d, Day %2$d - %3$s</string>
+    <string name="training_max_kg">Training Max: %.1f kg</string>
+    <string name="amrap_reps_format">%1$d+ / %2$d reps</string>
+    <string name="bonus_reps">+%d bonus reps</string>
+    <string name="amrap_achievement">AMRAP: %d reps achieved!</string>
+    <string name="performance_excellent">Excellent</string>
+    <string name="performance_good">Good</string>
+    <string name="performance_fair">Fair</string>
+    <string name="performance_poor">Poor</string>
+    <string name="performance_incomplete">Incomplete</string>
+    
+    <!-- About 5/3/1 Method -->
+    <string name="about_531_method">About 5/3/1 Method</string>
+    <string name="what_is_531">What is 5/3/1?</string>
+    <string name="method_531_introduction">The 5/3/1 method is a strength training program created by powerlifter Jim Wendler. It focuses on slow, steady progression in the squat, bench press, deadlift, and overhead press using percentage-based training with built-in autoregulation through AMRAP sets.</string>
+    
+    <string name="creator_jim_wendler">Creator: Jim Wendler</string>
+    <string name="jim_wendler_background">Jim Wendler is a former elite powerlifter who competed at the highest levels. After years of high-intensity training led to injuries and burnout, he developed the 5/3/1 method as a sustainable approach to strength training that emphasizes consistency over intensity.</string>
+    <string name="jim_wendler_quote">"The best ability is availability. You can\'t get stronger if you\'re injured."</string>
+    
+    <string name="core_principles">Core Principles</string>
+    <string name="percentage_based_training">Percentage-Based Training</string>
+    <string name="percentage_training_desc">All working sets are calculated as percentages of your Training Max (90% of your 1RM), ensuring consistent progression without overreaching.</string>
+    <string name="progressive_overload">Progressive Overload</string>
+    <string name="progressive_overload_desc">Training Max increases by 5-10 lbs every cycle, providing gradual but steady strength gains over time.</string>
+    <string name="amrap_sets">AMRAP Sets</string>
+    <string name="amrap_sets_desc">The final set of each workout is performed for "As Many Reps As Possible," allowing for autoregulation based on daily performance.</string>
+    <string name="periodization">Periodization</string>
+    <string name="periodization_desc">The program follows a 4-week cycle with varying intensities, including a deload week for recovery.</string>
+    
+    <string name="scientific_basis">Scientific Basis</string>
+    <string name="scientific_basis_content">The 5/3/1 method is built on proven training principles: progressive overload drives adaptation, submaximal training reduces injury risk while maintaining progress, and autoregulation through AMRAP sets allows for individual variation in recovery and performance. Research shows that training at 70-90% of 1RM is optimal for strength development.</string>
+    
+    <string name="training_benefits">Training Benefits</string>
+    <string name="benefit_strength_gain">Consistent strength gains without plateaus</string>
+    <string name="benefit_simple_structure">Simple, easy-to-follow program structure</string>
+    <string name="benefit_flexible_schedule">Flexible scheduling with 3-4 workouts per week</string>
+    <string name="benefit_injury_prevention">Reduced injury risk through submaximal training</string>
+    <string name="benefit_long_term_progress">Sustainable long-term progress</string>
+    
+    <string name="target_audience">Who Should Use 5/3/1?</string>
+    <string name="target_audience_content">The 5/3/1 method is suitable for intermediate to advanced lifters who have mastered basic movement patterns and want steady, long-term strength gains. It\'s particularly effective for those who have experienced plateaus with other programs or want a sustainable approach to strength training.</string>
+    
+    <!-- Quick Actions Descriptions -->
+    <string name="plate_calculator_desc">Calculate barbell loading combinations</string>
+    <string name="training_timer_desc">Rest timer between sets</string>
+    <string name="progress_view_desc">View training statistics and history</string>
+    <string name="exercise_tutorials_desc">Learn proper form for main lifts</string>
+    <string name="adjust_plan_desc">Modify your 1RM and training settings</string>
+    <string name="please_finish_previous_set">Please complete the previous set of actions first</string>
 </resources>

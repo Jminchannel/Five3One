@@ -211,7 +211,8 @@
     <string name="theme_color">主题色彩</string>
     <string name="coming_soon_theme">即将推出</string>
     <string name="exit_app_prompt">再按一次返回键退出应用</string>
-    
+    <string name="clear_data_and_restart">清除所有数据并重新开始</string>
+    <string name="barbell_bar">杠铃杠</string>
     <!-- Notifications -->
     <string name="notification_workout_complete">训练完成！</string>
     <string name="notification_workout_message">很好的训练，继续保持！</string>
@@ -230,4 +231,127 @@
     <string name="day_wednesday">周三</string>
     <string name="day_friday">周五</string>
     <string name="day_sunday">周日</string>
+    
+    <!-- Exercise Tutorials -->
+    <string name="exercise_tutorial">动作教程</string>
+    <string name="learning_center">学习中心</string>
+    <string name="movement_library">动作库</string>
+    <string name="tutorial_completed">教程已完成</string>
+    <string name="mark_completed">标记完成</string>
+    <string name="mark_incomplete">标记未完成</string>
+    <string name="tutorial_not_found">未找到教程</string>
+    <string name="retry">重试</string>
+    
+    <!-- Tutorial Content -->
+    <string name="overview">概述</string>
+    <string name="demonstration_video">动作演示视频</string>
+    <string name="video_coming_soon">视频即将推出</string>
+    <string name="common_mistakes_video">常见错误视频</string>
+    <string name="key_points">关键要点</string>
+    <string name="mental_cues">心理提示</string>
+    <string name="target_muscles">目标肌群</string>
+    <string name="common_mistakes">常见错误</string>
+    <string name="safety_tips">安全提示</string>
+    <string name="frequently_asked_questions">常见问答</string>
+    
+    <!-- Learning Center -->
+    <string name="learning_progress">学习进度</string>
+    <string name="tutorials_completed_format" formatted="false">已完成 %d/%d 个教程</string>
+    <string name="all_tutorials_completed">所有教程已完成！🎉</string>
+    <string name="keep_going">继续加油！💪</string>
+    <string name="recommended_next">推荐下一个</string>
+    <string name="all_tutorials">所有教程</string>
+    <string name="duration_minutes">%d分钟</string>
+    
+    <!-- Tutorial Setup Integration -->
+    <string name="tutorial_setup_prompt">想要更好地完成这些动作吗？请查看我们的标准动作指南以确保安全与效率。</string>
+    <string name="view_exercise_guides">查看动作指南</string>
+    <string name="skip_guides">暂时跳过</string>
+    
+    <!-- Workout Screen Tutorial -->
+    <string name="view_tutorial">查看教程</string>
+    <string name="exercise_guide">动作指南</string>
+    <string name="quick_tips">快速提示</string>
+    <string name="close">关闭</string>
+    <string name="full_guide">完整指南</string>
+    <string name="tutorial_not_available">教程暂不可用</string>
+    <string name="learn_proper_form">学习标准动作</string>
+    <string name="master_the_movements">掌握动作要领</string>
+    
+    <!-- Exercise Names -->
+    <string name="squat">深蹲</string>
+    <string name="bench_press">卧推</string>
+    <string name="deadlift">硬拉</string>
+    <string name="overhead_press">推举</string>
+    
+    <!-- Additional strings -->
+    <string name="exercise_tutorials">动作教程</string>
+    <string name="appearance_settings">外观设置</string>
+    
+    <!-- Tutorial Prompt -->
+    <string name="tutorial_prompt_title">学习标准动作</string>
+    <string name="tutorial_prompt_description">想要更好地完成这些动作吗？请查看我们的标准动作指南以确保安全与效率。</string>
+    <string name="skip_for_now">暂时跳过</string>
+    <string name="view_tutorials">查看教程</string>
+    
+    <!-- Video Platforms -->
+    <string name="video_platforms_description">在热门平台搜索动作演示视频：</string>
+    
+    <!-- Workout Detail -->
+    <string name="workout_detail">训练详情</string>
+    <string name="workout_sets">训练组数</string>
+    <string name="workout_performance">训练表现</string>
+    <string name="performance_rating">表现评级</string>
+    <string name="training_feeling">训练感受</string>
+    <string name="week_day_template">第%1$d周，第%2$d天 - %3$s</string>
+    <string name="training_max_kg">训练最大重量：%.1f 公斤</string>
+    <string name="amrap_reps_format">%1$d+ / %2$d 次</string>
+    <string name="bonus_reps">+%d 额外次数</string>
+    <string name="amrap_achievement">AMRAP：完成 %d 次！</string>
+    <string name="performance_excellent">优秀</string>
+    <string name="performance_good">良好</string>
+    <string name="performance_fair">一般</string>
+    <string name="performance_poor">较差</string>
+    <string name="performance_incomplete">未完成</string>
+    
+    <!-- About 5/3/1 Method -->
+    <string name="about_531_method">关于531训练法</string>
+    <string name="what_is_531">什么是531训练法？</string>
+    <string name="method_531_introduction">531训练法是由举重运动员Jim Wendler创建的力量训练计划。它专注于在深蹲、卧推、硬拉和推举四个动作上稳步渐进，使用基于百分比的训练方法，并通过AMRAP组内置自我调节机制。</string>
+    
+    <string name="creator_jim_wendler">创始人：Jim Wendler</string>
+    <string name="jim_wendler_background">Jim Wendler是一位前精英举重运动员，曾在最高水平上参与竞技。在多年高强度训练导致伤病和疲劳后，他开发了531训练法，作为一种可持续的力量训练方法，强调一致性胜过强度。</string>
+    <string name="jim_wendler_quote">"最好的能力就是可用性。如果你受伤了，就无法变得更强。"</string>
+    
+    <string name="core_principles">核心原理</string>
+    <string name="percentage_based_training">百分比训练</string>
+    <string name="percentage_training_desc">所有工作组都按训练最大重量（1RM的90%）的百分比计算，确保持续进步而不过度训练。</string>
+    <string name="progressive_overload">渐进式超负荷</string>
+    <string name="progressive_overload_desc">训练最大重量每个周期增加5-10磅，提供渐进但稳定的力量增长。</string>
+    <string name="amrap_sets">AMRAP组</string>
+    <string name="amrap_sets_desc">每次训练的最后一组进行"尽可能多的重复"，允许根据日常表现进行自我调节。</string>
+    <string name="periodization">周期化</string>
+    <string name="periodization_desc">该计划遵循4周周期，强度变化，包括一个减载周用于恢复。</string>
+    
+    <string name="scientific_basis">科学依据</string>
+    <string name="scientific_basis_content">531训练法建立在经过验证的训练原理之上：渐进式超负荷驱动适应，次最大训练在保持进步的同时降低受伤风险，通过AMRAP组进行自我调节允许恢复和表现的个体差异。研究表明，在1RM的70-90%进行训练对力量发展是最佳的。</string>
+    
+    <string name="training_benefits">训练优势</string>
+    <string name="benefit_strength_gain">持续的力量增长，无平台期</string>
+    <string name="benefit_simple_structure">简单易懂的计划结构</string>
+    <string name="benefit_flexible_schedule">灵活安排，每周3-4次训练</string>
+    <string name="benefit_injury_prevention">通过次最大训练降低受伤风险</string>
+    <string name="benefit_long_term_progress">可持续的长期进步</string>
+    
+    <string name="target_audience">谁应该使用531训练法？</string>
+    <string name="target_audience_content">531训练法适合已掌握基本动作模式并希望稳定长期力量增长的中级到高级训练者。对于那些在其他计划中遇到平台期或希望采用可持续力量训练方法的人特别有效。</string>
+    
+    <!-- Quick Actions Descriptions -->
+    <string name="plate_calculator_desc">计算杠铃配重组合</string>
+    <string name="training_timer_desc">组间休息计时器</string>
+    <string name="progress_view_desc">查看训练统计和历史记录</string>
+    <string name="exercise_tutorials_desc">学习主要动作的标准姿势</string>
+    <string name="adjust_plan_desc">修改您的1RM和训练设置</string>
+    <string name="please_finish_previous_set">请先完成前一组动作</string>
+
 </resources>

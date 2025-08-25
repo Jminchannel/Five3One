@@ -8,8 +8,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
+import com.jmin.five3one.ui.screen.About531Screen
 import com.jmin.five3one.ui.screen.AppearanceScreen
 import com.jmin.five3one.ui.screen.DashboardScreen
+import com.jmin.five3one.ui.screen.ExerciseTutorialScreen
+import com.jmin.five3one.ui.screen.LearningCenterScreen
 import com.jmin.five3one.ui.screen.PlateCalculatorScreen
 import com.jmin.five3one.ui.screen.SettingsScreen
 import com.jmin.five3one.ui.screen.SetupScreen
@@ -17,6 +20,7 @@ import com.jmin.five3one.ui.screen.SplashScreen
 import com.jmin.five3one.ui.screen.StatisticsScreen
 import com.jmin.five3one.ui.screen.TimerScreen
 import com.jmin.five3one.ui.screen.WelcomeScreen
+import com.jmin.five3one.ui.screen.WorkoutDetailScreen
 import com.jmin.five3one.ui.screen.WorkoutScreen
 
 /**
@@ -86,6 +90,9 @@ fun AppNavigation(
                 onNavigateBack = {
                     navController.popBackStack()
                 },
+                onNavigateToLearningCenter = {
+                    navController.navigate(Screen.LearningCenter.route)
+                },
                 initialStep = initialStep
             )
         }
@@ -100,6 +107,9 @@ fun AppNavigation(
                 },
                 onNavigateBack = {
                     navController.popBackStack()
+                },
+                onNavigateToLearningCenter = {
+                    navController.navigate(Screen.LearningCenter.route)
                 }
             )
         }
@@ -121,6 +131,12 @@ fun AppNavigation(
                 },
                 onNavigateToSettings = {
                     navController.navigate(Screen.Settings.route)
+                },
+                onNavigateToSetup = { step ->
+                    navController.navigate("${Screen.Setup.route}?step=$step")
+                },
+                onNavigateToLearningCenter = {
+                    navController.navigate(Screen.LearningCenter.route)
                 }
             )
         }
@@ -189,6 +205,9 @@ fun AppNavigation(
             StatisticsScreen(
                 onNavigateBack = {
                     navController.popBackStack()
+                },
+                onNavigateToWorkoutDetail = { workoutId ->
+                    navController.navigate("${Screen.WorkoutDetail.route}/$workoutId")
                 }
             )
         }
@@ -204,6 +223,9 @@ fun AppNavigation(
                 },
                 onNavigateToAppearance = {
                     navController.navigate(Screen.Appearance.route)
+                },
+                onNavigateToAbout531 = {
+                    navController.navigate(Screen.About531.route)
                 }
             )
         }
@@ -211,6 +233,60 @@ fun AppNavigation(
         // 外观设置页面
         composable(Screen.Appearance.route) {
             AppearanceScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        // 学习中心页面
+        composable(Screen.LearningCenter.route) {
+            LearningCenterScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onNavigateToTutorial = { exerciseType ->
+                    navController.navigate("${Screen.ExerciseTutorial.route}/$exerciseType")
+                }
+            )
+        }
+        
+        // 动作教程页面
+        composable(
+            route = "${Screen.ExerciseTutorial.route}/{exerciseType}",
+            arguments = listOf(navArgument("exerciseType") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val exerciseTypeString = backStackEntry.arguments?.getString("exerciseType") ?: ""
+            val exerciseType = try {
+                com.jmin.five3one.data.model.LiftType.valueOf(exerciseTypeString)
+            } catch (e: IllegalArgumentException) {
+                com.jmin.five3one.data.model.LiftType.SQUAT // 默认值
+            }
+            ExerciseTutorialScreen(
+                exerciseType = exerciseType,
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        // 训练详情页面
+        composable(
+            route = "${Screen.WorkoutDetail.route}/{workoutId}",
+            arguments = listOf(navArgument("workoutId") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val workoutId = backStackEntry.arguments?.getLong("workoutId") ?: 0L
+            WorkoutDetailScreen(
+                workoutId = workoutId,
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        // 关于531训练法页面
+        composable(Screen.About531.route) {
+            About531Screen(
                 onNavigateBack = {
                     navController.popBackStack()
                 }
@@ -233,4 +309,8 @@ sealed class Screen(val route: String) {
     object Statistics : Screen("statistics")
     object Settings : Screen("settings")
     object Appearance : Screen("appearance")
+    object LearningCenter : Screen("learning_center")
+    object ExerciseTutorial : Screen("exercise_tutorial")
+    object WorkoutDetail : Screen("workout_detail")
+    object About531 : Screen("about_531")
 }

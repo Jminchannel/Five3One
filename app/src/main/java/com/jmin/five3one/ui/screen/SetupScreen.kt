@@ -6,13 +6,16 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jmin.five3one.R
 import com.jmin.five3one.ui.viewmodel.SetupViewModel
@@ -26,6 +29,7 @@ import com.jmin.five3one.ui.viewmodel.SetupViewModel
 fun SetupScreen(
     onSetupComplete: () -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateToLearningCenter: () -> Unit,
     initialStep: Int = 1,
     viewModel: SetupViewModel = hiltViewModel()
 ) {
@@ -133,6 +137,17 @@ fun SetupScreen(
                 }
             }
         }
+    }
+    
+    // 教程提示对话框
+    if (setupState.showTutorialPrompt) {
+        TutorialPromptDialog(
+            onViewTutorial = {
+                viewModel.viewTutorialAndContinue()
+                onNavigateToLearningCenter()
+            },
+            onDismiss = viewModel::dismissTutorialPrompt
+        )
     }
 }
 
@@ -500,5 +515,75 @@ private fun getTemplateDescriptionString(templateType: com.jmin.five3one.data.mo
         com.jmin.five3one.data.model.TemplateType.FIVES -> stringResource(R.string.template_5s_description)
         com.jmin.five3one.data.model.TemplateType.THREES -> stringResource(R.string.template_3s_description)
         com.jmin.five3one.data.model.TemplateType.FIVE_THREE_ONE -> stringResource(R.string.template_531_description)
+    }
+}
+
+/**
+ * 教程提示对话框
+ */
+@Composable
+private fun TutorialPromptDialog(
+    onViewTutorial: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            shape = MaterialTheme.shapes.large
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // 图标
+                Icon(
+                    imageVector = Icons.Default.School,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(48.dp)
+                )
+                
+                // 标题
+                Text(
+                    text = stringResource(R.string.tutorial_prompt_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+                
+                // 描述
+                Text(
+                    text = stringResource(R.string.tutorial_prompt_description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                // 按钮
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.skip_for_now))
+                    }
+                    
+                    Button(
+                        onClick = onViewTutorial,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.view_tutorials))
+                    }
+                }
+            }
+        }
     }
 }

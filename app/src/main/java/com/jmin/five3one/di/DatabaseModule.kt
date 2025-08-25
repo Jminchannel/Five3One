@@ -26,7 +26,7 @@ object DatabaseModule {
             AppDatabase::class.java,
             "five3one_database"
         )
-        .fallbackToDestructiveMigration() // 开发阶段使用，生产环境需要实现Migration
+        .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5)
         .build()
     }
     
@@ -53,5 +53,10 @@ object DatabaseModule {
     @Provides
     fun provideAppSettingsDao(database: AppDatabase): AppSettingsDao {
         return database.appSettingsDao()
+    }
+    
+    @Provides
+    fun provideExerciseTutorialDao(database: AppDatabase): ExerciseTutorialDao {
+        return database.exerciseTutorialDao()
     }
 }

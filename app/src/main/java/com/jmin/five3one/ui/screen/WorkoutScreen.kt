@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jmin.five3one.R
+import com.jmin.five3one.data.model.LiftType
 import com.jmin.five3one.ui.viewmodel.WorkoutViewModel
 import com.jmin.five3one.ui.viewmodel.AmrapCelebrationData
 
@@ -38,6 +40,7 @@ fun WorkoutScreen(
     onNavigateBack: () -> Unit,
     onNavigateToTimer: (restTime: Int, autoStart: Boolean) -> Unit,
     onNavigateToPlateCalculator: () -> Unit,
+    onNavigateToTutorial: ((LiftType) -> Unit)? = null,
     viewModel: WorkoutViewModel = hiltViewModel()
 ) {
     val workoutState by viewModel.workoutState.collectAsState()
@@ -91,7 +94,8 @@ fun WorkoutScreen(
                 // 训练概览卡片
                 WorkoutOverviewCard(
                     currentWorkout = currentWorkout,
-                    workoutState = workoutState
+                    workoutState = workoutState,
+                    onNavigateToTutorial = onNavigateToTutorial
                 )
             }
 
@@ -139,7 +143,8 @@ fun WorkoutScreen(
 @Composable
 private fun WorkoutOverviewCard(
     currentWorkout: com.jmin.five3one.ui.viewmodel.CurrentWorkoutInfo,
-    workoutState: com.jmin.five3one.ui.viewmodel.WorkoutUiState
+    workoutState: com.jmin.five3one.ui.viewmodel.WorkoutUiState,
+    onNavigateToTutorial: ((LiftType) -> Unit)? = null
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -163,11 +168,39 @@ private fun WorkoutOverviewCard(
             
             Spacer(modifier = Modifier.height(8.dp))
             
-            Text(
-                text = "TM: ${currentWorkout.trainingMax}kg",
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.9f)
-            )
+            // 动作信息和教程入口
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "TM: ${currentWorkout.trainingMax}kg",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.9f)
+                )
+                
+                // 教程入口按钮
+                if (onNavigateToTutorial != null) {
+                    Surface(
+                        onClick = { onNavigateToTutorial(currentWorkout.lift) },
+                        modifier = Modifier.size(36.dp),
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
+                    ) {
+                        Box(
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Help,
+                                contentDescription = stringResource(R.string.view_tutorial),
+                                modifier = Modifier.size(20.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
+            }
             
             Spacer(modifier = Modifier.height(12.dp))
             
@@ -648,7 +681,7 @@ private fun SetItemCard(
             }else if (!isEnabled) {
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = "请先完成前一组动作",
+                    text = stringResource(R.string.please_finish_previous_set),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.fillMaxWidth(),

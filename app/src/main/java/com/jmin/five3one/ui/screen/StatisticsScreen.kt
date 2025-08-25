@@ -19,6 +19,7 @@ import com.jmin.five3one.ui.viewmodel.StatisticsViewModel
 @Composable
 fun StatisticsScreen(
     onNavigateBack: () -> Unit,
+    onNavigateToWorkoutDetail: (Long) -> Unit,
     viewModel: StatisticsViewModel = hiltViewModel()
 ) {
     val workoutStats by viewModel.workoutStats.collectAsState()
@@ -64,7 +65,8 @@ fun StatisticsScreen(
                 // 最近训练记录
                 RecentWorkoutsCard(
                     recentWorkouts = recentWorkouts,
-                    onDeleteWorkout = viewModel::deleteWorkout
+                    onDeleteWorkout = viewModel::deleteWorkout,
+                    onWorkoutClick = onNavigateToWorkoutDetail
                 )
             }
             
@@ -254,7 +256,8 @@ private fun LiftProgressItem(
 @Composable
 private fun RecentWorkoutsCard(
     recentWorkouts: List<com.jmin.five3one.data.model.WorkoutHistory>,
-    onDeleteWorkout: (com.jmin.five3one.data.model.WorkoutHistory) -> Unit
+    onDeleteWorkout: (com.jmin.five3one.data.model.WorkoutHistory) -> Unit,
+    onWorkoutClick: (Long) -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -282,7 +285,8 @@ private fun RecentWorkoutsCard(
                 recentWorkouts.forEach { workout ->
                     WorkoutHistoryItem(
                         workout = workout,
-                        onDelete = { onDeleteWorkout(workout) }
+                        onDelete = { onDeleteWorkout(workout) },
+                        onClick = { onWorkoutClick(workout.id) }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
@@ -294,9 +298,11 @@ private fun RecentWorkoutsCard(
 @Composable
 private fun WorkoutHistoryItem(
     workout: com.jmin.five3one.data.model.WorkoutHistory,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(
+        onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface

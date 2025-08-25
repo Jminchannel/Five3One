@@ -102,7 +102,8 @@
     <string name="per_side_total">Total Per Sisi:</string>
     <string name="unable_to_load">Tidak Dapat Memuat</string>
     <string name="weight_too_low">Berat target terlalu rendah atau plate tidak cukup</string>
-    
+    <string name="clear_data_and_restart">Hapus semua data dan mulai lagi</string>
+
     <!-- Timer -->
     <string name="training_timer_title">Beristirahat dihitung mundur</string>
     <string name="rest_between_sets">Istirahat Antar Set</string>
@@ -202,4 +203,93 @@
     <string name="day_wednesday">Rabu</string>
     <string name="day_friday">Jumat</string>
     <string name="day_sunday">Minggu</string>
+    
+    <!-- Exercise Tutorials -->
+    <string name="exercise_tutorial">Tutorial Latihan</string>
+    <string name="learning_center">Pusat Belajar</string>
+    <string name="movement_library">Pustaka Gerakan</string>
+    <string name="tutorial_completed">Tutorial Selesai</string>
+    <string name="mark_completed">Tandai Selesai</string>
+    <string name="mark_incomplete">Tandai Belum Selesai</string>
+    <string name="tutorial_not_found">Tutorial tidak ditemukan</string>
+    <string name="retry">Coba Lagi</string>
+    
+    <!-- Tutorial Content -->
+    <string name="overview">Gambaran Umum</string>
+    <string name="demonstration_video">Video Demonstrasi</string>
+    <string name="video_coming_soon">Video Segera Hadir</string>
+    <string name="common_mistakes_video">Video Kesalahan Umum</string>
+    <string name="key_points">Poin Kunci</string>
+    <string name="mental_cues">Isyarat Mental</string>
+    <string name="target_muscles">Otot Target</string>
+    <string name="common_mistakes">Kesalahan Umum</string>
+    <string name="safety_tips">Tips Keamanan</string>
+    <string name="frequently_asked_questions">Pertanyaan Umum</string>
+    
+    <!-- Learning Center -->
+    <string name="learning_progress">Kemajuan Belajar</string>
+    <string name="tutorials_completed_format" formatted="false">%d dari %d tutorial selesai</string>
+    <string name="all_tutorials_completed">Semua tutorial selesai! 🎉</string>
+    <string name="keep_going">Terus semangat! 💪</string>
+    <string name="recommended_next">Rekomendasi Selanjutnya</string>
+    <string name="all_tutorials">Semua Tutorial</string>
+    <string name="duration_minutes">%d menit</string>
+    
+    <!-- Tutorial Setup Integration -->
+    <string name="tutorial_setup_prompt">Ingin menguasai gerakan-gerakan ini? Lihat panduan latihan kami untuk memastikan keamanan dan efisiensi.</string>
+    <string name="view_exercise_guides">Lihat Panduan Latihan</string>
+    <string name="skip_guides">Lewati Dulu</string>
+    
+    <!-- Workout Screen Tutorial -->
+    <string name="view_tutorial">Lihat Tutorial</string>
+    <string name="exercise_guide">Panduan Latihan</string>
+    <string name="quick_tips">Tips Cepat</string>
+    <string name="close">Tutup</string>
+    <string name="full_guide">Panduan Lengkap</string>
+    <string name="tutorial_not_available">Tutorial tidak tersedia</string>
+    <string name="learn_proper_form">Pelajari Teknik yang Benar</string>
+    <string name="master_the_movements">Kuasai Gerakan</string>
+    
+    <!-- Exercise Names -->
+    <string name="squat">Squat</string>
+    <string name="bench_press">Bench Press</string>
+    <string name="deadlift">Deadlift</string>
+    <string name="overhead_press">Overhead Press</string>
+    
+    <!-- Additional Missing Strings -->
+    <string name="barbell_bar">batang barbell</string>
+    <string name="exercise_tutorials">Tutorial Gerakan</string>
+    <string name="appearance_settings">Pengaturan Tampilan</string>
+    
+    <!-- Tutorial Prompt -->
+    <string name="tutorial_prompt_title">Pelajari Teknik yang Benar</string>
+    <string name="tutorial_prompt_description">Ingin melakukan gerakan ini dengan lebih baik? Lihat panduan gerakan standar kami untuk memastikan keamanan dan efisiensi.</string>
+    <string name="skip_for_now">Lewati Sekarang</string>
+    <string name="view_tutorials">Lihat Tutorial</string>
+    
+    <!-- Video Platforms -->
+    <string name="video_platforms_description">Cari video demonstrasi di platform populer:</string>
+    
+    <!-- Workout Detail -->
+    <string name="workout_detail">Detail Latihan</string>
+    <string name="workout_sets">Set Latihan</string>
+    <string name="workout_performance">Performa Latihan</string>
+    <string name="workout_notes">Catatan Latihan</string>
+    <string name="performance_rating">Rating Performa</string>
+    <string name="training_feeling">Perasaan Latihan</string>
+    <string name="week_day_template">Minggu %1$d, Hari %2$d - %3$s</string>
+    <string name="training_max_kg">Training Max: %.1f kg</string>
+    <string name="amrap_reps_format">%1$d+ / %2$d repetisi</string>
+    <string name="bonus_reps">+%d repetisi bonus</string>
+    <string name="amrap_achievement">AMRAP: %d repetisi tercapai!</string>
+    <string name="performance_excellent">Sangat Baik</string>
+    <string name="performance_good">Baik</string>
+    <string name="performance_fair">Cukup</string>
+    <string name="performance_poor">Kurang</string>
+    <string name="performance_incomplete">Tidak Selesai</string>
+    <string name="feeling_excellent">Sangat Baik</string>
+    <string name="feeling_good">Baik</string>
+    <string name="feeling_fair">Cukup</string>
+    <string name="feeling_poor">Kurang</string>
+    <string name="please_finish_previous_set">Silakan selesaikan langkah sebelumnya</string>
 </resources>

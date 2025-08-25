@@ -1,6 +1,7 @@
 package com.jmin.five3one.di
 
 import com.jmin.five3one.data.dao.*
+import com.jmin.five3one.data.repository.ExerciseTutorialRepository
 import com.jmin.five3one.data.repository.PlateCalculatorRepository
 import com.jmin.five3one.data.repository.UserDataRepository
 import com.jmin.five3one.data.repository.WorkoutRepository
@@ -40,5 +41,13 @@ object RepositoryModule {
     @Singleton
     fun providePlateCalculatorRepository(): PlateCalculatorRepository {
         return PlateCalculatorRepository()
+    }
+    
+    @Provides
+    @Singleton
+    fun provideExerciseTutorialRepository(
+        exerciseTutorialDao: ExerciseTutorialDao
+    ): ExerciseTutorialRepository {
+        return ExerciseTutorialRepository(exerciseTutorialDao)
     }
 }

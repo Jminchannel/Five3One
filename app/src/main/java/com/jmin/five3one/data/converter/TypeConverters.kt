@@ -64,4 +64,30 @@ class TypeConverters {
     @TypeConverter
     fun toWorkoutSetList(value: String): List<WorkoutSet> = 
         json.decodeFromString(value)
+    
+    // List<String>转换（教程相关列表）
+    @TypeConverter
+    fun fromStringList(value: List<String>): String = 
+        json.encodeToString(value)
+    
+    @TypeConverter
+    fun toStringList(value: String): List<String> = 
+        json.decodeFromString(value)
+    
+    // List<FAQItem>转换
+    @TypeConverter
+    fun fromFAQItemList(value: List<FAQItem>): String = 
+        json.encodeToString(value)
+    
+    @TypeConverter
+    fun toFAQItemList(value: String): List<FAQItem> = 
+        json.decodeFromString(value)
+    
+    // TutorialDifficulty转换
+    @TypeConverter
+    fun fromTutorialDifficulty(difficulty: TutorialDifficulty): String = difficulty.name
+    
+    @TypeConverter
+    fun toTutorialDifficulty(difficultyName: String): TutorialDifficulty = 
+        TutorialDifficulty.valueOf(difficultyName)
 }

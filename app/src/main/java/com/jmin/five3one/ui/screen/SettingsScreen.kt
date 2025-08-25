@@ -22,6 +22,7 @@ fun SettingsScreen(
     onNavigateBack: () -> Unit,
     onNavigateToSetup: (step: Int) -> Unit,
     onNavigateToAppearance: () -> Unit,
+    onNavigateToAbout531: () -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val userData by viewModel.userData.collectAsState()
@@ -77,7 +78,7 @@ fun SettingsScreen(
             
             item {
                 // 关于应用
-                AboutCard()
+                AboutCard(onNavigateToAbout531 = onNavigateToAbout531)
             }
             
             // 错误消息
@@ -234,7 +235,7 @@ private fun AppearanceSettingsCard(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "外观设置",
+                text = stringResource(R.string.appearance_settings),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -285,7 +286,7 @@ private fun TrainingSettingsCard(
             SettingsItem(
                 icon = Icons.Default.Build,
                 title = stringResource(R.string.plate_settings),
-                subtitle = "杠铃杆: ${userData.plateConfig.barbellWeight}kg",
+                subtitle = "${stringResource(R.string.barbell_bar)}: ${userData.plateConfig.barbellWeight}kg",
                 onClick = { onNavigateToSetup(2) } // 跳转到第2步：杠铃片配置
             )
             
@@ -326,7 +327,7 @@ private fun DataManagementCard(
             SettingsItem(
                 icon = Icons.Default.RestartAlt,
                 title = stringResource(R.string.reset_data),
-                subtitle = "清除所有数据并重新开始",
+                subtitle = stringResource(R.string.clear_data_and_restart),
                 onClick = { showResetDialog = true },
                 isDestructive = true
             )
@@ -361,7 +362,9 @@ private fun DataManagementCard(
 }
 
 @Composable
-private fun AboutCard() {
+private fun AboutCard(
+    onNavigateToAbout531: () -> Unit
+) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -399,9 +402,9 @@ private fun AboutCard() {
             // 531训练法说明
             SettingsItem(
                 icon = Icons.Default.Help,
-                title = "关于531训练法",
-                subtitle = "由Jim Wendler创建的经典力量训练方法",
-                onClick = { }
+                title = stringResource(R.string.about_531_method),
+                subtitle = stringResource(R.string.jim_wendler_quote),
+                onClick = onNavigateToAbout531
             )
         }
     }

@@ -31,6 +31,8 @@ fun MainScreen(
     onNavigateToTimer: () -> Unit,
     onNavigateToStatistics: () -> Unit,
     onNavigateToSettings: () -> Unit,
+    onNavigateToSetup: (Int) -> Unit,
+    onNavigateToLearningCenter: () -> Unit,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     val bottomNavController = rememberNavController()
@@ -53,6 +55,8 @@ fun MainScreen(
             onNavigateToTimer = onNavigateToTimer,
             onNavigateToStatistics = onNavigateToStatistics,
             onNavigateToSettings = onNavigateToSettings,
+            onNavigateToSetup = onNavigateToSetup,
+            onNavigateToLearningCenter = onNavigateToLearningCenter,
             mainViewModel = mainViewModel
         )
     }
@@ -108,6 +112,8 @@ private fun MainNavHost(
     onNavigateToTimer: () -> Unit,
     onNavigateToStatistics: () -> Unit,
     onNavigateToSettings: () -> Unit,
+    onNavigateToSetup: (Int) -> Unit,
+    onNavigateToLearningCenter: () -> Unit,
     mainViewModel: MainViewModel
 ) {
     NavHost(
@@ -122,6 +128,8 @@ private fun MainNavHost(
                 onNavigateToTimer = onNavigateToTimer,
                 onNavigateToStatistics = onNavigateToStatistics,
                 onNavigateToSettings = onNavigateToSettings,
+                onNavigateToSetup = onNavigateToSetup,
+                onNavigateToLearningCenter = onNavigateToLearningCenter,
                 viewModel = mainViewModel
             )
         }

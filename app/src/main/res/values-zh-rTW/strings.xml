@@ -102,7 +102,8 @@
     <string name="per_side_total">每側總重:</string>
     <string name="unable_to_load">無法配重</string>
     <string name="weight_too_low">目標重量過小或槓鈴片不足</string>
-    
+    <string name="clear_data_and_restart">清除所有數據並重新開始</string>
+
     <!-- Timer -->
     <string name="training_timer_title">休息倒計時</string>
     <string name="rest_between_sets">組間休息</string>
@@ -202,4 +203,93 @@
     <string name="day_wednesday">週三</string>
     <string name="day_friday">週五</string>
     <string name="day_sunday">週日</string>
+    
+    <!-- Exercise Tutorials -->
+    <string name="exercise_tutorial">動作教程</string>
+    <string name="learning_center">學習中心</string>
+    <string name="movement_library">動作庫</string>
+    <string name="tutorial_completed">教程已完成</string>
+    <string name="mark_completed">標記完成</string>
+    <string name="mark_incomplete">標記未完成</string>
+    <string name="tutorial_not_found">未找到教程</string>
+    <string name="retry">重試</string>
+    
+    <!-- Tutorial Content -->
+    <string name="overview">概述</string>
+    <string name="demonstration_video">動作演示視頻</string>
+    <string name="video_coming_soon">視頻即將推出</string>
+    <string name="common_mistakes_video">常見錯誤視頻</string>
+    <string name="key_points">關鍵要點</string>
+    <string name="mental_cues">心理提示</string>
+    <string name="target_muscles">目標肌群</string>
+    <string name="common_mistakes">常見錯誤</string>
+    <string name="safety_tips">安全提示</string>
+    <string name="frequently_asked_questions">常見問答</string>
+    
+    <!-- Learning Center -->
+    <string name="learning_progress">學習進度</string>
+    <string name="tutorials_completed_format" formatted="false">已完成 %d/%d 個教程</string>
+    <string name="all_tutorials_completed">所有教程已完成！🎉</string>
+    <string name="keep_going">繼續加油！💪</string>
+    <string name="recommended_next">推薦下一個</string>
+    <string name="all_tutorials">所有教程</string>
+    <string name="duration_minutes">%d分鐘</string>
+    
+    <!-- Tutorial Setup Integration -->
+    <string name="tutorial_setup_prompt">想要更好地完成這些動作嗎？請查看我們的標準動作指南以確保安全與效率。</string>
+    <string name="view_exercise_guides">查看動作指南</string>
+    <string name="skip_guides">暫時跳過</string>
+    
+    <!-- Workout Screen Tutorial -->
+    <string name="view_tutorial">查看教程</string>
+    <string name="exercise_guide">動作指南</string>
+    <string name="quick_tips">快速提示</string>
+    <string name="close">關閉</string>
+    <string name="full_guide">完整指南</string>
+    <string name="tutorial_not_available">教程暫不可用</string>
+    <string name="learn_proper_form">學習標準動作</string>
+    <string name="master_the_movements">掌握動作要領</string>
+    
+        <!-- Exercise Names -->
+    <string name="squat">深蹲</string>
+    <string name="bench_press">臥推</string>
+    <string name="deadlift">硬拉</string>
+    <string name="overhead_press">推舉</string>
+    
+    <!-- Additional Missing Strings -->
+    <string name="barbell_bar">槓鈴桿</string>
+    <string name="exercise_tutorials">動作教程</string>
+    <string name="appearance_settings">外觀設置</string>
+    
+    <!-- Tutorial Prompt -->
+    <string name="tutorial_prompt_title">學習標準動作</string>
+    <string name="tutorial_prompt_description">想要更好地完成這些動作嗎？請查看我們的標準動作指南以確保安全與效率。</string>
+    <string name="skip_for_now">暫時跳過</string>
+    <string name="view_tutorials">查看教程</string>
+    
+    <!-- Video Platforms -->
+    <string name="video_platforms_description">在熱門平台搜索動作演示影片：</string>
+    
+    <!-- Workout Detail -->
+    <string name="workout_detail">訓練詳情</string>
+    <string name="workout_sets">訓練組數</string>
+    <string name="workout_performance">訓練表現</string>
+    <string name="workout_notes">訓練備註</string>
+    <string name="performance_rating">表現評級</string>
+    <string name="training_feeling">訓練感受</string>
+    <string name="week_day_template">第%1$d週，第%2$d天 - %3$s</string>
+    <string name="training_max_kg">訓練最大重量：%.1f 公斤</string>
+    <string name="amrap_reps_format">%1$d+ / %2$d 次</string>
+    <string name="bonus_reps">+%d 額外次數</string>
+    <string name="amrap_achievement">AMRAP：完成 %d 次！</string>
+    <string name="performance_excellent">優秀</string>
+    <string name="performance_good">良好</string>
+    <string name="performance_fair">一般</string>
+    <string name="performance_poor">較差</string>
+    <string name="performance_incomplete">未完成</string>
+    <string name="feeling_excellent">非常好</string>
+    <string name="feeling_good">良好</string>
+    <string name="feeling_fair">一般</string>
+    <string name="feeling_poor">較差</string>
+    <string name="please_finish_previous_set">請先完成前一組動作</string>
 </resources>

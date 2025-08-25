@@ -27,6 +27,8 @@ fun DashboardScreen(
     onNavigateToTimer: () -> Unit,
     onNavigateToStatistics: () -> Unit,
     onNavigateToSettings: () -> Unit,
+    onNavigateToSetup: (Int) -> Unit,
+    onNavigateToLearningCenter: () -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val userData by viewModel.userData.collectAsState()
@@ -89,7 +91,8 @@ fun DashboardScreen(
                     onNavigateToPlateCalculator = onNavigateToPlateCalculator,
                     onNavigateToTimer = onNavigateToTimer,
                     onNavigateToStatistics = onNavigateToStatistics,
-                    onNavigateToSettings = onNavigateToSettings
+                    onNavigateToSetup = onNavigateToSetup,
+                    onNavigateToLearningCenter = onNavigateToLearningCenter
                 )
             }
         }
@@ -221,7 +224,8 @@ private fun QuickActionsCard(
     onNavigateToPlateCalculator: () -> Unit,
     onNavigateToTimer: () -> Unit,
     onNavigateToStatistics: () -> Unit,
-    onNavigateToSettings: () -> Unit
+    onNavigateToSetup: (Int) -> Unit,
+    onNavigateToLearningCenter: () -> Unit
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(
@@ -235,70 +239,104 @@ private fun QuickActionsCard(
             
             Spacer(modifier = Modifier.height(16.dp))
             
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                QuickActionButton(
-                    icon = Icons.Default.Calculate,
-                    text = stringResource(R.string.plate_calculator),
-                    onClick = onNavigateToPlateCalculator
-                )
-                QuickActionButton(
-                    icon = Icons.Default.Timer,
-                    text = stringResource(R.string.training_timer),
-                    onClick = onNavigateToTimer
-                )
-            }
+            // 纵向列表形式的快速操作
+            QuickActionListItem(
+                icon = Icons.Default.Calculate,
+                title = stringResource(R.string.plate_calculator),
+                subtitle = stringResource(R.string.plate_calculator_desc),
+                onClick = onNavigateToPlateCalculator
+            )
             
             Spacer(modifier = Modifier.height(8.dp))
             
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                QuickActionButton(
-                    icon = Icons.Default.BarChart,
-                    text = stringResource(R.string.progress_view),
-                    onClick = onNavigateToStatistics
-                )
-                QuickActionButton(
-                    icon = Icons.Default.Edit,
-                    text = stringResource(R.string.adjust_plan),
-                    onClick = onNavigateToSettings
-                )
-            }
+            QuickActionListItem(
+                icon = Icons.Default.Timer,
+                title = stringResource(R.string.training_timer),
+                subtitle = stringResource(R.string.training_timer_desc),
+                onClick = onNavigateToTimer
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            QuickActionListItem(
+                icon = Icons.Default.BarChart,
+                title = stringResource(R.string.progress_view),
+                subtitle = stringResource(R.string.progress_view_desc),
+                onClick = onNavigateToStatistics
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            QuickActionListItem(
+                icon = Icons.Default.School,
+                title = stringResource(R.string.exercise_tutorials),
+                subtitle = stringResource(R.string.exercise_tutorials_desc),
+                onClick = onNavigateToLearningCenter
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            QuickActionListItem(
+                icon = Icons.Default.Edit,
+                title = stringResource(R.string.adjust_plan),
+                subtitle = stringResource(R.string.adjust_plan_desc),
+                onClick = { onNavigateToSetup(1) } // 直接跳转到1RM设置
+            )
         }
     }
 }
 
 @Composable
-private fun QuickActionButton(
+private fun QuickActionListItem(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
-    text: String,
+    title: String,
+    subtitle: String,
     onClick: () -> Unit
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.width(100.dp)
+    Card(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
-        FilledTonalButton(
-            onClick = onClick,
-            modifier = Modifier.size(56.dp),
-            contentPadding = PaddingValues(0.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = icon,
-                contentDescription = text,
-                modifier = Modifier.size(24.dp)
+                contentDescription = title,
+                modifier = Modifier.size(24.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodySmall,
-            maxLines = 2
-        )
     }
 }
 

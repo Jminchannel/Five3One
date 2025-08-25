@@ -104,7 +104,7 @@ class SetupViewModel @Inject constructor(
                 )
                 
                 userDataRepository.saveOneRM(oneRM)
-                _setupState.update { it.copy(currentStep = 2) }
+                _setupState.update { it.copy(showTutorialPrompt = true) }
                 
             } catch (e: Exception) {
                 _setupState.update { it.copy(errorMessage = "保存1RM失败: ${e.message}") }
@@ -231,6 +231,20 @@ class SetupViewModel @Inject constructor(
     }
     
     /**
+     * 关闭教程提示并继续下一步
+     */
+    fun dismissTutorialPrompt() {
+        _setupState.update { it.copy(showTutorialPrompt = false, currentStep = 2) }
+    }
+    
+    /**
+     * 查看教程并继续下一步
+     */
+    fun viewTutorialAndContinue() {
+        _setupState.update { it.copy(showTutorialPrompt = false, currentStep = 2) }
+    }
+    
+    /**
      * 清除错误消息
      */
     fun clearError() {
@@ -255,7 +269,8 @@ data class SetupUiState(
     val selectedTemplate: TemplateType? = null,
     val isCompleted: Boolean = false,
     val isLoading: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val showTutorialPrompt: Boolean = false
 ) {
     val totalSteps: Int = 3
     val progressPercentage: Float = currentStep.toFloat() / totalSteps.toFloat()
