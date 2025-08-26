@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,7 +58,9 @@ fun SettingsScreen(
             item {
                 // 外观设置
                 AppearanceSettingsCard(
-                    onNavigateToAppearance = onNavigateToAppearance
+                    userData = userData,
+                    onNavigateToAppearance = onNavigateToAppearance,
+                    onToggleDebugMode = viewModel::toggleDebugMode
                 )
             }
             
@@ -226,7 +229,9 @@ private fun UserInfoCard(
 
 @Composable
 private fun AppearanceSettingsCard(
-    onNavigateToAppearance: () -> Unit
+    userData: com.jmin.five3one.data.repository.UserData,
+    onNavigateToAppearance: () -> Unit,
+    onToggleDebugMode: () -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -248,6 +253,17 @@ private fun AppearanceSettingsCard(
                 title = stringResource(R.string.appearance_language),
                 subtitle = stringResource(R.string.appearance_theme_subtitle),
                 onClick = onNavigateToAppearance
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            // 调试模式开关
+            SettingsToggleItem(
+                icon = Icons.Default.BugReport,
+                title = stringResource(R.string.debug_mode),
+                subtitle = stringResource(R.string.debug_mode_subtitle),
+                checked = userData.appSettings.isDebugMode,
+                onCheckedChange = { onToggleDebugMode() }
             )
         }
     }
@@ -296,7 +312,7 @@ private fun TrainingSettingsCard(
             SettingsItem(
                 icon = Icons.Default.Assignment,
                 title = stringResource(R.string.template_settings),
-                subtitle = "当前: ${userData.appSettings.currentTemplate.id.uppercase()}",
+                subtitle = "${stringResource(R.string.current)}: ${userData.appSettings.currentTemplate.id.uppercase()}",
                 onClick = { onNavigateToSetup(3) } // 跳转到第3步：训练模板
             )
         }
@@ -478,6 +494,68 @@ private fun SettingsItem(
                 contentDescription = null,
                 modifier = Modifier.size(16.dp),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+/**
+ * 带开关的设置项
+ */
+@Composable
+private fun SettingsToggleItem(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    title: String,
+    subtitle: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onCheckedChange(!checked) },
+        color = Color.Transparent
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                
+                Spacer(modifier = Modifier.width(16.dp))
+                
+                Column {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    
+                    Text(
+                        text = subtitle,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            
+            Switch(
+                checked = checked,
+                onCheckedChange = onCheckedChange
             )
         }
     }

@@ -126,7 +126,7 @@
     <string name="weight_difference_under">比目标轻%1$.1fkg</string>
     <string name="barbell_breakdown">杠铃杆: %1$dkg</string>
     <string name="per_side_weight">每侧: %1$.1fkg</string>
-    <string name="each_side_needs">左右两侧各需要</string>
+    <string name="each_side_needs">每侧需要</string>
     <string name="plate_diagram">杠铃配重示意图</string>
     <string name="detailed_breakdown">详细配重 (每侧)</string>
     <string name="per_side_total">每侧总重:</string>
@@ -212,7 +212,7 @@
     <string name="coming_soon_theme">即将推出</string>
     <string name="exit_app_prompt">再按一次返回键退出应用</string>
     <string name="clear_data_and_restart">清除所有数据并重新开始</string>
-    <string name="barbell_bar">杠铃杠</string>
+    <string name="barbell_bar">杠铃杆</string>
     <!-- Notifications -->
     <string name="notification_workout_complete">训练完成！</string>
     <string name="notification_workout_message">很好的训练，继续保持！</string>
@@ -353,5 +353,120 @@
     <string name="exercise_tutorials_desc">学习主要动作的标准姿势</string>
     <string name="adjust_plan_desc">修改您的1RM和训练设置</string>
     <string name="please_finish_previous_set">请先完成前一组动作</string>
+    
+    <!-- Training Templates -->
+    <string name="template_classic_4day">经典四天分化</string>
+    <string name="template_classic_4day_desc">每个主项拥有专属训练日，专注度最高，恢复效果最好。是Jim Wendler最推荐的原始版本。</string>
+    
+    <string name="template_3day">三天全身训练</string>
+    <string name="template_3day_desc">适合忙碌人士，训练频率更低，但每次训练内容更紧凑。</string>
+    
+    <string name="template_bbb">BBB增肌挑战</string>
+    <string name="template_bbb_desc">在主项后增加5组10次补充训练，极大提升训练量和增肌效果，为渴望增长肌肉和力量的设计。</string>
+    
+    <string name="template_custom">自定义模板</string>
+    <string name="template_custom_desc">创建您专属的个性化训练计划</string>
+    
+    <!-- Template Selection -->
+    <string name="select_training_template">选择训练模板</string>
+    <string name="template_selection_subtitle">选择最适合您目标和生活方式的训练计划</string>
+    <string name="use_this_template">使用此模板</string>
+    <string name="training_days_per_week">每周%d天</string>
+    <string name="recommended">推荐</string>
+    
+    <!-- Template Preview -->
+    <string name="template_preview">模板预览</string>
+    <string name="weekly_schedule">每周计划</string>
+    <string name="training_day">训练日</string>
+    <string name="rest_day">休息日</string>
+    <string name="rest_day_description">今天是休息日，好好休息恢复。肌肉在恢复时生长，不只是在训练时。</string>
+    <string name="main_lift">主项动作</string>
+    <string name="assistance_exercises">辅助动作</string>
+    <string name="bbb_sets">BBB组数</string>
+    <string name="generate_my_plan">生成我的计划</string>
+    <string name="customize_template">自定义模板</string>
+    
+    <!-- Assistance Exercises -->
+    <string name="exercise_dumbbell_bench_press">哑铃卧推</string>
+    <string name="exercise_incline_dumbbell_press">上斜哑铃推举</string>
+    <string name="exercise_barbell_row">杠铃划船</string>
+    <string name="exercise_dumbbell_row">哑铃划船</string>
+    <string name="exercise_dumbbell_shoulder_press">哑铃推举</string>
+    <string name="exercise_pull_ups">引体向上</string>
+    <string name="exercise_lat_pulldown">高位下拉</string>
+    <string name="exercise_leg_press">腿举</string>
+    <string name="exercise_leg_extension">腿屈伸</string>
+    <string name="exercise_romanian_deadlift">罗马尼亚硬拉</string>
+    <string name="exercise_leg_curl">腿弯举</string>
+    <string name="exercise_tricep_dips">臂屈伸</string>
+    <string name="exercise_lateral_raise">侧平举</string>
+    <string name="exercise_rear_delt_fly">后束飞鸟</string>
+    <string name="exercise_crunches">卷腹</string>
+    <string name="exercise_plank">平板支撑</string>
+    <string name="exercise_face_pulls">面拉</string>
+    
+    <!-- Days of Week -->
+    <string name="day_1">第1天</string>
+    <string name="day_2">第2天</string>
+    <string name="day_3">第3天</string>
+    <string name="day_4">第4天</string>
+    <string name="day_5">第5天</string>
+    <string name="day_6">第6天</string>
+    <string name="day_7">第7天</string>
+    
+    <!-- Smart Recommendations -->
+    <string name="recommended_for_you">为您推荐</string>
+    <string name="based_on_your_1rm">基于您的1RM数据，此模板可能最适合您</string>
+    <string name="beginner_recommendation">作为新手，三天模板提供更好的恢复</string>
+    <string name="advanced_recommendation">以您的高1RM水平，经典四天分化提供最佳专注度</string>
+    
+    <!-- Training Schedule -->
+    <string name="training_completed_today">今日训练已完成！</string>
+    <string name="rest_day_today">今天是休息日</string>
+    <string name="moderate_training_important">适度训练对恢复很重要</string>
+    <string name="next_training_session">下次训练</string>
+    <string name="training_not_available">训练不可用</string>
+    <string name="follow_your_schedule">请遵循您的训练计划</string>
+    <string name="training_days_completed" formatted="false">本周已完成 %d/%d 个训练日</string>
+    <string name="available_barbell_blades">可用杠铃数</string>
+    <string name="barbell_blade_on_each_side">每侧杠铃片</string>
+    <string name="current">当前</string>
+    
+    <!-- Training Schedule -->
+    <string name="training_schedule">训练日程</string>
+    <string name="training_schedule_desc">查看您的月度训练日历和进度</string>
+    <string name="go_to_today">回到今天</string>
+    <string name="previous_month">上个月</string>
+    <string name="next_month">下个月</string>
+    <string name="monthly_stats">月度统计</string>
+    <string name="scheduled">已安排</string>
+    <string name="today">今天</string>
+    <string name="missed">错过</string>
+    <string name="rest_days">休息日</string>
+    <string name="legend">图例</string>
+    <string name="day_details">日期详情</string>
+    <string name="training_completed">训练已完成</string>
+    <string name="today_training">今日训练</string>
+    <string name="scheduled_training">计划训练</string>
+    <string name="missed_training">错过训练</string>
+    <string name="available_for_training">可以训练</string>
+    <string name="exercise">训练动作</string>
+    <string name="planned_exercise">计划动作</string>
+    
+    <!-- Week days -->
+    <string name="sunday">周日</string>
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="saturday">周六</string>
+    
+    <!-- Debug Mode -->
+    <string name="debug_mode">调试模式</string>
+    <string name="debug_mode_subtitle">启用开发者工具和调试功能</string>
+    <string name="debug_tools">调试工具</string>
+    <string name="create_test_schedule">强制创建测试训练计划</string>
+    <string name="the_first_week">第一周</string>
 
 </resources>

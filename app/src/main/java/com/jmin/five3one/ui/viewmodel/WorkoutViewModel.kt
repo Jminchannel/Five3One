@@ -7,6 +7,7 @@ import com.jmin.five3one.data.repository.UserDataRepository
 import com.jmin.five3one.data.repository.UserData
 import com.jmin.five3one.data.repository.WorkoutRepository
 import com.jmin.five3one.data.repository.PlateCalculatorRepository
+import com.jmin.five3one.data.repository.TrainingScheduleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class WorkoutViewModel @Inject constructor(
     private val userDataRepository: UserDataRepository,
     private val workoutRepository: WorkoutRepository,
-    private val plateCalculatorRepository: PlateCalculatorRepository
+    private val plateCalculatorRepository: PlateCalculatorRepository,
+    private val trainingScheduleRepository: TrainingScheduleRepository
 ) : ViewModel() {
     
     // 用户数据
@@ -44,6 +46,14 @@ class WorkoutViewModel @Inject constructor(
             initialValue = CycleProgress()
         )
     
+    // 当前训练计划
+    val activeTrainingSchedule: StateFlow<UserTrainingSchedule?> = trainingScheduleRepository.getActiveSchedule()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null
+        )
+    
     // 训练状态
     private val _workoutState = MutableStateFlow(WorkoutUiState())
     val workoutState: StateFlow<WorkoutUiState> = _workoutState.asStateFlow()
@@ -52,11 +62,16 @@ class WorkoutViewModel @Inject constructor(
     val currentWorkout: StateFlow<CurrentWorkoutInfo> = combine(
         userData,
         cycleProgress,
+        activeTrainingSchedule,
         _workoutState
-    ) { userData, progress, state ->
+    ) { userData, progress, schedule, state ->
         val lift = state.selectedLift ?: progress.currentLift
         val template = WorkoutTemplate.getTemplate(userData.appSettings.currentTemplate)
         val trainingMax = userData.trainingMax.getByLift(lift)
+        
+        // 检查训练限制
+        val canStartTraining = schedule?.canStartTraining() ?: true
+        val restrictionMessage = schedule?.getTrainingRestrictionMessage()
         
         CurrentWorkoutInfo(
             lift = lift,
@@ -64,7 +79,9 @@ class WorkoutViewModel @Inject constructor(
             day = progress.currentDay,
             template = template,
             trainingMax = trainingMax,
-            sets = generateWorkoutSets(template, trainingMax, progress.currentWeek)
+            sets = generateWorkoutSets(template, trainingMax, progress.currentWeek),
+            canStartTraining = canStartTraining,
+            restrictionMessage = restrictionMessage
         )
     }.stateIn(
         scope = viewModelScope,
@@ -216,6 +233,15 @@ class WorkoutViewModel @Inject constructor(
                     notes = state.notes,
                     feeling = state.feeling
                 )
+                
+                // 完成训练计划中的今日训练
+                val currentSchedule = activeTrainingSchedule.value
+                if (currentSchedule != null) {
+                    println("DEBUG: WorkoutViewModel - Completing today's training for schedule: ${currentSchedule.id}")
+                    trainingScheduleRepository.completeTodayTraining(currentSchedule)
+                } else {
+                    println("DEBUG: WorkoutViewModel - No active schedule found!")
+                }
                 
                 _workoutState.update { 
                     it.copy(
@@ -381,5 +407,7 @@ data class CurrentWorkoutInfo(
     val day: Int = 1,
     val template: WorkoutTemplate = WorkoutTemplate.getTemplate(TemplateType.FIVES),
     val trainingMax: Double = 0.0,
-    val sets: List<WorkoutSetInfo> = emptyList()
+    val sets: List<WorkoutSetInfo> = emptyList(),
+    val canStartTraining: Boolean = true,
+    val restrictionMessage: String? = null
 )

@@ -485,9 +485,9 @@ private fun TemplateCard(
             val template = com.jmin.five3one.data.model.WorkoutTemplate.getTemplate(templateType)
             Text(
                 text = when (templateType) {
-                    com.jmin.five3one.data.model.TemplateType.FIVES -> "第1周: 65%, 75%, 85%+"
-                    com.jmin.five3one.data.model.TemplateType.THREES -> "第1周: 70%, 80%, 90%+"
-                    com.jmin.five3one.data.model.TemplateType.FIVE_THREE_ONE -> "第1周: 75%, 85%, 95%+"
+                    com.jmin.five3one.data.model.TemplateType.FIVES -> "${stringResource(R.string.the_first_week)}: 65%, 75%, 85%+"
+                    com.jmin.five3one.data.model.TemplateType.THREES -> "${stringResource(R.string.the_first_week)}: 70%, 80%, 90%+"
+                    com.jmin.five3one.data.model.TemplateType.FIVE_THREE_ONE -> "${stringResource(R.string.the_first_week)}: 75%, 85%, 95%+"
                 },
                 style = MaterialTheme.typography.bodySmall,
                 color = if (isSelected) {

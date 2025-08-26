@@ -52,7 +52,7 @@ class UserDataRepository @Inject constructor(
             oneRM = oneRM ?: OneRM(),
             trainingMax = trainingMax ?: oneRM?.calculateTrainingMax() ?: TrainingMax(),
             plateConfig = plateConfig ?: PlateConfig(),
-            appSettings = settings ?: AppSettings()
+            appSettings = settings ?: createDefaultAppSettings()
         )
     }
     
@@ -140,10 +140,17 @@ class UserDataRepository @Inject constructor(
     }
     
     /**
+     * 创建默认应用设置（使用英文作为默认语言）
+     */
+    private fun createDefaultAppSettings(): AppSettings {
+        return AppSettings(language = Language.ENGLISH)
+    }
+    
+    /**
      * 完成初始设置
      */
     suspend fun completeSetup() {
-        val currentSettings = appSettingsDao.getAppSettingsOnce() ?: AppSettings()
+        val currentSettings = appSettingsDao.getAppSettingsOnce() ?: createDefaultAppSettings()
         val updatedSettings = currentSettings.completeSetup()
         saveAppSettings(updatedSettings)
     }

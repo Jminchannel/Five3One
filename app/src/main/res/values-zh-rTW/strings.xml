@@ -292,4 +292,8 @@
     <string name="feeling_fair">一般</string>
     <string name="feeling_poor">較差</string>
     <string name="please_finish_previous_set">請先完成前一組動作</string>
+    <string name="available_barbell_blades">可用槓鈴數</string>
+    <string name="barbell_blade_on_each_side">每側槓鈴片</string>
+    <string name="current">當前</string>
+    <string name="the_first_week">第一周</string>
 </resources>

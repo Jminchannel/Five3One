@@ -18,6 +18,9 @@ import com.jmin.five3one.ui.screen.SettingsScreen
 import com.jmin.five3one.ui.screen.SetupScreen
 import com.jmin.five3one.ui.screen.SplashScreen
 import com.jmin.five3one.ui.screen.StatisticsScreen
+import com.jmin.five3one.ui.screen.TemplatePreviewScreen
+import com.jmin.five3one.ui.screen.TemplateSelectionScreen
+import com.jmin.five3one.ui.screen.ScheduleScreen
 import com.jmin.five3one.ui.screen.TimerScreen
 import com.jmin.five3one.ui.screen.WelcomeScreen
 import com.jmin.five3one.ui.screen.WorkoutDetailScreen
@@ -83,7 +86,7 @@ fun AppNavigation(
             
             SetupScreen(
                 onSetupComplete = {
-                    navController.navigate(Screen.Dashboard.route) {
+                    navController.navigate(Screen.TemplateSelection.route) {
                         popUpTo(Screen.Setup.route) { inclusive = true }
                     }
                 },
@@ -137,6 +140,9 @@ fun AppNavigation(
                 },
                 onNavigateToLearningCenter = {
                     navController.navigate(Screen.LearningCenter.route)
+                },
+                onNavigateToSchedule = {
+                    navController.navigate(Screen.Schedule.route)
                 }
             )
         }
@@ -292,6 +298,58 @@ fun AppNavigation(
                 }
             )
         }
+        
+        // 训练模板选择页面
+        composable(Screen.TemplateSelection.route) {
+            TemplateSelectionScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onTemplateSelected = { template ->
+                    // 传递模板类型到预览页面
+                    navController.navigate("${Screen.TemplatePreview.route}/${template.type.name}")
+                }
+            )
+        }
+        
+        // 训练模板预览页面
+        composable(
+            route = "${Screen.TemplatePreview.route}/{templateType}",
+            arguments = listOf(
+                navArgument("templateType") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val templateTypeName = backStackEntry.arguments?.getString("templateType") ?: ""
+            val templateType = try {
+                com.jmin.five3one.data.model.TrainingTemplateType.valueOf(templateTypeName)
+            } catch (e: Exception) {
+                com.jmin.five3one.data.model.TrainingTemplateType.CLASSIC_4_DAY
+            }
+            val template = com.jmin.five3one.data.model.TrainingTemplates.getTemplateByType(templateType)
+                ?: com.jmin.five3one.data.model.TrainingTemplates.classic4Day
+            
+            TemplatePreviewScreen(
+                template = template,
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onGeneratePlan = { selectedTemplate ->
+                    // 训练计划创建逻辑已在TemplatePreviewScreen中处理
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+        
+        // 训练日程
+        composable(Screen.Schedule.route) {
+            ScheduleScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
     }
 }
 
@@ -313,4 +371,7 @@ sealed class Screen(val route: String) {
     object ExerciseTutorial : Screen("exercise_tutorial")
     object WorkoutDetail : Screen("workout_detail")
     object About531 : Screen("about_531")
+    object TemplateSelection : Screen("template_selection")
+    object TemplatePreview : Screen("template_preview")
+    object Schedule : Screen("schedule")
 }

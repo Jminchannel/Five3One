@@ -19,6 +19,7 @@ data class AppSettings(
     val vibrationEnabled: Boolean = true,
     val isSetupCompleted: Boolean = false,
     val isDarkMode: Boolean = false, // 深色模式
+    val isDebugMode: Boolean = false, // 调试模式
     val updatedAt: Long = System.currentTimeMillis()
 ) {
     /**
@@ -68,6 +69,13 @@ data class AppSettings(
      */
     fun toggleDarkMode(): AppSettings {
         return copy(isDarkMode = !isDarkMode, updatedAt = System.currentTimeMillis())
+    }
+    
+    /**
+     * 切换调试模式
+     */
+    fun toggleDebugMode(): AppSettings {
+        return copy(isDebugMode = !isDebugMode, updatedAt = System.currentTimeMillis())
     }
 }
 

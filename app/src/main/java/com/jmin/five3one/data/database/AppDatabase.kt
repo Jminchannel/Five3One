@@ -23,12 +23,13 @@ import com.jmin.five3one.data.model.*
         AppSettings::class,
         ExerciseTutorial::class,
         ExerciseTutorialContent::class,
-        TutorialProgress::class
+        TutorialProgress::class,
+        UserTrainingSchedule::class
     ],
-    version = 5,
+    version = 8,
     exportSchema = false
 )
-@TypeConverters(AppTypeConverters::class)
+@TypeConverters(AppTypeConverters::class, TrainingScheduleConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     
     abstract fun oneRMDao(): OneRMDao
@@ -37,6 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun workoutHistoryDao(): WorkoutHistoryDao
     abstract fun appSettingsDao(): AppSettingsDao
     abstract fun exerciseTutorialDao(): ExerciseTutorialDao
+    abstract fun trainingScheduleDao(): TrainingScheduleDao
     
     companion object {
         @Volatile
@@ -224,13 +226,76 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
         
+        @JvmField
+        val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // 创建训练计划表
+                database.execSQL("""
+                    CREATE TABLE training_schedules (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        templateType TEXT NOT NULL,
+                        startDate TEXT NOT NULL,
+                        currentWeek INTEGER NOT NULL,
+                        currentCycle INTEGER NOT NULL,
+                        trainingDayRecords TEXT NOT NULL,
+                        isActive INTEGER NOT NULL,
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+                
+                // 创建索引以提高查询性能
+                database.execSQL("""
+                    CREATE INDEX index_training_schedules_isActive 
+                    ON training_schedules(isActive)
+                """)
+            }
+        }
+        
+        @JvmField
+        val MIGRATION_6_7 = object : Migration(6, 7) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // 重新创建training_schedules表以匹配实体定义
+                database.execSQL("DROP TABLE IF EXISTS training_schedules")
+                
+                // 创建符合实体定义的表结构
+                database.execSQL("""
+                    CREATE TABLE training_schedules (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        templateType TEXT NOT NULL,
+                        startDate TEXT NOT NULL,
+                        currentWeek INTEGER NOT NULL,
+                        currentCycle INTEGER NOT NULL,
+                        trainingDayRecords TEXT NOT NULL,
+                        isActive INTEGER NOT NULL,
+                        createdAt INTEGER NOT NULL,
+                        updatedAt INTEGER NOT NULL
+                    )
+                """)
+                
+                // 创建索引（这次会被Room正确识别）
+                database.execSQL("""
+                    CREATE INDEX index_training_schedules_isActive 
+                    ON training_schedules(isActive)
+                """)
+            }
+        }
+        
+        @JvmField
+        val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // 为app_settings表添加isDebugMode字段
+                database.execSQL("ALTER TABLE app_settings ADD COLUMN isDebugMode INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+        
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "five3one_database"
-                ).addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5).build()
+                ).addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8).build()
                 INSTANCE = instance
                 instance
             }

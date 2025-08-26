@@ -128,6 +128,7 @@ fun WorkoutScreen(
                 // 训练控制
                 WorkoutControlCard(
                     workoutState = workoutState,
+                    currentWorkout = currentWorkout,
                     onStartWorkout = viewModel::startWorkout,
                     onCompleteWorkout = viewModel::completeWorkout,
                     onCancelWorkout = viewModel::cancelWorkout,
@@ -299,6 +300,7 @@ private fun MainSetsCard(
 @Composable
 private fun WorkoutControlCard(
     workoutState: com.jmin.five3one.ui.viewmodel.WorkoutUiState,
+    currentWorkout: com.jmin.five3one.ui.viewmodel.CurrentWorkoutInfo,
     onStartWorkout: () -> Unit,
     onCompleteWorkout: () -> Unit,
     onCancelWorkout: () -> Unit,
@@ -313,17 +315,63 @@ private fun WorkoutControlCard(
             modifier = Modifier.padding(16.dp)
         ) {
             if (!workoutState.isWorkoutActive) {
-                Button(
-                    onClick = onStartWorkout,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.PlayArrow,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(stringResource(R.string.start_workout))
+                // 检查是否可以开始训练
+                if (currentWorkout.canStartTraining) {
+                    Button(
+                        onClick = onStartWorkout,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.PlayArrow,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(stringResource(R.string.start_workout))
+                    }
+                } else {
+                    // 显示训练限制信息
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onErrorContainer,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = currentWorkout.restrictionMessage ?: stringResource(R.string.training_not_available),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onErrorContainer,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                    
+                    Spacer(modifier = Modifier.height(8.dp))
+                    
+                    Button(
+                        onClick = { },
+                        enabled = false,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Block,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(stringResource(R.string.training_not_available))
+                    }
                 }
             } else {
                 // 训练进行中的控制
@@ -466,7 +514,7 @@ private fun PlateLoadingCard(
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "每侧杠铃片:",
+                text = "${stringResource(R.string.barbell_blade_on_each_side)}:",
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Bold
             )

@@ -33,6 +33,7 @@ fun MainScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToSetup: (Int) -> Unit,
     onNavigateToLearningCenter: () -> Unit,
+    onNavigateToSchedule: () -> Unit,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     val bottomNavController = rememberNavController()
@@ -57,6 +58,7 @@ fun MainScreen(
             onNavigateToSettings = onNavigateToSettings,
             onNavigateToSetup = onNavigateToSetup,
             onNavigateToLearningCenter = onNavigateToLearningCenter,
+            onNavigateToSchedule = onNavigateToSchedule,
             mainViewModel = mainViewModel
         )
     }
@@ -114,6 +116,7 @@ private fun MainNavHost(
     onNavigateToSettings: () -> Unit,
     onNavigateToSetup: (Int) -> Unit,
     onNavigateToLearningCenter: () -> Unit,
+    onNavigateToSchedule: () -> Unit,
     mainViewModel: MainViewModel
 ) {
     NavHost(
@@ -130,6 +133,7 @@ private fun MainNavHost(
                 onNavigateToSettings = onNavigateToSettings,
                 onNavigateToSetup = onNavigateToSetup,
                 onNavigateToLearningCenter = onNavigateToLearningCenter,
+                onNavigateToSchedule = onNavigateToSchedule,
                 viewModel = mainViewModel
             )
         }

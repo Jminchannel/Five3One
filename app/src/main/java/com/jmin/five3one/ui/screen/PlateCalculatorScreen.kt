@@ -268,8 +268,8 @@ private fun PlateResultCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "杠铃杆: ${plateConfig.barbellWeight}kg")
-                Text(text = "每侧: ${solution.weightPerSide}kg")
+                Text(text = "${stringResource(R.string.barbell_bar)}: ${plateConfig.barbellWeight}kg")
+                Text(text = "${stringResource(R.string.each_side_needs)}: ${solution.weightPerSide}kg")
             }
             
             Spacer(modifier = Modifier.height(8.dp))
@@ -321,14 +321,14 @@ private fun PlateConfigCard(
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "杠铃杆: ${plateConfig.barbellWeight}kg",
+                text = "${stringResource(R.string.barbell_bar)}: ${plateConfig.barbellWeight}kg",
                 style = MaterialTheme.typography.bodyMedium
             )
             
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "可用杠铃片:",
+                text = stringResource(R.string.available_barbell_blades) + ":",
                 style = MaterialTheme.typography.bodyMedium
             )
             

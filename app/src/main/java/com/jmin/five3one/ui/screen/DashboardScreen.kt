@@ -29,6 +29,7 @@ fun DashboardScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToSetup: (Int) -> Unit,
     onNavigateToLearningCenter: () -> Unit,
+    onNavigateToSchedule: () -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val userData by viewModel.userData.collectAsState()
@@ -78,7 +79,8 @@ fun DashboardScreen(
                 // 今日训练卡片
                 TodayWorkoutCard(
                     todayWorkout = todayWorkout,
-                    onStartWorkout = onNavigateToWorkout
+                    onStartWorkout = onNavigateToWorkout,
+                    onNavigateToSchedule = onNavigateToSchedule
                 )
             }
             item {
@@ -92,8 +94,38 @@ fun DashboardScreen(
                     onNavigateToTimer = onNavigateToTimer,
                     onNavigateToStatistics = onNavigateToStatistics,
                     onNavigateToSetup = onNavigateToSetup,
-                    onNavigateToLearningCenter = onNavigateToLearningCenter
+                    onNavigateToLearningCenter = onNavigateToLearningCenter,
+                    onNavigateToSchedule = onNavigateToSchedule
                 )
+            }
+            
+            // 调试按钮 - 只有在调试模式开启时才显示
+            if (userData.appSettings.isDebugMode) {
+                item {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.debug_tools),
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Button(
+                                onClick = { viewModel.forceCreateTestSchedule() },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(stringResource(R.string.create_test_schedule))
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -102,7 +134,8 @@ fun DashboardScreen(
 @Composable
 private fun TodayWorkoutCard(
     todayWorkout: com.jmin.five3one.ui.viewmodel.TodayWorkoutInfo,
-    onStartWorkout: () -> Unit
+    onStartWorkout: () -> Unit,
+    onNavigateToSchedule: () -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -139,7 +172,7 @@ private fun TodayWorkoutCard(
                 }
                 
                 AssistChip(
-                    onClick = { },
+                    onClick = { onNavigateToSchedule() },
                     label = {
                         Text(
                             text = stringResource(
@@ -193,17 +226,63 @@ private fun TodayWorkoutCard(
             
             Spacer(modifier = Modifier.height(16.dp))
             
-            Button(
-                onClick = onStartWorkout,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Icon(
-                    imageVector = Icons.Default.PlayArrow,
-                    contentDescription = null,
-                    modifier = Modifier.size(18.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(stringResource(R.string.start_workout))
+            // 检查是否可以开始训练
+            if (todayWorkout.canStartTraining) {
+                Button(
+                    onClick = onStartWorkout,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.PlayArrow,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(stringResource(R.string.start_workout))
+                }
+            } else {
+                // 显示训练限制信息
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = todayWorkout.restrictionMessage ?: stringResource(R.string.training_not_available),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                        )
+                    }
+                }
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Button(
+                    onClick = { },
+                    enabled = false,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Block,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(stringResource(R.string.training_not_available))
+                }
             }
         }
     }
@@ -225,7 +304,8 @@ private fun QuickActionsCard(
     onNavigateToTimer: () -> Unit,
     onNavigateToStatistics: () -> Unit,
     onNavigateToSetup: (Int) -> Unit,
-    onNavigateToLearningCenter: () -> Unit
+    onNavigateToLearningCenter: () -> Unit,
+    onNavigateToSchedule: () -> Unit
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(
@@ -263,6 +343,15 @@ private fun QuickActionsCard(
                 title = stringResource(R.string.progress_view),
                 subtitle = stringResource(R.string.progress_view_desc),
                 onClick = onNavigateToStatistics
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            QuickActionListItem(
+                icon = Icons.Default.CalendarToday,
+                title = stringResource(R.string.training_schedule),
+                subtitle = stringResource(R.string.training_schedule_desc),
+                onClick = onNavigateToSchedule
             )
             
             Spacer(modifier = Modifier.height(8.dp))

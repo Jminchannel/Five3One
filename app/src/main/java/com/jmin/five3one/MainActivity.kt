@@ -2,12 +2,9 @@ package com.jmin.five3one
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -18,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
-import java.util.Locale
 import com.jmin.five3one.navigation.AppNavigation
 import com.jmin.five3one.navigation.Screen
 import com.jmin.five3one.ui.theme.Five3oneTheme
@@ -27,27 +23,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private var backPressedTime: Long = 0
-    private var toast: Toast? = null
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // 确保应用启动时使用英文语言设置
+        updateLanguage(com.jmin.five3one.data.model.Language.ENGLISH)
+        
         enableEdgeToEdge()
-        
-        // 设置双击返回键退出
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (backPressedTime + 2000 > System.currentTimeMillis()) {
-                    toast?.cancel()
-                    finish()
-                } else {
-                    toast = Toast.makeText(this@MainActivity, getString(R.string.exit_app_prompt), Toast.LENGTH_SHORT)
-                    toast?.show()
-                }
-                backPressedTime = System.currentTimeMillis()
-            }
-        })
-        
         setContent {
             Five3OneApp(
                 onLanguageChange = { language ->
@@ -65,12 +47,9 @@ class MainActivity : ComponentActivity() {
             com.jmin.five3one.data.model.Language.INDONESIAN -> java.util.Locale("id", "ID")
         }
         
-        val config = android.content.res.Configuration(resources.configuration)
+        val config = Configuration(resources.configuration)
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
-        
-        // 语言切换现在通过Compose的重组机制自动生效，无需重启Activity
-        // 这样可以避免卡顿问题
     }
 }
 

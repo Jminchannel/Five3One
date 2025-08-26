@@ -7,6 +7,7 @@ import com.jmin.five3one.data.repository.UserDataRepository
 import com.jmin.five3one.data.repository.UserData
 import com.jmin.five3one.data.repository.WorkoutRepository
 import com.jmin.five3one.data.repository.WorkoutStats
+import com.jmin.five3one.data.repository.TrainingScheduleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val userDataRepository: UserDataRepository,
-    private val workoutRepository: WorkoutRepository
+    private val workoutRepository: WorkoutRepository,
+    private val trainingScheduleRepository: TrainingScheduleRepository
 ) : ViewModel() {
     
     // 用户数据状态
@@ -59,6 +61,14 @@ class MainViewModel @Inject constructor(
             initialValue = emptyList()
         )
     
+    // 当前训练计划
+    val activeTrainingSchedule: StateFlow<UserTrainingSchedule?> = trainingScheduleRepository.getActiveSchedule()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null
+        )
+    
     // UI状态
     private val _uiState = MutableStateFlow(MainUiState())
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
@@ -66,19 +76,50 @@ class MainViewModel @Inject constructor(
     // 组合状态：今日训练信息
     val todayWorkout: StateFlow<TodayWorkoutInfo> = combine(
         userData,
-        cycleProgress
-    ) { userData, progress ->
-        val currentLift = progress.currentLift
-        val template = WorkoutTemplate.getTemplate(userData.appSettings.currentTemplate)
-        val trainingMax = userData.trainingMax.getByLift(currentLift)
-        
-        TodayWorkoutInfo(
-            lift = currentLift,
-            week = progress.currentWeek,
-            day = progress.currentDay,
-            template = template,
-            trainingMax = trainingMax
-        )
+        cycleProgress,
+        activeTrainingSchedule
+    ) { userData, progress, schedule ->
+        // 如果有活跃的训练计划，使用训练计划决定今日训练
+        if (schedule != null) {
+            println("DEBUG: MainViewModel - Found active schedule: $schedule")
+            val todayTrainingDay = schedule.getTodayTrainingDay()
+            val currentLift = todayTrainingDay?.mainLift ?: progress.currentLift
+            val template = WorkoutTemplate.getTemplate(userData.appSettings.currentTemplate)
+            val trainingMax = userData.trainingMax.getByLift(currentLift)
+            
+            // 检查训练限制
+            val canStartTraining = schedule.canStartTraining()
+            val restrictionMessage = schedule.getTrainingRestrictionMessage()
+            
+            println("DEBUG: MainViewModel - TodayTrainingDay: $todayTrainingDay")
+            println("DEBUG: MainViewModel - CanStartTraining: $canStartTraining")
+            println("DEBUG: MainViewModel - RestrictionMessage: $restrictionMessage")
+            
+            TodayWorkoutInfo(
+                lift = currentLift,
+                week = progress.currentWeek,
+                day = progress.currentDay,
+                template = template,
+                trainingMax = trainingMax,
+                canStartTraining = canStartTraining,
+                restrictionMessage = restrictionMessage
+            )
+        } else {
+            // 没有训练计划时，使用原来的逻辑
+            val currentLift = progress.currentLift
+            val template = WorkoutTemplate.getTemplate(userData.appSettings.currentTemplate)
+            val trainingMax = userData.trainingMax.getByLift(currentLift)
+            
+            TodayWorkoutInfo(
+                lift = currentLift,
+                week = progress.currentWeek,
+                day = progress.currentDay,
+                template = template,
+                trainingMax = trainingMax,
+                canStartTraining = true,
+                restrictionMessage = null
+            )
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -90,6 +131,15 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val isSetupCompleted = userDataRepository.isSetupCompleted()
             _uiState.update { it.copy(isSetupCompleted = isSetupCompleted) }
+        }
+        
+        // 确保有活跃的训练计划
+        viewModelScope.launch {
+            val activeSchedule = trainingScheduleRepository.getActiveScheduleOnce()
+            if (activeSchedule == null && userDataRepository.isSetupCompleted()) {
+                // 如果没有活跃的训练计划但已完成设置，创建一个默认的训练计划
+                trainingScheduleRepository.createAndActivateSchedule(TrainingTemplateType.CLASSIC_4_DAY)
+            }
         }
     }
     
@@ -191,6 +241,12 @@ class MainViewModel @Inject constructor(
                 feeling = feeling
             )
             
+            // 完成训练计划中的今日训练
+            val currentSchedule = activeTrainingSchedule.value
+            if (currentSchedule != null) {
+                trainingScheduleRepository.completeTodayTraining(currentSchedule)
+            }
+            
             // 检查是否需要增加周期TM
             val newProgress = cycleProgress.value.completeWorkout()
             if (newProgress.isCycleComplete) {
@@ -198,6 +254,45 @@ class MainViewModel @Inject constructor(
             }
             
             _uiState.update { it.copy(isWorkoutInProgress = false) }
+        }
+    }
+    
+    /**
+     * 创建并激活训练计划
+     */
+    fun createTrainingSchedule(templateType: TrainingTemplateType) {
+        viewModelScope.launch {
+            trainingScheduleRepository.createAndActivateSchedule(templateType)
+        }
+    }
+    
+    /**
+     * 停用当前训练计划
+     */
+    fun deactivateCurrentSchedule() {
+        viewModelScope.launch {
+            trainingScheduleRepository.deactivateCurrentSchedule()
+        }
+    }
+    
+    /**
+     * 强制创建测试训练计划 (用于调试)
+     */
+    fun forceCreateTestSchedule() {
+        viewModelScope.launch {
+            println("DEBUG: forceCreateTestSchedule - Creating test schedule")
+            trainingScheduleRepository.createAndActivateSchedule(TrainingTemplateType.CLASSIC_4_DAY)
+        }
+    }
+    
+    /**
+     * 切换调试模式
+     */
+    fun toggleDebugMode() {
+        viewModelScope.launch {
+            val currentUserData = userData.value
+            val updatedSettings = currentUserData.appSettings.toggleDebugMode()
+            userDataRepository.saveAppSettings(updatedSettings)
         }
     }
     
@@ -261,7 +356,9 @@ data class TodayWorkoutInfo(
     val week: Int = 1,
     val day: Int = 1,
     val template: WorkoutTemplate = WorkoutTemplate.getTemplate(TemplateType.FIVES),
-    val trainingMax: Double = 0.0
+    val trainingMax: Double = 0.0,
+    val canStartTraining: Boolean = true,
+    val restrictionMessage: String? = null
 ) {
     /**
      * 获取训练组信息

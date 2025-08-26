@@ -292,4 +292,8 @@
     <string name="feeling_fair">Cukup</string>
     <string name="feeling_poor">Kurang</string>
     <string name="please_finish_previous_set">Silakan selesaikan langkah sebelumnya</string>
+    <string name="available_barbell_blades">Jumlah barbel yang tersedia</string>
+    <string name="barbell_blade_on_each_side">Barbell blade di setiap sisi</string>
+    <string name="current">saat ini</string>
+    <string name="the_first_week">Minggu pertama adalah minggu pertama</string>
 </resources>

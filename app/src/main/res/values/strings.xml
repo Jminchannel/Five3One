@@ -402,4 +402,119 @@
     <string name="exercise_tutorials_desc">Learn proper form for main lifts</string>
     <string name="adjust_plan_desc">Modify your 1RM and training settings</string>
     <string name="please_finish_previous_set">Please complete the previous set of actions first</string>
+    
+    <!-- Training Templates -->
+    <string name="template_classic_4day">Classic 4-Day Split</string>
+    <string name="template_classic_4day_desc">Each main lift has its own dedicated training day with highest focus and best recovery. This is Jim Wendler\'s most recommended original version.</string>
+    
+    <string name="template_3day">3-Day Full Body</string>
+    <string name="template_3day_desc">Perfect for busy people, lower training frequency but more compact sessions each time.</string>
+    
+    <string name="template_bbb">Boring But Big Challenge</string>
+    <string name="template_bbb_desc">Add 5 sets of 10 reps supplemental training after main lifts, greatly increasing training volume and muscle building effects.</string>
+    
+    <string name="template_custom">Custom Template</string>
+    <string name="template_custom_desc">Create your own personalized training schedule</string>
+    
+    <!-- Template Selection -->
+    <string name="select_training_template">Select Training Template</string>
+    <string name="template_selection_subtitle">Choose the training schedule that best fits your goals and lifestyle</string>
+    <string name="use_this_template">Use This Template</string>
+    <string name="training_days_per_week">%d days per week</string>
+    <string name="recommended">Recommended</string>
+    
+    <!-- Template Preview -->
+    <string name="template_preview">Template Preview</string>
+    <string name="weekly_schedule">Weekly Schedule</string>
+    <string name="training_day">Training Day</string>
+    <string name="rest_day">Rest Day</string>
+    <string name="rest_day_description">Take this day to rest and recover. Your muscles grow during recovery, not just training.</string>
+    <string name="main_lift">Main Lift</string>
+    <string name="assistance_exercises">Assistance Exercises</string>
+    <string name="bbb_sets">BBB Sets</string>
+    <string name="generate_my_plan">Generate My Plan</string>
+    <string name="customize_template">Customize Template</string>
+    
+    <!-- Assistance Exercises -->
+    <string name="exercise_dumbbell_bench_press">Dumbbell Bench Press</string>
+    <string name="exercise_incline_dumbbell_press">Incline Dumbbell Press</string>
+    <string name="exercise_barbell_row">Barbell Row</string>
+    <string name="exercise_dumbbell_row">Dumbbell Row</string>
+    <string name="exercise_dumbbell_shoulder_press">Dumbbell Shoulder Press</string>
+    <string name="exercise_pull_ups">Pull-ups</string>
+    <string name="exercise_lat_pulldown">Lat Pulldown</string>
+    <string name="exercise_leg_press">Leg Press</string>
+    <string name="exercise_leg_extension">Leg Extension</string>
+    <string name="exercise_romanian_deadlift">Romanian Deadlift</string>
+    <string name="exercise_leg_curl">Leg Curl</string>
+    <string name="exercise_tricep_dips">Tricep Dips</string>
+    <string name="exercise_lateral_raise">Lateral Raise</string>
+    <string name="exercise_rear_delt_fly">Rear Delt Fly</string>
+    <string name="exercise_crunches">Crunches</string>
+    <string name="exercise_plank">Plank</string>
+    <string name="exercise_face_pulls">Face Pulls</string>
+    
+    <!-- Days of Week -->
+    <string name="day_1">Day 1</string>
+    <string name="day_2">Day 2</string>
+    <string name="day_3">Day 3</string>
+    <string name="day_4">Day 4</string>
+    <string name="day_5">Day 5</string>
+    <string name="day_6">Day 6</string>
+    <string name="day_7">Day 7</string>
+    
+    <!-- Smart Recommendations -->
+    <string name="recommended_for_you">Recommended for You</string>
+    <string name="based_on_your_1rm">Based on your 1RM data, this template may be most suitable for you</string>
+    <string name="beginner_recommendation">As a beginner, the 3-day template provides better recovery</string>
+    <string name="advanced_recommendation">With your high 1RM, the classic 4-day split offers optimal focus</string>
+    
+    <!-- Training Schedule -->
+    <string name="training_completed_today">Training completed for today!</string>
+    <string name="rest_day_today">Today is a rest day</string>
+    <string name="moderate_training_important">Moderate training is important for recovery</string>
+    <string name="next_training_session">Next training session</string>
+    <string name="training_not_available">Training not available</string>
+    <string name="follow_your_schedule">Please follow your training schedule</string>
+    <string name="training_days_completed" formatted="false">%d/%d training days completed this week</string>
+    <string name="available_barbell_blades">Available barbell blades</string>
+    <string name="barbell_blade_on_each_side">Barbell blade on each side</string>
+    <string name="current">current</string>
+    
+    <!-- Training Schedule -->
+    <string name="training_schedule">Training Schedule</string>
+    <string name="training_schedule_desc">View your monthly training calendar and progress</string>
+    <string name="go_to_today">Go to Today</string>
+    <string name="previous_month">Previous Month</string>
+    <string name="next_month">Next Month</string>
+    <string name="monthly_stats">Monthly Statistics</string>
+    <string name="scheduled">Scheduled</string>
+    <string name="today">Today</string>
+    <string name="missed">Missed</string>
+    <string name="rest_days">Rest Days</string>
+    <string name="legend">Legend</string>
+    <string name="day_details">Day Details</string>
+    <string name="training_completed">Training Completed</string>
+    <string name="today_training">Today\'s Training</string>
+    <string name="scheduled_training">Scheduled Training</string>
+    <string name="missed_training">Missed Training</string>
+    <string name="available_for_training">Available for Training</string>
+    <string name="exercise">Exercise</string>
+    <string name="planned_exercise">Planned Exercise</string>
+    
+    <!-- Week days -->
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    
+    <!-- Debug Mode -->
+    <string name="debug_mode">Debug Mode</string>
+    <string name="debug_mode_subtitle">Enable developer tools and debugging features</string>
+    <string name="debug_tools">🐛 Debug Tools</string>
+    <string name="create_test_schedule">Force Create Test Training Schedule</string>
+    <string name="the_first_week">the first week</string>
 </resources>
